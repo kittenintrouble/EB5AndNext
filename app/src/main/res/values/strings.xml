@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">EB-5 Guide</string>
+    <string name="language_english">English</string>
+    <string name="language_chinese">中文</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
+    <string name="language_korean">한국어</string>
+
+    <string name="onboarding_welcome">Welcome to the EB-5 Guide</string>
+    <string name="onboarding_description">Choose your preferred language to personalize articles, quizzes, and projects instantly.</string>
+    <string name="label_language">Language</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_back">Back</string>
+    <string name="action_close">Close</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_base">EB-5 Base</string>
+    <string name="title_quizzes">Quizzes</string>
+    <string name="title_progress">Progress</string>
+    <string name="title_projects">Projects</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_article_detail">Article Detail</string>
+    <string name="title_quiz_runner">Quiz</string>
+    <string name="title_quiz_result">Quiz Result</string>
+    <string name="title_project_detail">Project Detail</string>
+
+    <string name="tab_home">Home</string>
+    <string name="tab_base">Base</string>
+    <string name="tab_quizzes">Quizzes</string>
+    <string name="tab_progress">Progress</string>
+    <string name="tab_projects">Projects</string>
+
+    <string name="cd_open_settings">Open settings</string>
+
+    <string name="home_greeting">Your EB-5 learning hub</string>
+    <string name="home_articles_title">Articles</string>
+    <string name="home_articles_summary">%1$d of %2$d articles completed</string>
+    <string name="home_articles_in_progress">%1$d in progress</string>
+    <string name="home_articles_favorites">%1$d favorites</string>
+    <string name="home_explore_articles">Explore EB-5 base</string>
+    <string name="home_quizzes_title">Quizzes</string>
+    <string name="home_quizzes_summary">%1$d of %2$d quizzes completed</string>
+    <string name="home_take_quiz">Take a quiz</string>
+    <string name="home_empty_title">Start your journey</string>
+    <string name="home_empty_description">Begin with foundational EB-5 articles to unlock personalized recommendations.</string>
+
+    <string name="base_title">EB-5 Knowledge Base</string>
+    <string name="base_change_category">Change category</string>
+    <string name="base_change_subcategory">Change subcategory</string>
+    <string name="base_read">Read</string>
+    <string name="base_remove_favorite">Remove favorite</string>
+    <string name="base_add_favorite">Add favorite</string>
+    <string name="base_mark_in_progress">Mark in progress</string>
+    <string name="base_mark_completed">Mark completed</string>
+
+    <string name="article_remove_favorite">Remove from favorites</string>
+    <string name="article_add_favorite">Add to favorites</string>
+    <string name="article_mark_in_progress">Mark in progress</string>
+    <string name="article_mark_completed">Mark completed</string>
+    <string name="article_examples_title">Examples</string>
+
+    <string name="quiz_question_count">%1$d questions</string>
+    <string name="quiz_best_score">Best score: %1$d</string>
+    <string name="quiz_start">Start quiz</string>
+    <string name="quiz_question_progress">Question %1$d of %2$d</string>
+    <string name="quiz_finish">Finish</string>
+    <string name="quiz_next">Next question</string>
+    <string name="quiz_change_answer">Change answer</string>
+    <string name="quiz_continue">Continue</string>
+    <string name="quiz_exit">Exit quiz</string>
+    <string name="quiz_result_title">Great effort!</string>
+    <string name="quiz_result_score">You scored %1$d out of %2$d</string>
+    <string name="quiz_retake">Retake quiz</string>
+
+    <string name="project_location">Location: %1$s</string>
+    <string name="project_category">Category: %1$s</string>
+    <string name="project_investment">Minimum investment: %1$s</string>
+    <string name="project_tea_status">TEA status: %1$s</string>
+    <string name="project_job_model">Job model: %1$s</string>
+
+    <string name="settings_language_title">Language</string>
+    <string name="settings_version">App version %1$s</string>
+
+    <string name="progress_articles_title">Article progress</string>
+    <string name="progress_articles_total">Total articles: %1$d</string>
+    <string name="progress_articles_completed">Completed: %1$d</string>
+    <string name="progress_articles_in_progress">In progress: %1$d</string>
+    <string name="progress_articles_favorites">Favorites: %1$d</string>
+    <string name="progress_quizzes_title">Quiz progress</string>
+    <string name="progress_quizzes_total">Total quizzes: %1$d</string>
+    <string name="progress_quizzes_completed">Completed: %1$d</string>
+    <string name="progress_quizzes_average">Average best score: %1$s</string>
+
+</resources>

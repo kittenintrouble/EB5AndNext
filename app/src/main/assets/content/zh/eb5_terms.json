@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "EB-5 项目概览",
+    "category": "基础",
+    "subcategory": "项目入门",
+    "description": "EB-5 投资移民计划允许符合条件的境外投资者通过投资新的商业企业并创造美国就业机会，获取美国永久居留权。",
+    "shortDescription": "了解 EB-5 如何将投资与永久居留联系在一起。",
+    "examples": [
+      "向目标就业区 (TEA) 项目投资 80 万美元",
+      "在两年内创造或保留至少 10 个全职美国工作岗位"
+    ],
+    "dayNumber": 1,
+    "isCompleted": false
+  },
+  {
+    "id": 2,
+    "title": "直接投资与区域中心投资",
+    "category": "基础",
+    "subcategory": "投资模式",
+    "description": "投资者可以选择直接投资——自行管理企业运营，或区域中心投资——参与由专业团队管理的集合项目。",
+    "shortDescription": "比较 EB-5 两种主要投资路径。",
+    "examples": [
+      "作为直接投资者经营一家餐厅",
+      "通过区域中心参与大型地产开发"
+    ],
+    "dayNumber": 2,
+    "isCompleted": false
+  },
+  {
+    "id": 3,
+    "title": "就业创造要求",
+    "category": "合规",
+    "subcategory": "USCIS 标准",
+    "description": "每项 EB-5 投资都必须在投资者获得有条件居留后的两年内，为符合资格的美国工人创造至少 10 个全职职位。",
+    "shortDescription": "为何就业创造是 EB-5 审批的核心。",
+    "examples": [
+      "为新建酒店招聘员工",
+      "通过区域中心项目计算间接就业"
+    ],
+    "dayNumber": 3,
+    "isCompleted": false
+  }
+]

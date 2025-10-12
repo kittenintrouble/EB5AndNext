@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Tổng quan chương trình EB-5",
+    "category": "Nền tảng",
+    "subcategory": "Giới thiệu",
+    "description": "Chương trình đầu tư định cư EB-5 cho phép nhà đầu tư nước ngoài đủ điều kiện nhận thẻ xanh Mỹ bằng cách đầu tư vào doanh nghiệp thương mại mới tạo việc làm cho lao động Mỹ.",
+    "shortDescription": "Cách EB-5 gắn kết đầu tư với quyền thường trú.",
+    "examples": [
+      "Đầu tư 800.000 USD vào dự án thuộc khu vực TEA",
+      "Tạo hoặc giữ lại ít nhất 10 việc làm toàn thời gian"
+    ],
+    "dayNumber": 1,
+    "isCompleted": false
+  },
+  {
+    "id": 2,
+    "title": "Đầu tư trực tiếp và đầu tư qua trung tâm vùng",
+    "category": "Nền tảng",
+    "subcategory": "Mô hình đầu tư",
+    "description": "Nhà đầu tư có thể chọn đầu tư trực tiếp, tự quản lý hoạt động kinh doanh, hoặc đầu tư qua trung tâm vùng, tham gia dự án hợp vốn do đơn vị chuyên nghiệp quản lý.",
+    "shortDescription": "So sánh hai con đường đầu tư EB-5 phổ biến.",
+    "examples": [
+      "Vận hành nhà hàng dưới dạng đầu tư trực tiếp",
+      "Tham gia dự án bất động sản thông qua trung tâm vùng"
+    ],
+    "dayNumber": 2,
+    "isCompleted": false
+  },
+  {
+    "id": 3,
+    "title": "Yêu cầu tạo việc làm",
+    "category": "Tuân thủ",
+    "subcategory": "Tiêu chí USCIS",
+    "description": "Mỗi khoản đầu tư EB-5 phải tạo ít nhất 10 việc làm toàn thời gian cho lao động đủ điều kiện tại Hoa Kỳ trong vòng hai năm kể từ khi nhà đầu tư nhận thẻ xanh có điều kiện.",
+    "shortDescription": "Vì sao tạo việc làm là trọng tâm xét duyệt EB-5.",
+    "examples": [
+      "Tuyển dụng nhân sự cho khách sạn mới",
+      "Tính việc làm gián tiếp trong dự án trung tâm vùng"
+    ],
+    "dayNumber": 3,
+    "isCompleted": false
+  }
+]

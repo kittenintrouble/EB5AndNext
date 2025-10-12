@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Hướng dẫn EB-5</string>
+    <string name="language_english">English</string>
+    <string name="language_chinese">中文</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
+    <string name="language_korean">한국어</string>
+
+    <string name="onboarding_welcome">Chào mừng đến với Hướng dẫn EB-5</string>
+    <string name="onboarding_description">Chọn ngôn ngữ ưa thích để đồng bộ bài viết, bài kiểm tra và dự án ngay lập tức.</string>
+    <string name="label_language">Ngôn ngữ</string>
+    <string name="action_continue">Tiếp tục</string>
+    <string name="action_back">Quay lại</string>
+    <string name="action_close">Đóng</string>
+
+    <string name="title_home">Trang chủ</string>
+    <string name="title_base">Kiến thức EB-5</string>
+    <string name="title_quizzes">Bài kiểm tra</string>
+    <string name="title_progress">Tiến độ</string>
+    <string name="title_projects">Dự án</string>
+    <string name="title_settings">Cài đặt</string>
+    <string name="title_article_detail">Chi tiết bài viết</string>
+    <string name="title_quiz_runner">Bài kiểm tra</string>
+    <string name="title_quiz_result">Kết quả kiểm tra</string>
+    <string name="title_project_detail">Chi tiết dự án</string>
+
+    <string name="tab_home">Trang chủ</string>
+    <string name="tab_base">Kiến thức</string>
+    <string name="tab_quizzes">Bài kiểm tra</string>
+    <string name="tab_progress">Tiến độ</string>
+    <string name="tab_projects">Dự án</string>
+
+    <string name="cd_open_settings">Mở cài đặt</string>
+
+    <string name="home_greeting">Trung tâm học tập EB-5 của bạn</string>
+    <string name="home_articles_title">Bài viết</string>
+    <string name="home_articles_summary">Hoàn thành %1$d/%2$d bài viết</string>
+    <string name="home_articles_in_progress">Đang học %1$d bài</string>
+    <string name="home_articles_favorites">Yêu thích %1$d bài</string>
+    <string name="home_explore_articles">Khám phá kiến thức EB-5</string>
+    <string name="home_quizzes_title">Bài kiểm tra</string>
+    <string name="home_quizzes_summary">Hoàn thành %1$d/%2$d bài kiểm tra</string>
+    <string name="home_take_quiz">Làm bài kiểm tra</string>
+    <string name="home_empty_title">Bắt đầu hành trình</string>
+    <string name="home_empty_description">Hãy đọc các bài viết nền tảng để nhận gợi ý phù hợp.</string>
+
+    <string name="base_title">Kho kiến thức EB-5</string>
+    <string name="base_change_category">Đổi danh mục</string>
+    <string name="base_change_subcategory">Đổi danh mục con</string>
+    <string name="base_read">Đọc</string>
+    <string name="base_remove_favorite">Bỏ yêu thích</string>
+    <string name="base_add_favorite">Thêm yêu thích</string>
+    <string name="base_mark_in_progress">Đánh dấu đang học</string>
+    <string name="base_mark_completed">Đánh dấu hoàn thành</string>
+
+    <string name="article_remove_favorite">Bỏ khỏi yêu thích</string>
+    <string name="article_add_favorite">Thêm vào yêu thích</string>
+    <string name="article_mark_in_progress">Đánh dấu đang học</string>
+    <string name="article_mark_completed">Đánh dấu hoàn thành</string>
+    <string name="article_examples_title">Ví dụ</string>
+
+    <string name="quiz_question_count">%1$d câu hỏi</string>
+    <string name="quiz_best_score">Điểm cao nhất: %1$d</string>
+    <string name="quiz_start">Bắt đầu kiểm tra</string>
+    <string name="quiz_question_progress">Câu %1$d/%2$d</string>
+    <string name="quiz_finish">Hoàn tất</string>
+    <string name="quiz_next">Câu tiếp theo</string>
+    <string name="quiz_change_answer">Đổi đáp án</string>
+    <string name="quiz_continue">Tiếp tục</string>
+    <string name="quiz_exit">Thoát bài kiểm tra</string>
+    <string name="quiz_result_title">Bạn đã cố gắng tuyệt vời!</string>
+    <string name="quiz_result_score">Bạn đạt %1$d/%2$d điểm</string>
+    <string name="quiz_retake">Làm lại</string>
+
+    <string name="project_location">Địa điểm: %1$s</string>
+    <string name="project_category">Loại hình: %1$s</string>
+    <string name="project_investment">Mức đầu tư tối thiểu: %1$s</string>
+    <string name="project_tea_status">Trạng thái TEA: %1$s</string>
+    <string name="project_job_model">Mô hình tạo việc làm: %1$s</string>
+
+    <string name="settings_language_title">Ngôn ngữ ứng dụng</string>
+    <string name="settings_version">Phiên bản ứng dụng %1$s</string>
+
+    <string name="progress_articles_title">Tiến độ bài viết</string>
+    <string name="progress_articles_total">Tổng số bài viết: %1$d</string>
+    <string name="progress_articles_completed">Đã hoàn thành: %1$d</string>
+    <string name="progress_articles_in_progress">Đang học: %1$d</string>
+    <string name="progress_articles_favorites">Yêu thích: %1$d</string>
+    <string name="progress_quizzes_title">Tiến độ bài kiểm tra</string>
+    <string name="progress_quizzes_total">Tổng số bài kiểm tra: %1$d</string>
+    <string name="progress_quizzes_completed">Đã hoàn thành: %1$d</string>
+    <string name="progress_quizzes_average">Điểm cao trung bình: %1$s</string>
+</resources>

@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">EB-5 가이드</string>
+    <string name="language_english">English</string>
+    <string name="language_chinese">中文</string>
+    <string name="language_vietnamese">Tiếng Việt</string>
+    <string name="language_korean">한국어</string>
+
+    <string name="onboarding_welcome">EB-5 가이드에 오신 것을 환영합니다</string>
+    <string name="onboarding_description">선호하는 언어를 선택하면 기사, 퀴즈, 프로젝트가 즉시 전환됩니다.</string>
+    <string name="label_language">언어</string>
+    <string name="action_continue">계속</string>
+    <string name="action_back">뒤로</string>
+    <string name="action_close">닫기</string>
+
+    <string name="title_home">홈</string>
+    <string name="title_base">EB-5 기초</string>
+    <string name="title_quizzes">퀴즈</string>
+    <string name="title_progress">진행 상황</string>
+    <string name="title_projects">프로젝트</string>
+    <string name="title_settings">설정</string>
+    <string name="title_article_detail">기사 상세</string>
+    <string name="title_quiz_runner">퀴즈</string>
+    <string name="title_quiz_result">퀴즈 결과</string>
+    <string name="title_project_detail">프로젝트 상세</string>
+
+    <string name="tab_home">홈</string>
+    <string name="tab_base">기초</string>
+    <string name="tab_quizzes">퀴즈</string>
+    <string name="tab_progress">진행</string>
+    <string name="tab_projects">프로젝트</string>
+
+    <string name="cd_open_settings">설정 열기</string>
+
+    <string name="home_greeting">나만의 EB-5 학습 허브</string>
+    <string name="home_articles_title">기사</string>
+    <string name="home_articles_summary">%1$d / %2$d개 기사 완료</string>
+    <string name="home_articles_in_progress">진행 중 %1$d개</string>
+    <string name="home_articles_favorites">즐겨찾기 %1$d개</string>
+    <string name="home_explore_articles">EB-5 기초 살펴보기</string>
+    <string name="home_quizzes_title">퀴즈</string>
+    <string name="home_quizzes_summary">%1$d / %2$d개 퀴즈 완료</string>
+    <string name="home_take_quiz">퀴즈 시작</string>
+    <string name="home_empty_title">지금 여정을 시작하세요</string>
+    <string name="home_empty_description">EB-5 기초 기사부터 읽고 개인 맞춤 추천을 받아보세요.</string>
+
+    <string name="base_title">EB-5 지식 베이스</string>
+    <string name="base_change_category">카테고리 변경</string>
+    <string name="base_change_subcategory">하위 카테고리 변경</string>
+    <string name="base_read">읽기</string>
+    <string name="base_remove_favorite">즐겨찾기 해제</string>
+    <string name="base_add_favorite">즐겨찾기 추가</string>
+    <string name="base_mark_in_progress">진행 중으로 표시</string>
+    <string name="base_mark_completed">완료로 표시</string>
+
+    <string name="article_remove_favorite">즐겨찾기에서 제거</string>
+    <string name="article_add_favorite">즐겨찾기에 추가</string>
+    <string name="article_mark_in_progress">진행 중으로 표시</string>
+    <string name="article_mark_completed">완료로 표시</string>
+    <string name="article_examples_title">사례</string>
+
+    <string name="quiz_question_count">문항 %1$d개</string>
+    <string name="quiz_best_score">최고 점수: %1$d</string>
+    <string name="quiz_start">퀴즈 시작</string>
+    <string name="quiz_question_progress">%1$d / %2$d문항</string>
+    <string name="quiz_finish">완료</string>
+    <string name="quiz_next">다음 문제</string>
+    <string name="quiz_change_answer">답 변경</string>
+    <string name="quiz_continue">계속</string>
+    <string name="quiz_exit">퀴즈 나가기</string>
+    <string name="quiz_result_title">수고하셨습니다!</string>
+    <string name="quiz_result_score">%1$d / %2$d점 획득</string>
+    <string name="quiz_retake">다시 풀기</string>
+
+    <string name="project_location">위치: %1$s</string>
+    <string name="project_category">카테고리: %1$s</string>
+    <string name="project_investment">최소 투자액: %1$s</string>
+    <string name="project_tea_status">TEA 상태: %1$s</string>
+    <string name="project_job_model">고용 모델: %1$s</string>
+
+    <string name="settings_language_title">앱 언어</string>
+    <string name="settings_version">앱 버전 %1$s</string>
+
+    <string name="progress_articles_title">기사 진행</string>
+    <string name="progress_articles_total">총 기사: %1$d</string>
+    <string name="progress_articles_completed">완료: %1$d</string>
+    <string name="progress_articles_in_progress">진행 중: %1$d</string>
+    <string name="progress_articles_favorites">즐겨찾기: %1$d</string>
+    <string name="progress_quizzes_title">퀴즈 진행</string>
+    <string name="progress_quizzes_total">총 퀴즈: %1$d</string>
+    <string name="progress_quizzes_completed">완료: %1$d</string>
+    <string name="progress_quizzes_average">최고 점수 평균: %1$s</string>
+</resources>

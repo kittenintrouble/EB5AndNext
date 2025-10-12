@@ -1,0 +1,34 @@
+[
+  {
+    "termId": 1,
+    "title": "Kiểm tra kiến thức cơ bản",
+    "questions": [
+      {
+        "question": "Nhà đầu tư EB-5 phải tạo tối thiểu bao nhiêu việc làm toàn thời gian?",
+        "options": ["5 việc làm", "10 việc làm", "15 việc làm", "20 việc làm"],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Giấy tờ nào cấp thẻ xanh có điều kiện sau khi hồ sơ EB-5 được chấp thuận?",
+        "options": ["Mẫu I-829", "Mẫu I-526E", "Thẻ xanh", "Giấy phép lao động"],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 2,
+    "title": "Mô hình đầu tư",
+    "questions": [
+      {
+        "question": "Đặc điểm nổi bật của dự án trung tâm vùng là gì?",
+        "options": ["Nhà đầu tư tự quản lý hoạt động hằng ngày", "Có thể tính việc làm gián tiếp", "Vốn tối thiểu 500.000 USD", "Chỉ áp dụng cho sản xuất"],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Đầu tư EB-5 trực tiếp được mô tả đúng nhất bởi lựa chọn nào?",
+        "options": ["Nhà đầu tư tham gia quỹ hợp vốn", "Nhà đầu tư mua trái phiếu chính phủ Mỹ", "Nhà đầu tư trực tiếp điều hành doanh nghiệp", "Nhà đầu tư chọn quỹ chỉ số"],
+        "correctAnswerIndex": 2
+      }
+    ]
+  }
+]

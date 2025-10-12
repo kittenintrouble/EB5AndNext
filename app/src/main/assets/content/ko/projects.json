@@ -1,0 +1,26 @@
+[
+  {
+    "id": "riverfront-hotel",
+    "title": "리버프런트 호텔 재개발",
+    "shortDescription": "역사적인 워터프런트 호텔을 복합형 호텔 및 컨퍼런스 허브로 재탄생시킵니다.",
+    "image": "https://images.unsplash.com/photo-1501117716987-c8e1ecb210a7?auto=format&fit=crop&w=1200&q=80",
+    "category": "지역센터",
+    "location": "메릴랜드 볼티모어",
+    "teaStatus": "고실업률 TEA",
+    "minInvestmentUsd": 800000,
+    "jobCreationModel": "RegionalCenter",
+    "fullDescription": "프로젝트는 이너 하버 일대의 역사적 호텔을 리노베이션하여 180개 객실과 컨퍼런스 센터, 리테일 공간을 확충하며, 지역센터 구조로 간접 고용 창출을 인정받습니다."
+  },
+  {
+    "id": "green-tech-manufacturing",
+    "title": "그린 테크 제조 캠퍼스",
+    "shortDescription": "전기차 배터리 부품을 생산하는 친환경 공장에 대한 직접 투자입니다.",
+    "image": "https://images.unsplash.com/photo-1581091215367-59ab6f167900?auto=format&fit=crop&w=1200&q=80",
+    "category": "직접",
+    "location": "네바다 리노",
+    "teaStatus": "농촌 TEA",
+    "minInvestmentUsd": 800000,
+    "jobCreationModel": "Direct",
+    "fullDescription": "캠퍼스는 전기차용 리튬 배터리 팩을 생산하며, 가동 후 2년 내에 정규직 35명을 고용할 계획입니다."
+  }
+]

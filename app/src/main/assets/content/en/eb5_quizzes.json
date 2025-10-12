@@ -1,0 +1,34 @@
+[
+  {
+    "termId": 1,
+    "title": "Program Fundamentals Quiz",
+    "questions": [
+      {
+        "question": "What is the minimum job creation requirement for an EB-5 investor?",
+        "options": ["At least 5 full-time jobs", "At least 10 full-time jobs", "At least 15 part-time jobs", "At least 20 indirect jobs"],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which document grants conditional residency after an EB-5 petition is approved?",
+        "options": ["Form I-829", "Form I-526E", "Green card", "Employment Authorization Document"],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 2,
+    "title": "Investment Models Quiz",
+    "questions": [
+      {
+        "question": "What is a key characteristic of a regional center project?",
+        "options": ["The investor directly manages daily operations", "Jobs can be counted indirectly", "Minimum investment is $500,000", "Only manufacturing businesses qualify"],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which option best describes a direct EB-5 investment?",
+        "options": ["Investor joins a pooled fund", "Investor purchases U.S. government bonds", "Investor actively manages the enterprise", "Investor invests through an index fund"],
+        "correctAnswerIndex": 2
+      }
+    ]
+  }
+]
