@@ -61,7 +61,7 @@ fun QuizRunnerScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(text = topic.title, style = MaterialTheme.typography.titleLarge)
-        LinearProgressIndicator(progress = (currentIndex + 1f) / totalQuestions)
+        LinearProgressIndicator(progress = { (currentIndex + 1f) / totalQuestions })
         Text(text = stringResource(R.string.quiz_question_progress, currentIndex + 1, totalQuestions))
         Text(text = question.question, style = MaterialTheme.typography.titleMedium)
         LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {

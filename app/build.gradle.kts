@@ -5,7 +5,14 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
 }
+
+val rawNewsBaseUrl =
+    (project.findProperty("newsBaseUrl") as? String)?.takeIf { it.isNotBlank() }
+        ?: "https://news-service.replit.app/"
+val newsBaseUrl = if (rawNewsBaseUrl.endsWith("/")) rawNewsBaseUrl else "$rawNewsBaseUrl/"
+val escapedNewsBaseUrl = newsBaseUrl.replace("\"", "\\\"")
 
 android {
     namespace = "com.eb5.app"
@@ -22,6 +29,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", "NEWS_BASE_URL", "\"$escapedNewsBaseUrl\"")
     }
 
     buildTypes {
@@ -45,6 +53,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {
@@ -68,18 +77,28 @@ dependencies {
     val composeBom = libs.versions.composeBom.get()
     implementation(platform("androidx.compose:compose-bom:$composeBom"))
     androidTestImplementation(platform("androidx.compose:compose-bom:$composeBom"))
+    implementation(platform(libs.firebase.bom))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.firebase.messaging)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
     implementation(libs.material3)
+    implementation(libs.material)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.datastore)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.coil.compose)
     implementation(libs.androidx.appcompat)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation("androidx.compose.foundation:foundation")
 
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")

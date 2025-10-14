@@ -7,15 +7,32 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.unit.sp
 import com.eb5.app.R
 import com.eb5.app.data.model.Article
 import com.eb5.app.data.model.ArticleStatus
@@ -36,28 +53,114 @@ fun ArticleDetailScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(text = article.title, style = MaterialTheme.typography.headlineSmall)
-                Text(text = article.description, style = MaterialTheme.typography.bodyLarge)
-                Button(onClick = onToggleFavorite, modifier = Modifier.fillMaxWidth()) {
-                    Text(text = if (isFavorite) stringResource(R.string.article_remove_favorite) else stringResource(R.string.article_add_favorite))
+            // Top bar: Back arrow + "Back" label (clickable), and heart on the right
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    modifier = Modifier
+                        .clickable { onBack() },
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                        contentDescription = stringResource(R.string.action_back),
+                        modifier = Modifier.size(32.dp)
+                    )
+                    Text(
+                        text = stringResource(R.string.action_back),
+                        style = MaterialTheme.typography.headlineSmall
+                    )
                 }
-                Button(onClick = onToggleStatus, modifier = Modifier.fillMaxWidth()) {
-                    val textRes = if (status == ArticleStatus.COMPLETED) R.string.article_mark_in_progress else R.string.article_mark_completed
-                    Text(text = stringResource(textRes))
-                }
-                Button(onClick = onBack, modifier = Modifier.fillMaxWidth()) {
-                    Text(text = stringResource(R.string.action_back))
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(onClick = onToggleFavorite) {
+                    if (isFavorite) {
+                        Icon(imageVector = Icons.Outlined.Favorite, contentDescription = stringResource(R.string.article_remove_favorite))
+                    } else {
+                        Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = stringResource(R.string.article_add_favorite))
+                    }
                 }
             }
         }
+        item {
+            // Title with improved visibility
+            Text(
+                text = article.title,
+                style = MaterialTheme.typography.headlineMedium
+            )
+        }
+        item {
+            // Actions row: Mark completed on the left (same behavior as preview list)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                if (status == ArticleStatus.COMPLETED) {
+                    val dottedColor = MaterialTheme.colorScheme.primary
+                    Icon(imageVector = Icons.Outlined.CheckCircle, contentDescription = null)
+                    Text(
+                        text = stringResource(R.string.action_uncompleted),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = dottedColor,
+                        modifier = Modifier
+                            .clickable { onToggleStatus() }
+                            .drawBehind {
+                                val y = size.height - 2.dp.toPx()
+                                val dash = 4.dp.toPx()
+                                drawLine(
+                                    color = dottedColor,
+                                    start = Offset(0f, y),
+                                    end = Offset(size.width, y),
+                                    strokeWidth = 1.dp.toPx(),
+                                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(dash, dash), 0f)
+                                )
+                            }
+                    )
+                } else {
+                    Button(onClick = onToggleStatus) {
+                        Text(text = stringResource(R.string.action_mark_completed))
+                    }
+                }
+            }
+        }
+        item {
+            Spacer(modifier = Modifier.height(4.dp))
+        }
+        item {
+            // Body text with better readability: larger line height and spacing
+            Text(
+                text = article.description,
+                style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 24.sp)
+            )
+        }
         if (article.examples.isNotEmpty()) {
             item {
-                Text(text = stringResource(R.string.article_examples_title), style = MaterialTheme.typography.titleMedium)
-            }
-            items(article.examples) { example ->
-                Text(text = example)
-                Spacer(modifier = Modifier.height(8.dp))
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 12.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.article_examples_title),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        article.examples.forEach { example ->
+                            Text(text = example, style = MaterialTheme.typography.bodyMedium)
+                        }
+                    }
+                }
             }
         }
     }

@@ -6,9 +6,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenu
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,32 +29,40 @@ fun SettingsScreen(
     language: AppLanguage,
     availableLanguages: List<AppLanguage>,
     onLanguageChanged: (AppLanguage) -> Unit,
-    onClose: () -> Unit,
+    onClose: (AppLanguage) -> Unit,
     appVersion: String
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var selectedLanguage by remember(language) { mutableStateOf(language) }
     Column(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(text = stringResource(R.string.settings_language_title))
-        ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = !expanded }) {
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = { expanded = !expanded }
+        ) {
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .menuAnchor(),
-                value = stringResource(language.displayName),
+                    .menuAnchor(MenuAnchorType.PrimaryEditable, enabled = true),
+                value = stringResource(selectedLanguage.displayName),
                 onValueChange = {},
                 readOnly = true,
                 label = { Text(text = stringResource(R.string.label_language)) },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
             )
-            ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
                 availableLanguages.forEach { option ->
                     androidx.compose.material3.DropdownMenuItem(
                         text = { Text(text = stringResource(option.displayName)) },
                         onClick = {
                             expanded = false
+                            selectedLanguage = option
                             onLanguageChanged(option)
                         }
                     )
@@ -61,7 +70,7 @@ fun SettingsScreen(
             }
         }
         Text(text = stringResource(R.string.settings_version, appVersion))
-        Button(onClick = onClose) {
+        Button(onClick = { onClose(selectedLanguage) }) {
             Text(text = stringResource(R.string.action_close))
         }
     }

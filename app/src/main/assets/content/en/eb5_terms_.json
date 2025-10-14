@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "EB-5 Program Overview",
+    "category": "Foundations",
+    "subcategory": "Program Basics",
+    "description": "The EB-5 Immigrant Investor Program allows qualified foreign investors to obtain a U.S. green card by investing in a new commercial enterprise that creates jobs for American workers.",
+    "shortDescription": "How EB-5 connects investment to permanent residency.",
+    "examples": [
+      "Investing $800,000 in a targeted employment area (TEA) project",
+      "Creating or preserving at least 10 full-time U.S. jobs"
+    ],
+    "dayNumber": 1,
+    "isCompleted": false
+  },
+  {
+    "id": 2,
+    "title": "Direct vs. Regional Center Investment",
+    "category": "Foundations",
+    "subcategory": "Investment Models",
+    "description": "Investors may choose between direct investments, where they manage the business operations, and regional center investments, where they join pooled projects managed by professionals.",
+    "shortDescription": "Comparing the two main EB-5 investment paths.",
+    "examples": [
+      "Owning and operating a restaurant as a direct investor",
+      "Participating in a real estate development through a regional center"
+    ],
+    "dayNumber": 2,
+    "isCompleted": false
+  },
+  {
+    "id": 3,
+    "title": "Job Creation Requirements",
+    "category": "Compliance",
+    "subcategory": "USCIS Criteria",
+    "description": "Every EB-5 investment must lead to the creation of at least 10 full-time positions for qualifying U.S. workers within two years of the investor receiving conditional residency.",
+    "shortDescription": "Why job creation is the centerpiece of EB-5 eligibility.",
+    "examples": [
+      "Hiring hotel staff for a new development",
+      "Counting indirect jobs supported by a regional center project"
+    ],
+    "dayNumber": 3,
+    "isCompleted": false
+  }
+]

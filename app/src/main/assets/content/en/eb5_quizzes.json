@@ -5,13 +5,33 @@
     "questions": [
       {
         "question": "What is the minimum job creation requirement for an EB-5 investor?",
-        "options": ["At least 5 full-time jobs", "At least 10 full-time jobs", "At least 15 part-time jobs", "At least 20 indirect jobs"],
+        "options": [
+          "At least 5 full-time jobs",
+          "At least 10 full-time jobs",
+          "At least 15 part-time jobs",
+          "At least 20 indirect jobs"
+        ],
         "correctAnswerIndex": 1
       },
       {
         "question": "Which document grants conditional residency after an EB-5 petition is approved?",
-        "options": ["Form I-829", "Form I-526E", "Green card", "Employment Authorization Document"],
+        "options": [
+          "Form I-829",
+          "Form I-526E",
+          "Green card",
+          "Employment Authorization Document"
+        ],
         "correctAnswerIndex": 2
+      },
+      {
+        "question": "What is the main purpose of the EB-5 Immigrant Investor Program?",
+        "options": [
+          "Promoting tourism in the U.S.",
+          "Stimulating U.S. economy through investment and job creation",
+          "Issuing student visas",
+          "Funding state education programs"
+        ],
+        "correctAnswerIndex": 1
       }
     ]
   },
@@ -21,13 +41,4141 @@
     "questions": [
       {
         "question": "What is a key characteristic of a regional center project?",
-        "options": ["The investor directly manages daily operations", "Jobs can be counted indirectly", "Minimum investment is $500,000", "Only manufacturing businesses qualify"],
+        "options": [
+          "The investor directly manages daily operations",
+          "Jobs can be counted indirectly",
+          "Minimum investment is $500,000",
+          "Only manufacturing businesses qualify"
+        ],
         "correctAnswerIndex": 1
       },
       {
         "question": "Which option best describes a direct EB-5 investment?",
-        "options": ["Investor joins a pooled fund", "Investor purchases U.S. government bonds", "Investor actively manages the enterprise", "Investor invests through an index fund"],
+        "options": [
+          "Investor joins a pooled fund",
+          "Investor purchases U.S. government bonds",
+          "Investor actively manages the enterprise",
+          "Investor invests through an index fund"
+        ],
         "correctAnswerIndex": 2
+      },
+      {
+        "question": "What job creation requirement must EB-5 investors fulfill?",
+        "options": [
+          "Create 5 part-time jobs",
+          "Create at least 10 full-time jobs for U.S. workers",
+          "Hire only temporary seasonal workers",
+          "Create jobs exclusively for family members"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 3,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which agency manages and oversees the EB-5 program in the U.S.?",
+        "options": [
+          "Department of State",
+          "Federal Reserve",
+          "U.S. Citizenship and Immigration Services (USCIS)",
+          "Department of Labor"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 4,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is the annual limit of EB-5 visas issued?",
+        "options": [
+          "5,000",
+          "10,000",
+          "15,000",
+          "20,000"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 5,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "How long does an investor initially receive a conditional Green Card under EB-5?",
+        "options": [
+          "1 year",
+          "2 years",
+          "5 years",
+          "10 years"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 6,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Since its creation, how has the EB-5 program impacted the U.S. economy?",
+        "options": [
+          "It negatively impacted job creation",
+          "It has had no measurable impact",
+          "It has significantly contributed to investment and job creation",
+          "It primarily supported educational exchanges"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 7,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What is the standard minimum investment amount for EB-5 projects not in TEA areas?",
+        "options": [
+          "$500,000",
+          "$800,000",
+          "$1,050,000",
+          "$1,500,000"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 8,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What type of business qualifies for EB-5 investment?",
+        "options": [
+          "Non-profit organization",
+          "New commercial enterprise",
+          "Personal residence purchase",
+          "Government bonds purchase"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 9,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Who qualifies as an eligible employee under EB-5?",
+        "options": [
+          "Temporary visa holders",
+          "International students",
+          "U.S. citizens or permanent residents",
+          "Investor’s family members"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 10,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "Which form must investors file to remove conditions from their Green Card?",
+        "options": [
+          "Form I-485",
+          "Form I-829",
+          "Form DS-260",
+          "Form I-765"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 11,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Who can apply for the EB-5 Immigrant Investor Program?",
+        "options": [
+          "Only students",
+          "Only diplomats",
+          "Any foreign national meeting investment and job creation criteria",
+          "U.S. citizens looking to invest abroad"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 12,
+    "title": "Job Creation Requirements",
+    "questions": [
+      {
+        "question": "What is the minimum number of jobs an EB-5 investor must create?",
+        "options": [
+          "At least 5 jobs",
+          "At least 10 full-time jobs",
+          "At least 20 part-time jobs",
+          "Jobs are not required"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which positions generally DO NOT count toward the EB‑5 job creation total?",
+        "options": [
+          "Independent contractors",
+          "W‑2 full‑time employees",
+          "Full‑time U.S. citizens",
+          "Permanent residents on payroll"
+        ],
+        "correctAnswerIndex": 0
+      }
+    ]
+  },
+  {
+    "termId": 13,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What is the typical investment threshold for EB-5 projects located in Targeted Employment Areas (TEAs)?",
+        "options": [
+          "$500,000",
+          "$800,000",
+          "$1,050,000",
+          "$2,000,000"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 14,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which family members can an EB-5 investor include in their application?",
+        "options": [
+          "Spouse and unmarried children under age 21",
+          "Only children regardless of marital status",
+          "Parents and siblings",
+          "Any relatives"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 15,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What type of jobs qualify as EB-5 compliant jobs?",
+        "options": [
+          "Only part-time positions",
+          "Seasonal jobs",
+          "Permanent full-time positions for U.S. citizens or authorized workers",
+          "Jobs created outside the U.S."
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 16,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What is one major benefit of obtaining an EB-5 visa?",
+        "options": [
+          "Immediate U.S. citizenship",
+          "Guaranteed return on investment",
+          "Eligibility for a Green Card and permanent residency",
+          "Automatic admission to U.S. universities"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 17,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What educational benefit can EB-5 visa holders enjoy?",
+        "options": [
+          "Free private schooling",
+          "Eligibility for public education at resident rates",
+          "Guaranteed scholarships",
+          "Immediate admission to Ivy League universities"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 18,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "How does an EB-5 visa impact the investor's ability to work in the U.S.?",
+        "options": [
+          "Allows employment only in government positions",
+          "Restricts employment to the investment business only",
+          "Permits unrestricted employment anywhere in the U.S.",
+          "Does not grant employment authorization"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 19,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What benefit does an EB-5 visa provide concerning U.S. residency?",
+        "options": [
+          "Only temporary visitation rights",
+          "Conditional permanent residency initially, later permanent",
+          "Permanent citizenship immediately",
+          "Residency limited to specific states only"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 20,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "How soon can EB-5 visa holders apply for U.S. citizenship after obtaining their Green Card?",
+        "options": [
+          "Immediately after investment",
+          "After 2 years of conditional residency",
+          "After 5 years of permanent residency",
+          "Citizenship is not an option for EB-5 investors"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 21,
+    "title": "Program History & Reforms",
+    "questions": [
+      {
+        "question": "In which year was the EB-5 Immigrant Investor Program established?",
+        "options": [
+          "1980",
+          "1990",
+          "2000",
+          "2010"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 22,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What was the original goal of establishing the EB-5 program?",
+        "options": [
+          "Increase tourism",
+          "Attract skilled foreign labor",
+          "Stimulate economic growth through foreign investment",
+          "Promote cultural exchanges"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 23,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What significant amendment was introduced to the EB-5 program in 1993?",
+        "options": [
+          "Reduction of job creation requirements",
+          "Introduction of the Regional Center Pilot Program",
+          "Mandatory investment in government bonds",
+          "Automatic citizenship for investors"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 24,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What impact did the introduction of Regional Centers have on EB-5 participation?",
+        "options": [
+          "Decreased investor interest significantly",
+          "No measurable impact",
+          "Significantly increased investor participation and project scale",
+          "Restricted the types of businesses eligible"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 25,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which act significantly reformed the EB-5 program in recent years?",
+        "options": [
+          "Immigration Reform Act of 1986",
+          "EB-5 Reform and Integrity Act of 2022",
+          "USA PATRIOT Act of 2001",
+          "Dodd-Frank Act of 2010"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 26,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What distinguishes a direct EB-5 investment from a regional center investment?",
+        "options": [
+          "Direct investments require higher investment amounts",
+          "Regional center investments require no job creation",
+          "Direct investments involve the investor actively managing the business",
+          "Regional centers only fund government projects"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 27,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What main advantage do Regional Centers offer to EB-5 investors?",
+        "options": [
+          "Guaranteed return on investment",
+          "Ability to count indirect jobs toward the job creation requirement",
+          "Immediate permanent residency",
+          "Exemption from investment risk"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 28,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "How are jobs counted differently between direct and regional center investments?",
+        "options": [
+          "Only regional centers count full-time jobs",
+          "Direct investments count indirect jobs, while regional centers count direct jobs",
+          "Regional centers can count indirect and induced jobs, direct investments typically count only direct jobs",
+          "Direct investments do not require job creation at all"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 29,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What role does a Regional Center play in EB-5 investments?",
+        "options": [
+          "It directly employs investors",
+          "It manages all aspects of investors' businesses",
+          "It pools capital from multiple investors to fund larger projects",
+          "It exclusively funds nonprofit ventures"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 30,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which type of EB-5 investment typically involves the investor actively managing daily business operations?",
+        "options": [
+          "Regional Center Investment",
+          "Direct EB-5 Investment",
+          "Government-sponsored Investment",
+          "Non-profit EB-5 Investment"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 31,
+    "title": "Direct EB‑5 Investment Basics",
+    "questions": [
+      {
+        "question": "What defines a Direct EB-5 Investment?",
+        "options": [
+          "Investment made only through regional centers",
+          "Passive investment with no management required",
+          "Investor actively manages the new commercial enterprise",
+          "Investment only in government projects"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which governance setup best matches a direct EB‑5 investment?",
+        "options": [
+          "Passive limited partner only",
+          "Active manager or day‑to‑day oversight role",
+          "No involvement post‑investment",
+          "Only voting on annual reports"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 32,
+    "title": "Direct EB‑5 Investment Basics",
+    "questions": [
+      {
+        "question": "What type of job creation is typically counted in direct EB-5 investments?",
+        "options": [
+          "Only indirect and induced jobs",
+          "Only seasonal and temporary jobs",
+          "Primarily direct, full-time jobs created by the enterprise",
+          "No job creation requirement"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which governance setup best matches a direct EB‑5 investment?",
+        "options": [
+          "Passive limited partner only",
+          "Active manager or day‑to‑day oversight role",
+          "No involvement post‑investment",
+          "Only voting on annual reports"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 33,
+    "title": "Direct EB‑5 Investment Basics",
+    "questions": [
+      {
+        "question": "Which scenario is an example of a Direct EB-5 Investment?",
+        "options": [
+          "Investing in a large hotel through a regional center",
+          "Buying government treasury bonds",
+          "Opening and managing a franchise restaurant that creates 10 jobs",
+          "Investing in a mutual fund"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which governance setup best matches a direct EB‑5 investment?",
+        "options": [
+          "Passive limited partner only",
+          "Active manager or day‑to‑day oversight role",
+          "No involvement post‑investment",
+          "Only voting on annual reports"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 34,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "How involved must an investor be in a direct EB-5 business?",
+        "options": [
+          "Completely passive with no management duties",
+          "Investor must be actively engaged in managing or overseeing the business",
+          "Only involved as a silent partner",
+          "Must delegate all management to regional centers"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which governance setup best matches a direct EB‑5 investment?",
+        "options": [
+          "Passive limited partner only",
+          "Active manager or day‑to‑day oversight role",
+          "No involvement post‑investment",
+          "Only voting on annual reports"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 35,
+    "title": "Direct EB‑5 Investment Basics",
+    "questions": [
+      {
+        "question": "Can direct EB-5 investors pool their investments?",
+        "options": [
+          "No, pooling is prohibited",
+          "Yes, but only through a regional center",
+          "Yes, investors can pool funds but each must create required jobs independently",
+          "Pooling automatically exempts job creation"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which governance setup best matches a direct EB‑5 investment?",
+        "options": [
+          "Passive limited partner only",
+          "Active manager or day‑to‑day oversight role",
+          "No involvement post‑investment",
+          "Only voting on annual reports"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 36,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What is the main advantage of investing through an EB-5 Regional Center?",
+        "options": [
+          "Lower investment amount",
+          "Guarantee of investment returns",
+          "Counting indirect and induced jobs toward job creation requirements",
+          "Immediate U.S. citizenship"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 37,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What types of projects do EB-5 Regional Centers typically fund?",
+        "options": [
+          "Only government infrastructure projects",
+          "Large-scale commercial or real estate projects",
+          "Non-profit organizations only",
+          "Individual small business ventures exclusively"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 38,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "Who must designate and approve EB-5 Regional Centers?",
+        "options": [
+          "Federal Reserve Bank",
+          "Department of Commerce",
+          "U.S. Citizenship and Immigration Services (USCIS)",
+          "Department of State"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 39,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What is an essential criterion USCIS considers for Regional Center designation?",
+        "options": [
+          "Guaranteed investor returns",
+          "Potential for economic growth and job creation",
+          "Mandatory investment in non-profit sectors",
+          "Restriction to only rural areas"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 40,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "Can EB-5 investors actively manage businesses funded through Regional Centers?",
+        "options": [
+          "Yes, investors must manage daily operations",
+          "No, investments are usually passive",
+          "Yes, but only government-related projects",
+          "No, management is prohibited entirely"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 41,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What does TEA stand for in the context of the EB-5 program?",
+        "options": [
+          "Temporary Employment Area",
+          "Targeted Employment Area",
+          "Total Economic Area",
+          "Tax Exempt Area"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 42,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What benefit does investing in a TEA offer to EB-5 investors?",
+        "options": [
+          "Exemption from job creation requirements",
+          "Guaranteed return on investment",
+          "Reduced minimum investment amount",
+          "Immediate citizenship"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 43,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What characterizes an area as a TEA?",
+        "options": [
+          "High employment rate",
+          "High unemployment or rural area",
+          "Urban financial district",
+          "Tourist-heavy regions"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 44,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "Who officially designates a Targeted Employment Area (TEA)?",
+        "options": [
+          "Local city government only",
+          "USCIS based on economic data",
+          "Federal Reserve Bank",
+          "Department of Education"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 45,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What is the minimum EB-5 investment amount required in a TEA?",
+        "options": [
+          "$500,000",
+          "$800,000",
+          "$1,050,000",
+          "$2,000,000"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 46,
+    "title": "At‑Risk Investment Requirement",
+    "questions": [
+      {
+        "question": "What does 'at-risk' mean in EB-5 investments?",
+        "options": [
+          "Investor is guaranteed a return on their investment",
+          "Investment must be exposed to potential gain or loss",
+          "Investment is insured by the government",
+          "No financial risk involved for the investor"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which term BEST reflects EB‑5 'at‑risk' capital?",
+        "options": [
+          "Guaranteed principal",
+          "Exposed to potential gain or loss",
+          "Backed by government insurance",
+          "Redeemable on demand"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 47,
+    "title": "At‑Risk Investment Requirement",
+    "questions": [
+      {
+        "question": "Why must EB-5 investments be 'at-risk'?",
+        "options": [
+          "To ensure investors lose money",
+          "To comply with SEC regulations",
+          "To demonstrate genuine investment and job creation intent",
+          "To guarantee profit to investors"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which term BEST reflects EB‑5 'at‑risk' capital?",
+        "options": [
+          "Guaranteed principal",
+          "Exposed to potential gain or loss",
+          "Backed by government insurance",
+          "Redeemable on demand"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 48,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Can EB-5 investment funds be guaranteed by a developer or third party?",
+        "options": [
+          "Yes, funds must be fully insured",
+          "No, any guarantee violates the 'at-risk' requirement",
+          "Only by government-backed securities",
+          "Yes, but only after job creation is confirmed"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 49,
+    "title": "At‑Risk Investment Requirement",
+    "questions": [
+      {
+        "question": "What happens if an EB-5 investment is found not to be 'at-risk' by USCIS?",
+        "options": [
+          "The investor immediately gains citizenship",
+          "It results in approval with conditions",
+          "USCIS may deny the investor's application",
+          "Investment amount is refunded automatically"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which term BEST reflects EB‑5 'at‑risk' capital?",
+        "options": [
+          "Guaranteed principal",
+          "Exposed to potential gain or loss",
+          "Backed by government insurance",
+          "Redeemable on demand"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 50,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "How should the potential for profit or loss in an EB-5 project be documented?",
+        "options": [
+          "No documentation is required",
+          "Through guarantees in contracts",
+          "Clearly outlined in project offering documents",
+          "Only verbally communicated"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 51,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What is the standard EB-5 investment amount for projects NOT in Targeted Employment Areas?",
+        "options": [
+          "$500,000",
+          "$800,000",
+          "$1,050,000",
+          "$2,000,000"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 52,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "How much is the reduced EB-5 investment amount for projects located within TEAs?",
+        "options": [
+          "$500,000",
+          "$800,000",
+          "$1,000,000",
+          "$1,500,000"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 53,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "Who designates the eligibility of Targeted Employment Areas (TEAs)?",
+        "options": [
+          "Local government",
+          "USCIS using economic data",
+          "Investor themselves",
+          "Federal Reserve"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 54,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "When were the EB-5 investment amounts last updated significantly by law?",
+        "options": [
+          "2000",
+          "2010",
+          "2019 under the Modernization Rule",
+          "1990"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 55,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "How often will EB-5 investment amounts be adjusted according to recent regulations?",
+        "options": [
+          "Every year",
+          "Every two years",
+          "Every five years",
+          "Only when requested by investors"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 56,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "Which project type is commonly used in EB-5 regional center investments?",
+        "options": [
+          "Small family-owned stores",
+          "Large-scale real estate developments",
+          "Individual consulting services",
+          "Personal home construction"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 57,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What type of infrastructure project is typically eligible for EB-5 funding?",
+        "options": [
+          "Private luxury residences",
+          "Public transportation or utility projects",
+          "Small community gardens",
+          "Temporary event spaces"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 58,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What distinguishes hospitality projects in EB-5?",
+        "options": [
+          "Limited to small bed-and-breakfast inns",
+          "Commonly involve large hotels and resorts",
+          "Usually nonprofit ventures",
+          "Do not require job creation"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 59,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which type of EB-5 project commonly involves construction of apartment complexes?",
+        "options": [
+          "Manufacturing projects",
+          "Residential real estate projects",
+          "Small tech startups",
+          "Educational projects"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 60,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What is a characteristic of mixed-use developments in EB-5 projects?",
+        "options": [
+          "Exclusively industrial use",
+          "Only residential housing",
+          "Combining residential, commercial, and retail spaces",
+          "Used solely for government facilities"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 61,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which of the following is an acceptable source of EB-5 investment funds?",
+        "options": [
+          "Unlawful proceeds",
+          "Documented personal savings",
+          "Funds from anonymous sources",
+          "Loans secured by the EB-5 investment itself"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 62,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Can EB-5 funds be a gift from family members?",
+        "options": [
+          "No, gifts are not allowed",
+          "Yes, with proper documentation",
+          "Only if from U.S. citizens",
+          "Only if the gift is returned later"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 63,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Are loans an acceptable source for EB-5 investment?",
+        "options": [
+          "No, loans are prohibited",
+          "Yes, if secured by investor’s personal assets",
+          "Only loans from foreign governments",
+          "Yes, if secured by the EB-5 business assets"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 64,
+    "title": "Lawful Source of Funds",
+    "questions": [
+      {
+        "question": "How must an investor document the lawful source of funds for EB-5?",
+        "options": [
+          "No documentation required",
+          "Only verbal assurances",
+          "Detailed financial records such as bank statements and tax returns",
+          "Only a signed declaration"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which document type BEST supports lawful source of funds?",
+        "options": [
+          "Unsigned personal note",
+          "Bank statements and tax returns",
+          "Verbal confirmation by a broker",
+          "Handwritten memo"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 65,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Can proceeds from the sale of a property be used for an EB-5 investment?",
+        "options": [
+          "No, property sales are not allowed",
+          "Yes, if properly documented and legal",
+          "Only if the property was in the U.S.",
+          "Only for rural TEA projects"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 66,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What should investors primarily consider when selecting an EB-5 real estate project?",
+        "options": [
+          "Popularity of the location among tourists",
+          "Developer’s track record and project feasibility",
+          "Immediate profit guarantee",
+          "Color and aesthetics of the building"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 67,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Why is market analysis crucial when selecting EB-5 real estate projects?",
+        "options": [
+          "To choose the most visually appealing properties",
+          "To ensure sufficient market demand and project viability",
+          "To avoid investing in any metropolitan areas",
+          "Because it guarantees job creation without risk"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 68,
+    "title": "Targeted Employment Areas (TEA)",
+    "questions": [
+      {
+        "question": "What benefit does investing in a TEA area real estate project offer?",
+        "options": [
+          "Guaranteed return on investment",
+          "Reduced investment requirement and potential visa priority",
+          "Immediate U.S. citizenship",
+          "No need for job creation documentation"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is MOST likely to qualify as a TEA?",
+        "options": [
+          "Affluent downtown core",
+          "Rural county with sparse population",
+          "Luxury resort district",
+          "Suburban tech corridor with low unemployment"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 69,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What is a critical element of due diligence for EB-5 real estate projects?",
+        "options": [
+          "Checking the local weather conditions",
+          "Ensuring transparent financial and project documentation",
+          "Verifying the interior design plans",
+          "Ensuring availability of nearby restaurants"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 70,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What financial documentation should investors review carefully when selecting a real estate project?",
+        "options": [
+          "Developer's personal financial statements only",
+          "Project’s capital stack and financing structure",
+          "Developer's college transcripts",
+          "Historical weather data for the location"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 71,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Which type of EB-5 real estate investment commonly involves hotels and office buildings?",
+        "options": [
+          "Residential real estate",
+          "Commercial real estate",
+          "Personal homes",
+          "Farmland investments"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 72,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What characterizes residential real estate investments in EB-5?",
+        "options": [
+          "Building shopping malls",
+          "Development of apartment complexes",
+          "Construction of highways",
+          "Investment in private residences for personal use"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 73,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Mixed-use developments in EB-5 real estate typically combine which components?",
+        "options": [
+          "Residential, commercial, and retail spaces",
+          "Only residential properties",
+          "Only government offices",
+          "Exclusively industrial facilities"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 74,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What type of EB-5 real estate investment often targets student or senior housing?",
+        "options": [
+          "Industrial real estate",
+          "Specialized residential housing",
+          "Luxury hotel developments",
+          "Retail store chains"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 75,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Why are hospitality projects popular in EB-5 investments?",
+        "options": [
+          "They guarantee high investment returns",
+          "Typically involve significant job creation opportunities",
+          "Require no investment at risk",
+          "Provide immediate citizenship"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 76,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Why is market analysis critical before investing in an EB-5 real estate project?",
+        "options": [
+          "To choose the best color for building exteriors",
+          "To ensure the project meets local demand and economic viability",
+          "To reduce project construction time",
+          "To guarantee investment returns"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 77,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What key factors does an EB-5 market analysis usually include?",
+        "options": [
+          "Investor’s personal preferences",
+          "Economic and demographic trends, competition analysis",
+          "Only local weather conditions",
+          "Government sponsorship levels"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 78,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Why is understanding the competitive landscape important in EB-5 investments?",
+        "options": [
+          "To pick the least expensive project",
+          "To avoid markets with excessive competition or saturation",
+          "To qualify for additional tax exemptions",
+          "To skip regulatory approval processes"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 79,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is typically assessed through third-party market studies for EB-5 projects?",
+        "options": [
+          "The project manager’s personal finances",
+          "Feasibility, economic impact, and job creation potential",
+          "Only construction costs",
+          "Visa processing speed"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 80,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Why is local government support important in EB-5 market analysis?",
+        "options": [
+          "It automatically guarantees investment returns",
+          "It can validate project demand and aid in obtaining necessary permits",
+          "It exempts the investor from job creation requirements",
+          "It ensures immediate visa approval"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 81,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What is the first stage in the EB-5 real estate project development cycle?",
+        "options": [
+          "Construction completion",
+          "Site selection and feasibility analysis",
+          "Immediate property sale",
+          "Investor fund distribution"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 82,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "During the planning and permitting stage, what essential tasks are completed?",
+        "options": [
+          "Selling the finished property",
+          "Securing necessary permits and approvals from local authorities",
+          "Immediate job creation verification",
+          "Investor exit planning"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 83,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What happens during the construction phase of an EB-5 project?",
+        "options": [
+          "Investors receive immediate capital returns",
+          "Permits and zoning are obtained",
+          "The actual building of the project, generating most jobs",
+          "Property sales agreements are finalized"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 84,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is a critical milestone after completing construction in EB-5 projects?",
+        "options": [
+          "Immediate liquidation of assets",
+          "Operations and stabilization phase",
+          "Returning investor capital immediately",
+          "Closing the business permanently"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 85,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What marks the final phase of the EB-5 project development cycle?",
+        "options": [
+          "Site selection",
+          "Planning and permitting",
+          "Investor exit strategy implementation",
+          "Ongoing indefinite operations"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 86,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Which real estate investment typically offers higher job creation opportunities in EB-5 projects?",
+        "options": [
+          "Personal homes",
+          "Commercial real estate",
+          "Small residential projects",
+          "Individual apartment units"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 87,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "What typically characterizes residential EB-5 real estate investments?",
+        "options": [
+          "Shopping malls",
+          "Manufacturing facilities",
+          "Apartment buildings and condominiums",
+          "Government offices only"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 88,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Why might an investor prefer commercial real estate in EB-5 projects?",
+        "options": [
+          "Usually involves smaller projects",
+          "Often provides stable, long-term lease income and significant job creation",
+          "No risk involved",
+          "Automatic U.S. citizenship"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 89,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What type of job creation do residential projects primarily offer in EB-5 investments?",
+        "options": [
+          "High-tech engineering jobs",
+          "Primarily construction-related jobs",
+          "Mostly seasonal jobs",
+          "No jobs required"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 90,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Which EB-5 real estate type generally involves larger project scales and investment amounts?",
+        "options": [
+          "Residential real estate",
+          "Commercial real estate",
+          "Personal residential properties",
+          "Individual small retail stores"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 91,
+    "title": "USCIS Business Plan Standard",
+    "questions": [
+      {
+        "question": "Why is a detailed business plan critical for EB-5 project approval?",
+        "options": [
+          "To ensure immediate profits",
+          "To guarantee automatic citizenship",
+          "To demonstrate compliance with USCIS job creation requirements",
+          "To bypass financial audits"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Under Matter of Ho, which component is REQUIRED?",
+        "options": [
+          "Exact 10‑year profit forecast",
+          "Detailed hiring timeline with positions",
+          "Letter from mayor",
+          "Photographs of the site"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 92,
+    "title": "USCIS Business Plan Standard",
+    "questions": [
+      {
+        "question": "What essential elements must an EB-5 business plan include according to USCIS?",
+        "options": [
+          "Only the project location",
+          "Detailed financial projections, job creation plan, and market analysis",
+          "Investor personal preferences",
+          "No documentation required"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Under Matter of Ho, which component is REQUIRED?",
+        "options": [
+          "Exact 10‑year profit forecast",
+          "Detailed hiring timeline with positions",
+          "Letter from mayor",
+          "Photographs of the site"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 93,
+    "title": "USCIS Business Plan Standard",
+    "questions": [
+      {
+        "question": "What is the USCIS standard for evaluating EB-5 business plans called?",
+        "options": [
+          "Matter of Ho",
+          "EB-5 Simplification Act",
+          "Investment Risk Act",
+          "Green Card Act"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "Under Matter of Ho, which component is REQUIRED?",
+        "options": [
+          "Exact 10‑year profit forecast",
+          "Detailed hiring timeline with positions",
+          "Letter from mayor",
+          "Photographs of the site"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 94,
+    "title": "USCIS Business Plan Standard",
+    "questions": [
+      {
+        "question": "Which of the following is crucial to show in an EB-5 business plan for USCIS?",
+        "options": [
+          "Personal assets of the investor",
+          "Detailed hiring timelines and job positions",
+          "Immediate project profitability",
+          "Tax exemption status"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Under Matter of Ho, which component is REQUIRED?",
+        "options": [
+          "Exact 10‑year profit forecast",
+          "Detailed hiring timeline with positions",
+          "Letter from mayor",
+          "Photographs of the site"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 95,
+    "title": "USCIS Business Plan Standard",
+    "questions": [
+      {
+        "question": "What might cause USCIS to reject an EB-5 business plan?",
+        "options": [
+          "Detailed job creation strategy",
+          "Vague or unrealistic projections and lack of clarity",
+          "Comprehensive market analysis",
+          "Investor's extensive documentation"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Under Matter of Ho, which component is REQUIRED?",
+        "options": [
+          "Exact 10‑year profit forecast",
+          "Detailed hiring timeline with positions",
+          "Letter from mayor",
+          "Photographs of the site"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 96,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is typically demonstrated by successful EB-5 case studies?",
+        "options": [
+          "Guaranteed returns for all investors",
+          "Failure to meet job creation requirements",
+          "Real-world examples of job creation and compliance with EB-5 regulations",
+          "Automatic U.S. citizenship"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 97,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "How can case studies assist potential EB-5 investors?",
+        "options": [
+          "By guaranteeing investment returns",
+          "By providing insights into risks and successful strategies",
+          "By ensuring immediate Green Card issuance",
+          "By eliminating investment risks entirely"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 98,
+    "title": "Common EB‑5 Project Types",
+    "questions": [
+      {
+        "question": "Why are hospitality projects frequently cited in EB-5 case studies?",
+        "options": [
+          "They require the lowest investment amounts",
+          "They typically involve significant job creation opportunities",
+          "They ensure investor profit",
+          "They are government-sponsored projects only"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 99,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What common challenge is often highlighted in EB-5 case studies?",
+        "options": [
+          "Immediate visa approval",
+          "Ensuring compliance with job creation targets",
+          "Lack of investment documentation",
+          "Guaranteed financial success"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 100,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What benefit do investors gain by studying past EB-5 cases?",
+        "options": [
+          "Assurance of no investment risks",
+          "Knowledge of successful strategies and potential pitfalls",
+          "Automatic project approval",
+          "Immediate return on investment"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 101,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which form initiates the EB-5 petition process?",
+        "options": [
+          "Form I-526",
+          "Form I-485",
+          "Form DS-260",
+          "Form I-829"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 102,
+    "title": "Form I‑526 / I‑526E Petition",
+    "questions": [
+      {
+        "question": "What does USCIS primarily assess in the EB-5 petition (Form I-526)?",
+        "options": [
+          "The investor’s travel history",
+          "Investor’s eligibility, lawful source of funds, and project’s job creation",
+          "Immediate citizenship eligibility",
+          "Investor’s language proficiency"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which of the following is a core element of a strong I‑526 filing?",
+        "options": [
+          "Investor’s travel diary",
+          "Lawful source of funds tracing",
+          "Personal social media metrics",
+          "Prepaid return guarantees"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 103,
+    "title": "Form I‑526 / I‑526E Petition",
+    "questions": [
+      {
+        "question": "What is the next step after Form I-526 approval in the EB-5 petition process?",
+        "options": [
+          "Immediately receiving citizenship",
+          "Filing Form I-829",
+          "Applying for a conditional Green Card via Adjustment of Status or Consular Processing",
+          "Investor immediately withdraws capital"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which of the following is a core element of a strong I‑526 filing?",
+        "options": [
+          "Investor’s travel diary",
+          "Lawful source of funds tracing",
+          "Personal social media metrics",
+          "Prepaid return guarantees"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 104,
+    "title": "Form I‑829: Removing Conditions",
+    "questions": [
+      {
+        "question": "What must investors demonstrate when filing Form I-829?",
+        "options": [
+          "That their personal net worth increased",
+          "That they met job creation and investment requirements",
+          "Immediate intent to become U.S. citizens",
+          "No further documentation is required"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What evidence is commonly used to support Form I‑829?",
+        "options": [
+          "Passport stamps only",
+          "Payroll records and job creation analysis",
+          "University diplomas",
+          "Tourist visas"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 105,
+    "title": "Form I‑829: Removing Conditions",
+    "questions": [
+      {
+        "question": "How long after receiving conditional residency must investors file Form I-829?",
+        "options": [
+          "Within 90 days before the two-year conditional residency expires",
+          "Immediately after entering the U.S.",
+          "Five years after investment",
+          "No filing required after initial investment"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "What evidence is commonly used to support Form I‑829?",
+        "options": [
+          "Passport stamps only",
+          "Payroll records and job creation analysis",
+          "University diplomas",
+          "Tourist visas"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 106,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which form starts the EB-5 immigration application process?",
+        "options": [
+          "Form I-485",
+          "Form I-526",
+          "Form I-829",
+          "Form DS-260"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 107,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What form is used for EB-5 applicants already in the U.S. to adjust their status?",
+        "options": [
+          "Form I-829",
+          "Form I-526",
+          "Form I-485",
+          "Form DS-260"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 108,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "Which form must be filed to remove conditions on EB-5 conditional Green Cards?",
+        "options": [
+          "Form I-526",
+          "Form I-829",
+          "Form DS-260",
+          "Form I-765"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 109,
+    "title": "Consular Processing (DS‑260)",
+    "questions": [
+      {
+        "question": "If an EB-5 investor is outside the U.S., which form do they use for consular processing?",
+        "options": [
+          "Form I-485",
+          "Form DS-260",
+          "Form I-829",
+          "Form I-526"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which choice correctly pairs process with typical user?",
+        "options": [
+          "Adjustment of Status — applicants abroad",
+          "Consular Processing — applicants in the U.S.",
+          "Adjustment of Status — applicants in the U.S.",
+          "Neither requires biometrics"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 110,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is the purpose of Form I-956K in the EB-5 process?",
+        "options": [
+          "To apply for a conditional Green Card",
+          "To register EB-5 agents and promoters",
+          "To remove conditions from a Green Card",
+          "To document the source of investment funds"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 111,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "How long is the initial EB-5 Green Card conditional residency period?",
+        "options": [
+          "1 year",
+          "2 years",
+          "5 years",
+          "Permanent immediately"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 112,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What must EB-5 investors file to remove conditions from their Green Cards?",
+        "options": [
+          "Form I-485",
+          "Form DS-260",
+          "Form I-829",
+          "Form I-526"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 113,
+    "title": "Form I‑829: Removing Conditions",
+    "questions": [
+      {
+        "question": "What happens after USCIS approves Form I-829?",
+        "options": [
+          "Investor must leave the U.S. immediately",
+          "Investor receives a permanent Green Card",
+          "Investor is required to make an additional investment",
+          "Investor automatically becomes a U.S. citizen"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What evidence is commonly used to support Form I‑829?",
+        "options": [
+          "Passport stamps only",
+          "Payroll records and job creation analysis",
+          "University diplomas",
+          "Tourist visas"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 114,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What right does permanent residency provide EB-5 investors?",
+        "options": [
+          "Guaranteed investment profits",
+          "Unlimited travel within Europe",
+          "Permission to live and work permanently in the U.S.",
+          "Immediate voting rights in federal elections"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 115,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "When can EB-5 investors typically apply for U.S. citizenship after obtaining permanent residency?",
+        "options": [
+          "Immediately upon investment",
+          "After 2 years of conditional residency",
+          "After 5 years of lawful permanent residency",
+          "Only after 10 years of residency"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 116,
+    "title": "Adjustment of Status (I‑485)",
+    "questions": [
+      {
+        "question": "Who typically uses Adjustment of Status (Form I-485) in the EB-5 process?",
+        "options": [
+          "Investors living outside the U.S.",
+          "Investors already residing in the U.S.",
+          "Only investors from Europe",
+          "Investors seeking immediate citizenship"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which choice correctly pairs process with typical user?",
+        "options": [
+          "Adjustment of Status — applicants abroad",
+          "Consular Processing — applicants in the U.S.",
+          "Adjustment of Status — applicants in the U.S.",
+          "Neither requires biometrics"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 117,
+    "title": "Consular Processing (DS‑260)",
+    "questions": [
+      {
+        "question": "What form is used for Consular Processing by EB-5 investors outside the U.S.?",
+        "options": [
+          "Form I-485",
+          "Form DS-260",
+          "Form I-829",
+          "Form I-765"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which choice correctly pairs process with typical user?",
+        "options": [
+          "Adjustment of Status — applicants abroad",
+          "Consular Processing — applicants in the U.S.",
+          "Adjustment of Status — applicants in the U.S.",
+          "Neither requires biometrics"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 118,
+    "title": "Adjustment of Status (I‑485)",
+    "questions": [
+      {
+        "question": "What benefit does Adjustment of Status provide to EB-5 applicants?",
+        "options": [
+          "Automatic U.S. citizenship",
+          "Ability to remain in the U.S. during application processing",
+          "Immediate job placement by the government",
+          "No documentation requirement"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 119,
+    "title": "Consular Processing (DS‑260)",
+    "questions": [
+      {
+        "question": "What advantage does Consular Processing offer EB-5 investors?",
+        "options": [
+          "Faster approval by USCIS",
+          "Interview conducted at a U.S. consulate abroad",
+          "Immediate permanent residency",
+          "Exemption from investment requirements"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which choice correctly pairs process with typical user?",
+        "options": [
+          "Adjustment of Status — applicants abroad",
+          "Consular Processing — applicants in the U.S.",
+          "Adjustment of Status — applicants in the U.S.",
+          "Neither requires biometrics"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 120,
+    "title": "Adjustment of Status (I‑485)",
+    "questions": [
+      {
+        "question": "Why might an investor prefer Adjustment of Status over Consular Processing?",
+        "options": [
+          "No job creation requirement",
+          "Avoids international travel during application processing",
+          "Immediate return of investment capital",
+          "Guaranteed visa approval"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which choice correctly pairs process with typical user?",
+        "options": [
+          "Adjustment of Status — applicants abroad",
+          "Consular Processing — applicants in the U.S.",
+          "Adjustment of Status — applicants in the U.S.",
+          "Neither requires biometrics"
+        ],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 121,
+    "title": "Attorneys, Consultants & Compliance",
+    "questions": [
+      {
+        "question": "What role do immigration attorneys primarily play in the EB-5 process?",
+        "options": [
+          "Guarantee investment returns",
+          "Provide legal advice and prepare immigration documentation",
+          "Arrange business partnerships",
+          "Fund EB-5 projects directly"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 122,
+    "title": "Attorneys, Consultants & Compliance",
+    "questions": [
+      {
+        "question": "Why is it important to choose an experienced EB-5 attorney?",
+        "options": [
+          "They guarantee immediate citizenship",
+          "They provide better insights and compliance with USCIS requirements",
+          "They handle investment funds directly",
+          "They ensure no financial risks"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 123,
+    "title": "Attorneys, Consultants & Compliance",
+    "questions": [
+      {
+        "question": "Can EB-5 consultants provide legal advice if they are not attorneys?",
+        "options": [
+          "Yes, consultants can offer full legal services",
+          "No, legal advice must be provided by licensed attorneys only",
+          "Yes, but only on weekends",
+          "Only if they have USCIS approval"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 124,
+    "title": "Attorneys, Consultants & Compliance",
+    "questions": [
+      {
+        "question": "What should investors check before working with an EB-5 consultant?",
+        "options": [
+          "Their personal social media profiles",
+          "Their I-956K registration with USCIS",
+          "Their international travel history",
+          "Their ability to guarantee returns"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 125,
+    "title": "Fraud Prevention & Red Flags",
+    "questions": [
+      {
+        "question": "Why should investors avoid unregistered or fraudulent EB-5 consultants?",
+        "options": [
+          "They charge higher fees",
+          "They can jeopardize the investor’s immigration application and funds",
+          "They slow down visa processing intentionally",
+          "They provide too much information"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which promise should be treated as a FRAUD red flag?",
+        "options": [
+          "Transparent escrow usage",
+          "Guaranteed visa approval",
+          "Audited financials",
+          "Registered agents (I‑956K)"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 126,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is a frequent reason for EB-5 petition denial related to job creation?",
+        "options": [
+          "Too many jobs created",
+          "Insufficient number of qualifying jobs created",
+          "Jobs created too quickly",
+          "Jobs offered to family members"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 127,
+    "title": "Lawful Source of Funds",
+    "questions": [
+      {
+        "question": "What can cause USCIS to question an EB-5 investor's source of funds?",
+        "options": [
+          "Clear documentation of investment sources",
+          "Ambiguous or insufficient documentation of lawful source of funds",
+          "Investor’s family size",
+          "Investor’s country of origin"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which document type BEST supports lawful source of funds?",
+        "options": [
+          "Unsigned personal note",
+          "Bank statements and tax returns",
+          "Verbal confirmation by a broker",
+          "Handwritten memo"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 128,
+    "title": "At‑Risk Investment Requirement",
+    "questions": [
+      {
+        "question": "Why might USCIS deny an EB-5 petition related to 'at-risk' requirements?",
+        "options": [
+          "Investment was too risky",
+          "Investment had guaranteed returns violating 'at-risk' rules",
+          "Investor provided too much documentation",
+          "Project had too many investors"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which term BEST reflects EB‑5 'at‑risk' capital?",
+        "options": [
+          "Guaranteed principal",
+          "Exposed to potential gain or loss",
+          "Backed by government insurance",
+          "Redeemable on demand"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 129,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What documentation error frequently leads to EB-5 denials?",
+        "options": [
+          "Complete and accurate paperwork",
+          "Late or missed filing of required documents",
+          "Too detailed business plans",
+          "Excessive financial transparency"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 130,
+    "title": "Fraud Prevention & Red Flags",
+    "questions": [
+      {
+        "question": "What consequence can arise from fraud or misrepresentation in EB-5 applications?",
+        "options": [
+          "Faster processing by USCIS",
+          "Permanent denial and possible legal penalties",
+          "Automatic granting of a Green Card",
+          "Guaranteed financial reimbursement"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which promise should be treated as a FRAUD red flag?",
+        "options": [
+          "Transparent escrow usage",
+          "Guaranteed visa approval",
+          "Audited financials",
+          "Registered agents (I‑956K)"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 131,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Which family members can an EB-5 investor include in their application?",
+        "options": [
+          "Spouse and unmarried children under age 21",
+          "Only spouse",
+          "Parents and siblings",
+          "All extended family members"
+        ],
+        "correctAnswerIndex": 0
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 132,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What education benefits do dependent children of EB-5 investors receive?",
+        "options": [
+          "Guaranteed admission to Ivy League universities",
+          "Free private schooling",
+          "Eligibility for public education at resident rates",
+          "Automatic scholarships"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 133,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What happens to dependent children who turn 21 during the EB-5 application process?",
+        "options": [
+          "They automatically lose eligibility",
+          "They may be protected under the Child Status Protection Act (CSPA)",
+          "They must file a separate EB-5 application immediately",
+          "They receive immediate citizenship"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 134,
+    "title": "Benefits & Residency Path",
+    "questions": [
+      {
+        "question": "What right does an EB-5 conditional Green Card grant family members?",
+        "options": [
+          "Unlimited international travel without a visa",
+          "Guaranteed investment returns",
+          "Full rights to live, work, and study in the U.S.",
+          "Immediate right to vote"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which right is associated with lawful permanent residents?",
+        "options": [
+          "Vote in federal elections",
+          "Live and work anywhere in the U.S.",
+          "Hold U.S. diplomatic passport",
+          "Skip all taxes"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 135,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "When can family members of EB-5 investors apply for U.S. citizenship?",
+        "options": [
+          "Immediately upon arrival",
+          "After 5 years of lawful permanent residency",
+          "Only after 10 years of residency",
+          "Citizenship is not available to EB-5 families"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 136,
+    "title": "At‑Risk Investment Requirement",
+    "questions": [
+      {
+        "question": "What does the 'at-risk' requirement imply for EB-5 investors?",
+        "options": [
+          "Guaranteed returns on investments",
+          "Investments must be exposed to potential financial loss",
+          "No financial documentation required",
+          "Automatic protection by the U.S. government"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which term BEST reflects EB‑5 'at‑risk' capital?",
+        "options": [
+          "Guaranteed principal",
+          "Exposed to potential gain or loss",
+          "Backed by government insurance",
+          "Redeemable on demand"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 137,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Why might job creation shortfall pose a risk to EB-5 investors?",
+        "options": [
+          "Immediate citizenship denial",
+          "Possible denial of permanent residency due to insufficient jobs created",
+          "Guaranteed financial loss",
+          "Exemption from future investments"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 138,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "How can economic downturns affect EB-5 investment projects?",
+        "options": [
+          "Increase guaranteed returns",
+          "Decrease risk completely",
+          "Lead to project delays or job creation shortfalls",
+          "Ensure immediate visa approvals"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 139,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "What is a common risk involving regional center projects?",
+        "options": [
+          "Immediate Green Card issuance",
+          "Potential fraud or mismanagement of funds",
+          "Guaranteed project success",
+          "No investment risk at all"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 140,
+    "title": "Visa Backlogs & Timing",
+    "questions": [
+      {
+        "question": "What potential issue arises from visa backlogs in EB-5?",
+        "options": [
+          "Faster visa processing",
+          "No impact on investors",
+          "Delays in obtaining residency even after investment approval",
+          "Immediate loss of investment funds"
+        ],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 141,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is the primary purpose of conducting due diligence on an EB-5 project?",
+        "options": [
+          "To guarantee immediate citizenship",
+          "To ensure the project’s viability and compliance with EB-5 regulations",
+          "To avoid creating any jobs",
+          "To bypass financial reporting"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 142,
+    "title": "Regional Centers & Indirect Jobs",
+    "questions": [
+      {
+        "question": "Why should investors verify a regional center’s credentials during due diligence?",
+        "options": [
+          "To guarantee financial profits",
+          "To ensure they have a good compliance and approval track record",
+          "To immediately secure a visa",
+          "To avoid documentation requirements"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "What additional job categories can Regional Center projects typically count?",
+        "options": [
+          "Only part‑time jobs",
+          "Indirect and induced jobs",
+          "Jobs outside the U.S.",
+          "Contractor jobs only"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 143,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What does reviewing economic impact reports help investors assess?",
+        "options": [
+          "Immediate capital return",
+          "The credibility of job creation estimates",
+          "Automatic citizenship",
+          "Guaranteed project success"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 144,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Why are legal and financial reviews critical in EB-5 project due diligence?",
+        "options": [
+          "To skip all USCIS requirements",
+          "To uncover potential red flags and ensure accurate financial representations",
+          "To guarantee investor profits",
+          "To eliminate all investment risks"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 145,
+    "title": "Exit Strategies for Investors",
+    "questions": [
+      {
+        "question": "What should investors check about a project's exit strategy during due diligence?",
+        "options": [
+          "Immediate project cancellation plans",
+          "How and when investment capital will be returned",
+          "Automatic issuance of Green Cards",
+          "Project's promotional activities"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 146,
+    "title": "Fraud Prevention & Red Flags",
+    "questions": [
+      {
+        "question": "Which of the following is a red flag for potential EB-5 investment fraud?",
+        "options": [
+          "Transparency in project documentation",
+          "Guaranteed returns on investment",
+          "Clear communication from regional centers",
+          "Well-documented project history"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which promise should be treated as a FRAUD red flag?",
+        "options": [
+          "Transparent escrow usage",
+          "Guaranteed visa approval",
+          "Audited financials",
+          "Registered agents (I‑956K)"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 147,
+    "title": "Fraud Prevention & Red Flags",
+    "questions": [
+      {
+        "question": "What should investors verify to avoid fraudulent EB-5 projects?",
+        "options": [
+          "Guaranteed visa approvals",
+          "Registration of the regional center and agents with USCIS",
+          "Exemption from job creation requirements",
+          "Immediate refund guarantees"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which promise should be treated as a FRAUD red flag?",
+        "options": [
+          "Transparent escrow usage",
+          "Guaranteed visa approval",
+          "Audited financials",
+          "Registered agents (I‑956K)"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 148,
+    "title": "Fraud Prevention & Red Flags",
+    "questions": [
+      {
+        "question": "Why is transparency in escrow agreements critical in preventing EB-5 fraud?",
+        "options": [
+          "To immediately grant citizenship",
+          "To ensure investor funds are properly controlled and released",
+          "To avoid creating jobs",
+          "To provide guaranteed returns"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which promise should be treated as a FRAUD red flag?",
+        "options": [
+          "Transparent escrow usage",
+          "Guaranteed visa approval",
+          "Audited financials",
+          "Registered agents (I‑956K)"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 149,
+    "title": "Fraud Prevention & Red Flags",
+    "questions": [
+      {
+        "question": "How can investors protect themselves against EB-5 fraud?",
+        "options": [
+          "Rely solely on project advertisements",
+          "Use independent legal and financial advisors",
+          "Avoid documentation review",
+          "Trust guarantees from unverified sources"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which promise should be treated as a FRAUD red flag?",
+        "options": [
+          "Transparent escrow usage",
+          "Guaranteed visa approval",
+          "Audited financials",
+          "Registered agents (I‑956K)"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 150,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What action should investors take if an EB-5 project promises guaranteed visa approval?",
+        "options": [
+          "Accept the promise and invest immediately",
+          "Be cautious and consider it a potential fraud indicator",
+          "Skip all due diligence",
+          "Immediately file USCIS petitions"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 151,
+    "title": "Exit Strategies for Investors",
+    "questions": [
+      {
+        "question": "What does an EB-5 exit strategy primarily outline?",
+        "options": [
+          "Immediate citizenship process",
+          "How and when investors can recover their invested capital",
+          "Guaranteed financial returns",
+          "Investor's personal asset protection"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 152,
+    "title": "Exit Strategies for Investors",
+    "questions": [
+      {
+        "question": "Which is a common EB-5 project exit strategy?",
+        "options": [
+          "Permanent capital investment with no returns",
+          "Refinancing or sale of the project after job creation",
+          "Immediate liquidation of all assets upon investment",
+          "Avoiding documentation and legal compliance"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 153,
+    "title": "Exit Strategies for Investors",
+    "questions": [
+      {
+        "question": "When can EB-5 investors typically execute the exit strategy?",
+        "options": [
+          "Immediately after investing funds",
+          "Only after meeting job creation and USCIS requirements",
+          "Before any job creation takes place",
+          "Whenever the investor chooses"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 154,
+    "title": "Exit Strategies for Investors",
+    "questions": [
+      {
+        "question": "Why is a clearly defined exit strategy important in EB-5 projects?",
+        "options": [
+          "To guarantee immediate citizenship",
+          "To provide clarity on how and when investors might recoup capital",
+          "To bypass USCIS approvals",
+          "To ensure no financial risks"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 155,
+    "title": "Exit Strategies for Investors",
+    "questions": [
+      {
+        "question": "What might indicate a problematic EB-5 exit strategy?",
+        "options": [
+          "Clear and realistic timelines",
+          "Vague terms and unrealistic promises about returns",
+          "Detailed descriptions of refinancing",
+          "Well-documented exit plans"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 156,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What is the main purpose of an escrow account in EB-5 investments?",
+        "options": [
+          "To immediately distribute profits to investors",
+          "To hold investor funds securely until certain conditions are met",
+          "To avoid documentation requirements",
+          "To bypass USCIS regulations"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 157,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Why should investors conduct a thorough legal review of offering documents?",
+        "options": [
+          "To ensure automatic citizenship",
+          "To identify potential risks and confirm EB-5 compliance",
+          "To eliminate investment risks entirely",
+          "To guarantee immediate investment returns"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 158,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What advantage do independent fund administrators provide in EB-5 projects?",
+        "options": [
+          "They automatically grant Green Cards",
+          "They ensure transparency and proper handling of funds",
+          "They guarantee investment returns",
+          "They exempt investors from job creation requirements"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 159,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "Why is a developer’s equity commitment important in EB-5 projects?",
+        "options": [
+          "It guarantees immediate profits",
+          "It demonstrates alignment of developer interests with investors",
+          "It eliminates all investment risks",
+          "It allows bypassing USCIS approval"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
+      }
+    ]
+  },
+  {
+    "termId": 160,
+    "title": "EB‑5 Essentials",
+    "questions": [
+      {
+        "question": "What legal safeguard helps ensure EB-5 investment transparency?",
+        "options": [
+          "Guaranteed returns in promotional material",
+          "Compliance with securities laws and clear disclosure documents",
+          "Avoidance of legal counsel",
+          "Immediate liquidation of funds"
+        ],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "Which statement BEST aligns with EB‑5 program compliance?",
+        "options": [
+          "Guaranteed returns are acceptable",
+          "Investment must be at‑risk and create qualifying jobs",
+          "No documentation is necessary",
+          "Job creation outside the U.S. counts fully"
+        ],
+        "correctAnswerIndex": 1
       }
     ]
   }

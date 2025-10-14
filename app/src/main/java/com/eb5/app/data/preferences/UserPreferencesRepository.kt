@@ -28,17 +28,23 @@ class UserPreferencesRepository(
         val onboardingCompleted: Boolean = false,
         val articleStatuses: Map<Int, ArticleStatus> = emptyMap(),
         val favorites: Set<Int> = emptySet(),
+        val newsFavorites: Set<String> = emptySet(),
+        val projectFavorites: Set<String> = emptySet(),
         val quizProgress: Map<String, QuizProgress> = emptyMap()
     )
 
     private val languageKey = stringPreferencesKey("language")
     private val onboardingKey = booleanPreferencesKey("onboardingCompleted")
+    private val newsFavoritePrefix = "newsFavorite:"
+    private val projectFavoritePrefix = "projectFavorite:"
 
     val snapshot: Flow<Snapshot> = dataStore.data.map { preferences ->
         val language = AppLanguage.fromTag(preferences[languageKey])
         val onboarding = preferences[onboardingKey] ?: false
         val articleStatuses = mutableMapOf<Int, ArticleStatus>()
         val favorites = mutableSetOf<Int>()
+        val newsFavorites = mutableSetOf<String>()
+        val projectFavorites = mutableSetOf<String>()
         val quizProgress = mutableMapOf<String, QuizProgress>()
 
         preferences.asMap().forEach { (key, value) ->
@@ -57,6 +63,18 @@ class UserPreferencesRepository(
                     val isFavorite = value as? Boolean ?: false
                     if (isFavorite) favorites.add(id)
                 }
+                key.name.startsWith(newsFavoritePrefix) -> {
+                    val id = key.name.removePrefix(newsFavoritePrefix)
+                    val isFavorite = value as? Boolean ?: false
+                    if (isFavorite && id.isNotBlank()) {
+                        newsFavorites.add(id)
+                    }
+                }
+                key.name.startsWith(projectFavoritePrefix) -> {
+                    val id = key.name.removePrefix(projectFavoritePrefix)
+                    val isFavorite = value as? Boolean ?: false
+                    if (isFavorite) projectFavorites.add(id)
+                }
                 key.name.startsWith(QUIZ_BEST_PREFIX) -> {
                     val id = key.name.removePrefix(QUIZ_BEST_PREFIX)
                     val bestScore = value as? Int ?: 0
@@ -72,6 +90,8 @@ class UserPreferencesRepository(
             onboardingCompleted = onboarding,
             articleStatuses = articleStatuses,
             favorites = favorites,
+            newsFavorites = newsFavorites,
+            projectFavorites = projectFavorites,
             quizProgress = quizProgress
         )
     }
@@ -91,6 +111,22 @@ class UserPreferencesRepository(
     suspend fun toggleFavorite(articleId: Int) {
         dataStore.edit { preferences ->
             val key = booleanPreferencesKey(FAVORITE_PREFIX + articleId)
+            val current = preferences[key] ?: false
+            preferences[key] = !current
+        }
+    }
+
+    suspend fun toggleNewsFavorite(newsId: String) {
+        dataStore.edit { preferences ->
+            val key = booleanPreferencesKey(newsFavoritePrefix + newsId)
+            val current = preferences[key] ?: false
+            preferences[key] = !current
+        }
+    }
+
+    suspend fun toggleProjectFavorite(projectId: String) {
+        dataStore.edit { preferences ->
+            val key = booleanPreferencesKey(projectFavoritePrefix + projectId)
             val current = preferences[key] ?: false
             preferences[key] = !current
         }

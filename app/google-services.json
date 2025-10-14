@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999018424389",
+    "project_id": "eb5androidback",
+    "storage_bucket": "eb5androidback.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999018424389:android:d12c497b794a7ec3305b2c",
+        "android_client_info": {
+          "package_name": "com.eb5.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDeJHRFATc0EOOf1fJYCHa6E7JRgrs3t4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

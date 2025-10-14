@@ -9,6 +9,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -23,19 +24,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.eb5.app.data.model.ArticleStatus
 import androidx.compose.ui.res.stringResource
 import com.eb5.app.R
+import com.eb5.app.ui.quizzes.QuizzesRoute
+import com.eb5.app.ui.quizzes.QuizzesViewModel
 import com.eb5.app.ui.navigation.AppDestination
 import com.eb5.app.ui.navigation.BottomDestination
 import com.eb5.app.ui.navigation.bottomDestinations
+import com.eb5.app.EB5Application
 import com.eb5.app.ui.screens.ArticleDetailScreen
 import com.eb5.app.ui.screens.BaseScreen
 import com.eb5.app.ui.screens.HomeScreen
@@ -43,12 +53,15 @@ import com.eb5.app.ui.screens.OnboardingScreen
 import com.eb5.app.ui.screens.ProgressScreen
 import com.eb5.app.ui.screens.ProjectDetailScreen
 import com.eb5.app.ui.screens.ProjectsScreen
+import com.eb5.app.ui.screens.NewsDetailScreen
 import com.eb5.app.ui.screens.QuizResultScreen
 import com.eb5.app.ui.screens.QuizRunnerScreen
-import com.eb5.app.ui.screens.QuizzesScreen
 import com.eb5.app.ui.screens.SettingsScreen
 import com.eb5.app.ui.theme.EB5Theme
 import kotlinx.coroutines.launch
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.eb5.app.ui.news.NewsDetailViewModel
+import com.eb5.app.ui.projects.ProjectDetailViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,26 +94,70 @@ fun EB5App(viewModel: AppViewModel) {
                 }
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination?.route
+                val currentRoute = navBackStackEntry?.destination?.route
+                LaunchedEffect(currentRoute) {
+                    viewModel.updateCurrentDestination(currentRoute)
+                }
+                LaunchedEffect(state.pendingRestoreRoute) {
+                    val target = state.pendingRestoreRoute
+                    when {
+                        target == null -> Unit
+                        target == navController.currentDestination?.route -> {
+                            viewModel.clearPendingRestoreRoute()
+                        }
+                        else -> {
+                            navController.navigate(target) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                            viewModel.clearPendingRestoreRoute()
+                        }
+                    }
+                }
+                LaunchedEffect(state.pendingNewsArticleId, state.pendingNewsLanguage) {
+                    val articleId = state.pendingNewsArticleId ?: return@LaunchedEffect
+                    val language = state.pendingNewsLanguage
+                    val route = AppDestination.NewsDetail.routeWithId(articleId, language)
+                    navController.navigate(route) {
+                        launchSingleTop = true
+                        restoreState = false
+                    }
+                    viewModel.clearPendingNewsArticle()
+                }
+                LaunchedEffect(state.pendingProjectId, state.pendingProjectLanguage) {
+                    val projectId = state.pendingProjectId ?: return@LaunchedEffect
+                    val language = state.pendingProjectLanguage
+                    val route = AppDestination.ProjectDetail.routeWithId(projectId, language)
+                    navController.navigate(route) {
+                        launchSingleTop = true
+                        restoreState = false
+                    }
+                    viewModel.clearPendingProject()
+                }
                 Scaffold(
                     topBar = {
-                        val title = when (currentDestination) {
-                            AppDestination.Home.route -> stringResource(R.string.title_home)
-                            AppDestination.Base.route -> stringResource(R.string.title_base)
-                            AppDestination.Quizzes.route -> stringResource(R.string.title_quizzes)
-                            AppDestination.Progress.route -> stringResource(R.string.title_progress)
-                            AppDestination.Projects.route -> stringResource(R.string.title_projects)
-                            AppDestination.Settings.route -> stringResource(R.string.title_settings)
-                            AppDestination.ArticleDetail.route -> stringResource(R.string.title_article_detail)
-                            AppDestination.QuizRunner.route -> stringResource(R.string.title_quiz_runner)
-                            AppDestination.QuizResult.route -> stringResource(R.string.title_quiz_result)
-                            AppDestination.ProjectDetail.route -> stringResource(R.string.title_project_detail)
+                        val title = when {
+                            currentRoute?.startsWith(AppDestination.Home.route) == true -> stringResource(R.string.title_home)
+                            currentRoute?.startsWith(AppDestination.Base.route) == true -> stringResource(R.string.title_base)
+                            currentRoute?.startsWith(AppDestination.Quizzes.route) == true -> stringResource(R.string.title_quizzes)
+                            currentRoute?.startsWith(AppDestination.Progress.route) == true -> stringResource(R.string.title_progress)
+                            currentRoute?.startsWith(AppDestination.Projects.route) == true -> stringResource(R.string.title_projects)
+                            currentRoute?.startsWith(AppDestination.Settings.route) == true -> stringResource(R.string.title_settings)
+                            currentRoute?.startsWith(AppDestination.ArticleDetail.route.substringBefore("/{")) == true -> stringResource(R.string.title_article_detail)
+                            currentRoute?.startsWith(AppDestination.QuizRunner.route.substringBefore("/{")) == true -> stringResource(R.string.title_quiz_runner)
+                            currentRoute?.startsWith(AppDestination.QuizResult.route.substringBefore("/{")) == true -> stringResource(R.string.title_quiz_result)
+                            currentRoute?.startsWith(AppDestination.ProjectDetail.route.substringBefore("/{")) == true -> stringResource(R.string.title_project_detail)
                             else -> stringResource(R.string.app_name)
                         }
                         TopAppBar(
                             title = { Text(title) },
                             actions = {
-                                if (currentDestination !in listOf(AppDestination.Settings.route, AppDestination.Onboarding.route)) {
+                                if (currentRoute?.startsWith(AppDestination.Settings.route) != true &&
+                                    currentRoute?.startsWith(AppDestination.Onboarding.route) != true
+                                ) {
                                     IconButton(onClick = { navController.navigate(AppDestination.Settings.route) }) {
                                         Icon(imageVector = Icons.Default.Settings, contentDescription = stringResource(R.string.cd_open_settings))
                                     }
@@ -109,11 +166,12 @@ fun EB5App(viewModel: AppViewModel) {
                         )
                     },
                     bottomBar = {
-                        if (currentDestination in bottomDestinations.map { it.route }) {
+                        if (bottomDestinations.any { currentRoute?.startsWith(it.route) == true }) {
                             BottomNavigationBar(
                                 navController = navController,
                                 destinations = bottomDestinations,
-                                currentRoute = currentDestination
+                                currentRoute = currentRoute,
+                                onBaseSelected = viewModel::resetBaseScreen
                             )
                         }
                     },
@@ -132,14 +190,30 @@ fun EB5App(viewModel: AppViewModel) {
                                 articles = state.articles,
                                 articleStatuses = state.articleStatuses,
                                 favorites = state.favorites,
-                                quizzes = state.quizzes,
-                                quizProgress = state.quizProgress,
+                                news = state.news,
+                                newsFavorites = state.newsFavorites,
+                                projects = state.projects,
+                                projectFavorites = state.projectFavorites,
                                 onExploreArticles = {
                                     navController.navigate(AppDestination.Base.route)
                                 },
-                                onOpenQuiz = { topic ->
-                                    navController.navigate(AppDestination.QuizRunner.routeWithId(topic.id))
-                                }
+                                onOpenArticle = { articleId ->
+                                    navController.navigate(AppDestination.ArticleDetail.routeWithId(articleId))
+                                },
+                                onToggleFavorite = viewModel::toggleFavorite,
+                                onOpenNews = { article ->
+                                    navController.navigate(
+                                        AppDestination.NewsDetail.routeWithId(
+                                            article.id,
+                                            state.language.tag
+                                        )
+                                    )
+                                },
+                                onToggleNewsFavorite = viewModel::toggleNewsFavorite,
+                                onOpenProject = { project ->
+                                    navController.navigate(AppDestination.ProjectDetail.routeWithId(project.id))
+                                },
+                                onToggleProjectFavorite = viewModel::toggleProjectFavorite
                             )
                         }
                         composable(AppDestination.Base.route) {
@@ -151,41 +225,70 @@ fun EB5App(viewModel: AppViewModel) {
                                 onToggleStatus = viewModel::toggleArticleStatus,
                                 onArticleSelected = { articleId ->
                                     navController.navigate(AppDestination.ArticleDetail.routeWithId(articleId))
-                                }
+                                },
+                                scrollToArticleId = state.pendingScrollArticleId,
+                                onScrollHandled = viewModel::clearPendingArticleFocus,
+                                resetToken = state.baseResetToken,
+                                baseReturn = state.baseReturn,
+                                onRecordBaseReturn = viewModel::recordBaseReturn,
+                                onConsumeBaseReturn = viewModel::clearBaseReturn
                             )
                         }
                         composable(AppDestination.Quizzes.route) {
-                            QuizzesScreen(
-                                quizzes = state.quizzes,
-                                quizProgress = state.quizProgress,
-                                onQuizSelected = { topic ->
-                                    navController.navigate(AppDestination.QuizRunner.routeWithId(topic.id))
+                            val quizzesViewModel: QuizzesViewModel = viewModel()
+                            QuizzesRoute(
+                                viewModel = quizzesViewModel,
+                                onOpenQuiz = { quizId ->
+                                    navController.navigate(AppDestination.QuizRunner.routeWithId(quizId))
+                                },
+                                onOpenTrack = { trackId ->
+                                    navController.navigate(AppDestination.QuizTrackDetail.routeWithId(trackId))
                                 }
                             )
                         }
                         composable(AppDestination.Progress.route) {
                             ProgressScreen(
-                                articles = state.articles,
-                                articleStatuses = state.articleStatuses,
-                                favorites = state.favorites,
-                                quizzes = state.quizzes,
-                                quizProgress = state.quizProgress
+                                news = state.news,
+                                newsFavorites = state.newsFavorites,
+                                isLoading = state.isLoading,
+                                onToggleNewsFavorite = viewModel::toggleNewsFavorite,
+                                onOpenNews = { article ->
+                                    navController.navigate(
+                                        AppDestination.NewsDetail.routeWithId(
+                                            article.id,
+                                            state.language.tag
+                                        )
+                                    )
+                                }
                             )
                         }
                         composable(AppDestination.Projects.route) {
                             ProjectsScreen(
                                 projects = state.projects,
+                                projectFavorites = state.projectFavorites,
+                                onToggleProjectFavorite = viewModel::toggleProjectFavorite,
                                 onProjectSelected = { project ->
                                     navController.navigate(AppDestination.ProjectDetail.routeWithId(project.id))
                                 }
                             )
+                        }
+                        composable(AppDestination.QuizTrackDetail.route) { backStackEntry ->
+                            val trackId = backStackEntry.arguments?.getString("trackId")
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(text = trackId ?: "", style = MaterialTheme.typography.titleMedium)
+                            }
                         }
                         composable(AppDestination.Settings.route) {
                             SettingsScreen(
                                 language = state.language,
                                 availableLanguages = state.availableLanguages,
                                 onLanguageChanged = viewModel::setLanguage,
-                                onClose = { navController.navigateUp() },
+                                onClose = { _ ->
+                                    navController.navigateUp()
+                                },
                                 appVersion = state.versionName
                             )
                         }
@@ -199,9 +302,82 @@ fun EB5App(viewModel: AppViewModel) {
                                     isFavorite = article.id in state.favorites,
                                     onToggleFavorite = { viewModel.toggleFavorite(article.id) },
                                     onToggleStatus = { viewModel.toggleArticleStatus(article.id) },
-                                    onBack = { navController.navigateUp() }
+                                    onBack = {
+                                        val previousRoute = navController.previousBackStackEntry?.destination?.route
+                                        if (previousRoute == AppDestination.Base.route) {
+                                            viewModel.activateBaseReturn()
+                                        } else {
+                                            viewModel.focusArticleOnReturn(article.id)
+                                        }
+                                        navController.navigateUp()
+                                    }
                                 )
                             }
+                        }
+                        composable(
+                            route = AppDestination.NewsDetail.route,
+                            arguments = listOf(
+                                navArgument("articleId") { type = NavType.StringType },
+                                navArgument("lang") {
+                                    type = NavType.StringType
+                                    defaultValue = ""
+                                }
+                            ),
+                            deepLinks = listOf(
+                                navDeepLink { uriPattern = "eb5news://article?id={articleId}&lang={lang}" }
+                            )
+                        ) { backStackEntry ->
+                            val articleId = backStackEntry.arguments?.getString("articleId") ?: return@composable
+                            val langArg = backStackEntry.arguments?.getString("lang").orEmpty()
+                            val app = LocalContext.current.applicationContext as EB5Application
+                            val newsDetailViewModel: NewsDetailViewModel = viewModel(
+                                factory = viewModelFactory {
+                                    initializer {
+                                        NewsDetailViewModel(
+                                            newsRepository = app.container.newsRepository,
+                                            articleId = articleId,
+                                            languageCode = langArg
+                                        )
+                                    }
+                                }
+                            )
+                            val newsState by newsDetailViewModel.uiState.collectAsStateWithLifecycle()
+                            NewsDetailScreen(
+                                state = newsState,
+                                isFavorite = state.newsFavorites.contains(articleId),
+                                onToggleFavorite = { viewModel.toggleNewsFavorite(articleId) },
+                                onBack = {
+                                    val fallbackRoute = state.pendingNewsReturnRoute
+                                    val popped = navController.popBackStack()
+                                    if (fallbackRoute != null) {
+                                        val currentRoute = navController.currentDestination?.route
+                                        val fallbackPrefix = fallbackRoute.substringBefore("/{")
+                                        val alreadyOnFallback = currentRoute?.startsWith(fallbackPrefix) == true
+                                        if (!alreadyOnFallback) {
+                                            navController.navigate(fallbackRoute) {
+                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                    saveState = true
+                                                }
+                                                launchSingleTop = true
+                                                restoreState = true
+                                            }
+                                        }
+                                        viewModel.clearPendingNewsReturnRoute()
+                                    } else if (!popped) {
+                                        navController.navigate(AppDestination.Home.route) {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
+                                        viewModel.clearPendingNewsReturnRoute()
+                                    } else {
+                                        viewModel.clearPendingNewsReturnRoute()
+                                    }
+                                },
+                                onRetry = { newsDetailViewModel.reload() }
+                            )
                         }
                         composable(AppDestination.QuizRunner.route) { backStackEntry ->
                             val quizId = backStackEntry.arguments?.getString("quizId") ?: return@composable
@@ -232,11 +408,77 @@ fun EB5App(viewModel: AppViewModel) {
                                 )
                             }
                         }
-                        composable(AppDestination.ProjectDetail.route) { backStackEntry ->
-                            val projectId = backStackEntry.arguments?.getString("projectId")
-                            val project = state.projects.firstOrNull { it.id == projectId }
+                        composable(
+                            route = AppDestination.ProjectDetail.route,
+                            arguments = listOf(
+                                navArgument("projectId") { type = NavType.StringType },
+                                navArgument("lang") {
+                                    type = NavType.StringType
+                                    defaultValue = ""
+                                }
+                            ),
+                            deepLinks = listOf(
+                                navDeepLink { uriPattern = "eb5projects://project?id={projectId}&lang={lang}" },
+                                navDeepLink { uriPattern = "eb5projects://project?id={projectId}" }
+                            )
+                        ) { backStackEntry ->
+                            val projectId = backStackEntry.arguments?.getString("projectId") ?: return@composable
+                            val langArg = backStackEntry.arguments?.getString("lang").orEmpty()
+                            val app = LocalContext.current.applicationContext as EB5Application
+                            val projectDetailViewModel: ProjectDetailViewModel = viewModel(
+                                factory = viewModelFactory {
+                                    initializer {
+                                        ProjectDetailViewModel(
+                                            projectRepository = app.container.projectRepository,
+                                            projectId = projectId,
+                                            languageCode = langArg.ifBlank { state.language.tag }
+                                        )
+                                    }
+                                }
+                            )
+                            val projectState by projectDetailViewModel.uiState.collectAsStateWithLifecycle()
+                            val project = projectState.project
                             if (project != null) {
-                                ProjectDetailScreen(project = project, onBack = { navController.navigateUp() })
+                                ProjectDetailScreen(
+                                    state = projectState,
+                                    isFavorite = state.projectFavorites.contains(projectId),
+                                    onToggleFavorite = { viewModel.toggleProjectFavorite(projectId) },
+                                    onBack = {
+                                        val fallback = state.pendingProjectReturnRoute
+                                        val popped = navController.popBackStack()
+                                        if (fallback != null) {
+                                            val currentRoute = navController.currentDestination?.route
+                                            val fallbackPrefix = fallback.substringBefore("/{")
+                                            val alreadyOnFallback = currentRoute?.startsWith(fallbackPrefix) == true
+                                            if (!alreadyOnFallback) {
+                                                navController.navigate(fallback) {
+                                                    popUpTo(navController.graph.findStartDestination().id) {
+                                                        saveState = true
+                                                    }
+                                                    launchSingleTop = true
+                                                    restoreState = true
+                                                }
+                                            }
+                                            viewModel.clearPendingProjectReturnRoute()
+                                        } else if (!popped) {
+                                            navController.navigate(AppDestination.Home.route) {
+                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                    saveState = true
+                                                }
+                                                launchSingleTop = true
+                                                restoreState = true
+                                            }
+                                            viewModel.clearPendingProjectReturnRoute()
+                                        } else {
+                                            viewModel.clearPendingProjectReturnRoute()
+                                        }
+                                    },
+                                    onRetry = { projectDetailViewModel.reload() }
+                                )
+                            } else if (!projectState.isLoading) {
+                                LaunchedEffect(projectState) {
+                                    viewModel.refreshProjects(force = false)
+                                }
                             }
                         }
                     }
@@ -250,19 +492,44 @@ fun EB5App(viewModel: AppViewModel) {
 private fun BottomNavigationBar(
     navController: NavHostController,
     destinations: List<BottomDestination>,
-    currentRoute: String?
+    currentRoute: String?,
+    onBaseSelected: () -> Unit = {}
 ) {
     NavigationBar {
         destinations.forEach { destination ->
             NavigationBarItem(
-                selected = currentRoute == destination.route,
+                selected = currentRoute?.startsWith(destination.route) == true,
                 onClick = {
-                    navController.navigate(destination.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+                    when (destination.destination) {
+                        AppDestination.Home -> {
+                            val popped = navController.popBackStack(AppDestination.Home.route, false)
+                            if (!popped) {
+                                navController.navigate(AppDestination.Home.route) {
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
                         }
-                        launchSingleTop = true
-                        restoreState = true
+                        AppDestination.Base -> {
+                            onBaseSelected()
+                            navController.popBackStack(AppDestination.Home.route, false)
+                            navController.navigate(AppDestination.Base.route) {
+                                launchSingleTop = true
+                                restoreState = false
+                            }
+                        }
+                        else -> {
+                            val startRoute = navController.graph.startDestinationRoute
+                            navController.navigate(destination.route) {
+                                startRoute?.let {
+                                    popUpTo(it) {
+                                        saveState = true
+                                    }
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
                     }
                 },
                 icon = {
