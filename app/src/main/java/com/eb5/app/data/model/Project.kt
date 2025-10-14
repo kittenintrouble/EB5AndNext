@@ -26,16 +26,16 @@ data class Project(
     @SerializedName("developer")
     val developer: String? = null,
     @SerialName("expectedOpening")
-    @SerializedName("expected_opening")
+    @SerializedName(value = "expectedOpening", alternate = ["expected_opening"])
     val expectedOpening: String? = null,
     @SerialName("title")
     @SerializedName("title")
     val title: String,
     @SerialName("shortDescription")
-    @SerializedName("short_description")
+    @SerializedName(value = "shortDescription", alternate = ["short_description"])
     val shortDescription: String? = null,
     @SerialName("fullDescription")
-    @SerializedName("full_description")
+    @SerializedName(value = "fullDescription", alternate = ["full_description"])
     val fullDescription: String? = null,
     @SerialName("images")
     @SerializedName("images")
@@ -47,7 +47,7 @@ data class Project(
     @SerializedName("uscis")
     val uscis: UscisInfo? = null,
     @SerialName("loanStructure")
-    @SerializedName("loan_structure")
+    @SerializedName(value = "loanStructure", alternate = ["loan_structure"])
     val loanStructure: LoanStructure? = null,
     @SerialName("tea")
     @SerializedName("tea")
@@ -59,13 +59,13 @@ data class Project(
     @SerializedName("published")
     val published: Boolean = false,
     @SerialName("publishedAt")
-    @SerializedName("published_at")
+    @SerializedName(value = "publishedAt", alternate = ["published_at"])
     val publishedAt: String? = null,
     @SerialName("createdAt")
-    @SerializedName("created_at")
+    @SerializedName(value = "createdAt", alternate = ["created_at"])
     val createdAt: String? = null,
     @SerialName("updatedAt")
-    @SerializedName("updated_at")
+    @SerializedName(value = "updatedAt", alternate = ["updated_at"])
     val updatedAt: String? = null,
     // Legacy fields (assets compatibility)
     @SerialName("image")
@@ -75,13 +75,13 @@ data class Project(
     @SerializedName("category")
     val category: String? = null,
     @SerialName("teaStatus")
-    @SerializedName("tea_status")
+    @SerializedName(value = "teaStatus", alternate = ["tea_status"])
     val teaStatus: String? = null,
     @SerialName("minInvestmentUsd")
-    @SerializedName("min_investment_usd")
+    @SerializedName(value = "minInvestmentUsd", alternate = ["min_investment_usd"])
     val minInvestmentUsd: Long? = null,
     @SerialName("jobCreationModel")
-    @SerializedName("job_creation_model")
+    @SerializedName(value = "jobCreationModel", alternate = ["job_creation_model"])
     val jobCreationModel: String? = null
 ) {
     val heroImageUrl: String?
@@ -101,35 +101,35 @@ data class ProjectImage(
 @Serializable
 data class Financials(
     @SerialName("totalProject")
-    @SerializedName("total_project")
+    @SerializedName(value = "totalProject", alternate = ["total_project"])
     val totalProject: Long? = null,
     @SerialName("eb5Offering")
-    @SerializedName("eb5_offering")
+    @SerializedName(value = "eb5Offering", alternate = ["eb5_offering"])
     val eb5Offering: Long? = null,
     @SerialName("minInvestment")
-    @SerializedName("min_investment")
+    @SerializedName(value = "minInvestment", alternate = ["min_investment"])
     val minInvestment: Long? = null,
     @SerialName("eb5Investors")
-    @SerializedName("eb5_investors")
+    @SerializedName(value = "eb5Investors", alternate = ["eb5_investors"])
     val eb5Investors: String? = null,
     @SerialName("term")
     @SerializedName("term")
     val term: Int? = null,
     @SerialName("interestRate")
-    @SerializedName("interest_rate")
+    @SerializedName(value = "interestRate", alternate = ["interest_rate"])
     val interestRate: Double? = null
 )
 
 @Serializable
 data class UscisInfo(
     @SerialName("i956fStatus")
-    @SerializedName("i956f_status")
+    @SerializedName(value = "i956fStatus", alternate = ["i956f_status"])
     val i956fStatus: String? = null,
     @SerialName("i526eStatus")
-    @SerializedName("i526e_status")
+    @SerializedName(value = "i526eStatus", alternate = ["i526e_status"])
     val i526eStatus: String? = null,
     @SerialName("approvalDate")
-    @SerializedName("approval_date")
+    @SerializedName(value = "approvalDate", alternate = ["approval_date"])
     val approvalDate: String? = null
 )
 
@@ -139,10 +139,10 @@ data class LoanStructure(
     @SerializedName("type")
     val type: String? = null,
     @SerialName("annualReturn")
-    @SerializedName("annual_return")
+    @SerializedName(value = "annualReturn", alternate = ["annual_return"])
     val annualReturn: String? = null,
     @SerialName("termYears")
-    @SerializedName("term_years")
+    @SerializedName(value = "termYears", alternate = ["term_years"])
     val termYears: Int? = null,
     @SerialName("escrow")
     @SerializedName("escrow")
@@ -165,7 +165,7 @@ data class JobCreation(
     @SerializedName("total")
     val total: Int? = null,
     @SerialName("perInvestor")
-    @SerializedName("per_investor")
+    @SerializedName(value = "perInvestor", alternate = ["per_investor"])
     val perInvestor: Double? = null,
     @SerialName("model")
     @SerializedName("model")

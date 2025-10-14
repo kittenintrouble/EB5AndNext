@@ -1,6 +1,9 @@
 package com.eb5.app.ui.screens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +16,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Event
 import androidx.compose.material.icons.outlined.Favorite
@@ -20,8 +25,10 @@ import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,19 +44,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.eb5.app.R
-import com.eb5.app.data.model.AppLanguage
 import com.eb5.app.data.model.Project
+import com.eb5.app.data.model.ProjectImage
 import com.eb5.app.ui.projects.projectStatusLabel
 import com.eb5.app.ui.projects.projectTypeLabel
 import java.text.NumberFormat
 import java.time.Instant
 import java.time.OffsetDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.Locale
 
 @Composable
@@ -89,6 +93,7 @@ fun ProjectsScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ProjectListItem(
     project: Project,
@@ -101,8 +106,16 @@ private fun ProjectListItem(
         val amount = project.financials?.minInvestment ?: project.minInvestmentUsd
         amount?.let { currencyFormatter().format(it) } ?: "—"
     }
-    val publishedLabel = remember(project.publishedAt) { formatDate(project.publishedAt) }
     val expectedOpening = project.expectedOpening?.takeIf { it.isNotBlank() }
+    val heroImageUrl = project.heroImageUrl
+    val gallery = remember(project.images, heroImageUrl) {
+        val remoteImages = project.images?.takeIf { it.isNotEmpty() } ?: emptyList()
+        when {
+            remoteImages.isNotEmpty() -> remoteImages
+            !heroImageUrl.isNullOrBlank() -> listOf(ProjectImage(url = heroImageUrl, alt = project.title))
+            else -> emptyList()
+        }
+    }
 
     Card(
         onClick = onProjectSelected,
@@ -116,20 +129,53 @@ private fun ProjectListItem(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            AsyncImage(
-                model = ImageRequest.Builder(context)
-                    .data(project.heroImageUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = project.title,
-                placeholder = painterResource(id = R.drawable.bg_us_flag),
-                error = painterResource(id = R.drawable.bg_us_flag),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(180.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop
-            )
+            if (gallery.isNotEmpty()) {
+                val pagerState = rememberPagerState(pageCount = { gallery.size })
+                HorizontalPager(
+                    state = pagerState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(180.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                ) { page ->
+                    val image = gallery[page]
+                    SubcomposeAsyncImage(
+                        model = ImageRequest.Builder(context)
+                            .data(image.url)
+                            .crossfade(true)
+                            .build(),
+                        contentDescription = image.alt,
+                        loading = {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator()
+                            }
+                        },
+                        error = {
+                            Image(
+                                painter = painterResource(id = R.drawable.bg_us_flag),
+                                contentDescription = image.alt,
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Crop
+                            )
+                        },
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            } else {
+                Image(
+                    painter = painterResource(id = R.drawable.bg_us_flag),
+                    contentDescription = project.title,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(180.dp)
+                        .clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -141,24 +187,42 @@ private fun ProjectListItem(
                 ) {
                     Text(
                         text = project.title,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    project.shortDescription
+                        ?.takeIf { it.isNotBlank() }
+                        ?.let {
+                            Text(
+                                text = it,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 3,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.padding(bottom = 4.dp)
+                            )
+                        }
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         val typeLabel = remember(project.type) {
                             projectTypeLabel(context, project.type)
                         }
                         val statusLabel = remember(project.status) {
                             projectStatusLabel(context, project.status)
                         }
-                        val languageName = project.lang?.takeIf { it.isNotBlank() }
-                            ?.let { stringResource(AppLanguage.fromTag(it).displayName) }
-
-                        typeLabel?.let { ProjectTag(it) }
-                        statusLabel?.let { ProjectTag(it) }
-                        languageName?.let { ProjectTag(it) }
+                        typeLabel?.let {
+                            ProjectMetaPill(
+                                label = stringResource(R.string.project_list_meta_type),
+                                value = it
+                            )
+                        }
+                        statusLabel?.let {
+                            ProjectMetaPill(
+                                label = stringResource(R.string.project_list_meta_status),
+                                value = it
+                            )
+                        }
                     }
                 }
                 IconButton(onClick = onToggleFavorite) {
@@ -169,38 +233,6 @@ private fun ProjectListItem(
                         contentDescription = stringResource(id = label)
                     )
                 }
-            }
-
-            project.shortDescription
-                ?.takeIf { it.isNotBlank() }
-                ?.let {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 3,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                project.expectedOpening?.takeIf { it.isNotBlank() }?.let {
-                    ProjectTag(text = stringResource(R.string.project_expected_opening, it))
-                }
-                publishedLabel?.let {
-                    ProjectTag(text = stringResource(R.string.project_published_at, it))
-                }
-            }
-
-            val primaryDescription = project.shortDescription?.takeIf { it.isNotBlank() }
-                ?: project.fullDescription?.takeIf { it.isNotBlank() }
-            primaryDescription?.let {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 4,
-                    overflow = TextOverflow.Ellipsis
-                )
             }
 
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -216,15 +248,17 @@ private fun ProjectListItem(
                         text = stringResource(R.string.project_expected_opening, it)
                     )
                 }
-                publishedLabel?.let {
-                    InfoRow(
-                        icon = Icons.Outlined.Event,
-                        text = stringResource(R.string.project_published_at, it)
-                    )
-                }
             }
 
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+
+            HorizontalDivider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                color = MaterialTheme.colorScheme.outlineVariant
+            )
+
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(
                     text = stringResource(R.string.project_financial_minimum, minInvestmentLabel),
                     style = MaterialTheme.typography.bodyMedium,
@@ -236,37 +270,17 @@ private fun ProjectListItem(
                             R.string.project_financial_offering,
                             currencyFormatter().format(it)
                         ),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                project.financials?.totalProject?.let {
-                    Text(
-                        text = stringResource(
-                            R.string.project_financial_total,
-                            currencyFormatter().format(it)
-                        ),
-                        style = MaterialTheme.typography.bodySmall,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 project.financials?.eb5Investors?.takeIf { it.isNotBlank() }?.let {
                     Text(
                         text = stringResource(R.string.project_financial_investors, it),
-                        style = MaterialTheme.typography.bodySmall,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                project.tea?.designation?.takeIf { it.isNotBlank() }?.let {
-                    Text(
-                        text = stringResource(R.string.project_tea_status, it),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-            project.jobs?.total?.takeIf { it > 0 }?.let {
-                ProjectTag(text = stringResource(R.string.project_jobs_total, it.toString()))
             }
         }
     }
@@ -322,22 +336,45 @@ private fun InfoRow(icon: androidx.compose.ui.graphics.vector.ImageVector, text:
 }
 
 @Composable
-private fun ProjectTag(text: String) {
+private fun ProjectMetaPill(label: String, value: String) {
     Surface(
         color = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         shape = RoundedCornerShape(50)
     ) {
-        Text(
-            text = text,
+        Row(
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-            style = MaterialTheme.typography.labelSmall
-        )
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "$label:",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
     }
 }
 
 private fun currencyFormatter(): NumberFormat =
     NumberFormat.getCurrencyInstance(Locale.US)
+
+private fun parseInvestorProgress(value: String): Float? {
+    val match = Regex("(\\d+(?:[\\.,]\\d+)?)").find(value) ?: return null
+    val numeric = match.value.replace(',', '.').toFloatOrNull() ?: return null
+    val normalized = when {
+        value.contains("%") -> numeric / 100f
+        numeric <= 1f -> numeric
+        numeric in 1f..100f -> numeric / 100f
+        else -> return null
+    }
+    return normalized.coerceIn(0f, 1f)
+}
 
 private fun parseIsoDate(value: String?): Long? = runCatching {
     when {
@@ -346,8 +383,3 @@ private fun parseIsoDate(value: String?): Long? = runCatching {
         else -> OffsetDateTime.parse(value).toInstant().toEpochMilli()
     }
 }.getOrNull()
-
-private fun formatDate(value: String?): String? = parseIsoDate(value)?.let {
-    val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault())
-    formatter.format(Instant.ofEpochMilli(it).atZone(ZoneId.systemDefault()))
-}
