@@ -44,6 +44,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -256,7 +257,7 @@ private fun ProjectDetailContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -290,14 +291,14 @@ private fun ProjectDetailContent(
                         verticalArrangement = Arrangement.spacedBy(6.dp),
                         modifier = Modifier.padding(top = 8.dp)
                     ) {
+                        project.developer?.takeIf { it.isNotBlank() }?.let {
+                            InfoRow(icon = Icons.Outlined.Badge, text = stringResource(R.string.project_developer, it))
+                        }
                         project.location?.takeIf { it.isNotBlank() }?.let {
                             InfoRow(icon = Icons.Outlined.Place, text = stringResource(R.string.project_location, it))
                         }
                         project.expectedOpening?.takeIf { it.isNotBlank() }?.let {
                             InfoRow(icon = Icons.Outlined.Event, text = stringResource(R.string.project_expected_opening, it))
-                        }
-                        project.developer?.takeIf { it.isNotBlank() }?.let {
-                            InfoRow(icon = Icons.Outlined.Badge, text = stringResource(R.string.project_developer, it))
                         }
                     }
                 }
@@ -407,7 +408,7 @@ private fun ProjectDetailContent(
             }
 
             project.fullDescription?.takeIf { it.isNotBlank() }?.let {
-                HorizontalDivider(modifier = Modifier.padding(top = 12.dp))
+                HorizontalDivider(modifier = Modifier.padding(top = 4.dp))
                 Text(
                     text = it,
                     style = MaterialTheme.typography.bodyMedium,
@@ -415,7 +416,7 @@ private fun ProjectDetailContent(
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(0.dp))
 
             val visaOptions = remember {
                 listOf(
@@ -448,7 +449,7 @@ private fun ProjectDetailContent(
                 fontWeight = FontWeight.SemiBold
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
@@ -528,9 +529,15 @@ private fun ProjectDetailContent(
                                 visaFieldWidth = layoutCoordinates.size.width
                             },
                         colors = OutlinedTextFieldDefaults.colors(
-                            unfocusedIndicatorColor = MaterialTheme.colorScheme.outline,
-                            focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                            unfocusedTextColor = if (selectedVisa.isEmpty()) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                            unfocusedTextColor = if (selectedVisa.isEmpty()) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
+                            focusedLabelColor = MaterialTheme.colorScheme.primary,
+                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            focusedTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            unfocusedTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            cursorColor = MaterialTheme.colorScheme.primary
                         ),
                         interactionSource = visaInteraction
                     )
