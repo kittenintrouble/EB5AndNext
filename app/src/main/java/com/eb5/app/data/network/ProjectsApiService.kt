@@ -36,7 +36,7 @@ interface ProjectsApiService {
 
     @GET("projects")
     suspend fun getProjects(
-        @Query("lang") language: String = "en",
+        @Query("lang") language: String,
         @Query("type") type: String? = null,
         @Query("status") status: String? = null,
         @Query("published") published: Boolean = true,
@@ -47,7 +47,7 @@ interface ProjectsApiService {
     @GET("projects/{id}")
     suspend fun getProject(
         @Path("id") projectId: String,
-        @Query("lang") language: String = "en"
+        @Query("lang") language: String
     ): Project
 }
 

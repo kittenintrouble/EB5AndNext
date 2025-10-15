@@ -217,4 +217,7 @@
     <string name="quizzes_certificate_share">Share</string>
     <string name="quizzes_attempt_best">%1$d/%2$d</string>
     <string name="quizzes_attempt_completed">Completed on %1$s</string>
+
+    <string name="common_submitted_ok">Submitted successfully</string>
+    <string name="common_submitted_fail">Submission failed. Please try again.</string>
 </resources>

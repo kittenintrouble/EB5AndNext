@@ -14,8 +14,3 @@ data class Article(
     val dayNumber: Int? = null,
     val isCompleted: Boolean = false
 )
-
-@Serializable
-data class ArticleCollection(
-    val items: List<Article>
-)

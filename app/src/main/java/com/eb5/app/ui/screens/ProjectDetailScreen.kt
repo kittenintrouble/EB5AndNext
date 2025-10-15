@@ -1,5 +1,16 @@
 package com.eb5.app.ui.screens
 
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.focus.onFocusChanged
+import com.eb5.app.BuildConfig
+import org.json.JSONObject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import android.widget.Toast
+
+import android.util.Patterns
+import android.util.Log
+
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -22,6 +33,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import kotlinx.coroutines.launch
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.AttachMoney
@@ -34,11 +53,10 @@ import androidx.compose.material.icons.outlined.Gavel
 import androidx.compose.material.icons.outlined.Map
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material.icons.outlined.Work
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,6 +65,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -125,7 +147,7 @@ fun ProjectDetailScreen(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun ProjectDetailContent(
     project: Project,
@@ -192,9 +214,14 @@ private fun ProjectDetailContent(
                     modifier = Modifier.fillMaxSize()
                 ) { page ->
                     val image = gallery[page]
+                    val imageUrl = if (image.url.contains("unsplash.com")) {
+                        "${image.url}?w=800&q=80&fm=jpg&fit=crop"
+                    } else {
+                        image.url
+                    }
                     SubcomposeAsyncImage(
                         model = ImageRequest.Builder(context)
-                            .data(image.url)
+                            .data(imageUrl)
                             .crossfade(true)
                             .build(),
                         contentDescription = image.alt,
@@ -433,121 +460,217 @@ private fun ProjectDetailContent(
                     "Other"
                 )
             }
-            var firstName by rememberSaveable { mutableStateOf("") }
-            var lastName by rememberSaveable { mutableStateOf("") }
-            var email by rememberSaveable { mutableStateOf("") }
-            var phone by rememberSaveable { mutableStateOf("") }
-            var countryBirth by rememberSaveable { mutableStateOf("") }
-            var countryLiving by rememberSaveable { mutableStateOf("") }
-            var selectedVisa by rememberSaveable { mutableStateOf("") }
+            var firstName by remember { mutableStateOf("") }
+            var lastName by remember { mutableStateOf("") }
+            var email by remember { mutableStateOf("") }
+            var phone by remember { mutableStateOf("") }
+            var countryBirth by remember { mutableStateOf("") }
+            var countryLiving by remember { mutableStateOf("") }
+            var selectedVisa by remember { mutableStateOf("") }
             var visaExpanded by remember { mutableStateOf(false) }
-            var accreditedInvestor by rememberSaveable { mutableStateOf(false) }
+            var accreditedInvestor by remember { mutableStateOf(false) }
+            var attemptedSubmit by remember { mutableStateOf(false) }
+            var showErrors by remember { mutableStateOf(false) }
+            fun isEmailValid(value: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(value).matches()
+            fun phoneDigits(value: String): String = value.filter { it.isDigit() }
+            val isFormValid by remember(firstName, lastName, email, phone, countryBirth, countryLiving, selectedVisa, accreditedInvestor) {
+                mutableStateOf(
+                    firstName.isNotBlank() &&
+                            lastName.isNotBlank() &&
+                            email.isNotBlank() && isEmailValid(email) &&
+                            phoneDigits(phone).length >= 7 &&
+                            countryBirth.isNotBlank() &&
+                            countryLiving.isNotBlank() &&
+                            selectedVisa.isNotBlank() &&
+                            accreditedInvestor
+                )
+            }
 
-            Text(
-                text = stringResource(R.string.project_more_title),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.SemiBold
-            )
+            var submitting by remember { mutableStateOf(false) }
+            var submittedSuccessfully by remember { mutableStateOf(false) }
 
-            Spacer(modifier = Modifier.height(2.dp))
+            val scope = rememberCoroutineScope()
+            val reqFirstName = remember { BringIntoViewRequester() }
+            val reqLastName = remember { BringIntoViewRequester() }
+            val reqEmail = remember { BringIntoViewRequester() }
+            val reqPhone = remember { BringIntoViewRequester() }
+            val reqCountryBirth = remember { BringIntoViewRequester() }
+            val reqCountryLiving = remember { BringIntoViewRequester() }
+            val reqVisa = remember { BringIntoViewRequester() }
+            val reqAccredited = remember { BringIntoViewRequester() }
+
+            fun bringFirstErrorIntoView() {
+                val requester = when {
+                    firstName.isBlank() -> reqFirstName
+                    lastName.isBlank() -> reqLastName
+                    !isEmailValid(email) -> reqEmail
+                    phoneDigits(phone).length < 7 -> reqPhone
+                    countryBirth.isBlank() -> reqCountryBirth
+                    countryLiving.isBlank() -> reqCountryLiving
+                    selectedVisa.isBlank() -> reqVisa
+                    !accreditedInvestor -> reqAccredited
+                    else -> null
+                }
+                requester?.let { scope.launch { it.bringIntoView() } }
+            }
+            if (!submittedSuccessfully) {
+                Text(
+                    text = stringResource(R.string.project_more_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Text(
+                    text = "All fields are required",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+            }
 
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                if (!submittedSuccessfully) {
                 OutlinedTextField(
                     value = firstName,
                     onValueChange = { firstName = it },
                     singleLine = true,
-                    label = { Text(stringResource(R.string.project_more_first_name)) },
-                    modifier = Modifier.fillMaxWidth()
+                    enabled = !submitting,
+                    isError = showErrors && firstName.isBlank(),
+                    label = { RequiredLabel(stringResource(R.string.project_more_first_name)) },
+                    placeholder = { Text("John") },
+                    supportingText = {
+                        if (showErrors && firstName.isBlank()) {
+                            Text(text = stringResource(R.string.common_required))
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .bringIntoViewRequester(reqFirstName)
                 )
                 OutlinedTextField(
                     value = lastName,
                     onValueChange = { lastName = it },
                     singleLine = true,
-                    label = { Text(stringResource(R.string.project_more_last_name)) },
-                    modifier = Modifier.fillMaxWidth()
+                    enabled = !submitting,
+                    isError = showErrors && lastName.isBlank(),
+                    label = { RequiredLabel(stringResource(R.string.project_more_last_name)) },
+                    placeholder = { Text("Smith") },
+                    supportingText = {
+                        if (showErrors && lastName.isBlank()) {
+                            Text(text = stringResource(R.string.common_required))
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .bringIntoViewRequester(reqLastName)
                 )
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
                     singleLine = true,
-                    label = { Text(stringResource(R.string.project_more_email)) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                    modifier = Modifier.fillMaxWidth()
+                    enabled = !submitting,
+                    isError = showErrors && (email.isBlank() || !isEmailValid(email)),
+                    label = { RequiredLabel(stringResource(R.string.project_more_email)) },
+                    placeholder = { Text("john.smith@example.com") },
+                    supportingText = {
+                        if (showErrors && (email.isBlank() || !isEmailValid(email))) {
+                            Text(text = if (email.isBlank()) stringResource(R.string.common_required) else stringResource(R.string.common_invalid_email))
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .bringIntoViewRequester(reqEmail)
                 )
                 OutlinedTextField(
                     value = phone,
                     onValueChange = { phone = it },
                     singleLine = true,
-                    label = { Text(stringResource(R.string.project_more_phone)) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                    modifier = Modifier.fillMaxWidth()
+                    enabled = !submitting,
+                    isError = showErrors && phoneDigits(phone).length < 7,
+                    label = { RequiredLabel(stringResource(R.string.project_more_phone)) },
+                    placeholder = { Text("+1 (555) 123-4567") },
+                    supportingText = {
+                        if (showErrors && phoneDigits(phone).length < 7) {
+                            Text(text = stringResource(R.string.common_invalid_phone))
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .bringIntoViewRequester(reqPhone)
                 )
                 OutlinedTextField(
                     value = countryBirth,
                     onValueChange = { countryBirth = it },
                     singleLine = true,
-                    label = { Text(stringResource(R.string.project_more_country_birth)) },
-                    modifier = Modifier.fillMaxWidth()
+                    enabled = !submitting,
+                    isError = showErrors && countryBirth.isBlank(),
+                    label = { RequiredLabel(stringResource(R.string.project_more_country_birth)) },
+                    placeholder = { Text("China") },
+                    supportingText = {
+                        if (showErrors && countryBirth.isBlank()) {
+                            Text(text = stringResource(R.string.common_required))
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .bringIntoViewRequester(reqCountryBirth)
                 )
                 OutlinedTextField(
                     value = countryLiving,
                     onValueChange = { countryLiving = it },
                     singleLine = true,
-                    label = { Text(stringResource(R.string.project_more_country_living)) },
-                    modifier = Modifier.fillMaxWidth()
+                    enabled = !submitting,
+                    isError = showErrors && countryLiving.isBlank(),
+                    label = { RequiredLabel(stringResource(R.string.project_more_country_living)) },
+                    placeholder = { Text("United States") },
+                    supportingText = {
+                        if (showErrors && countryLiving.isBlank()) {
+                            Text(text = stringResource(R.string.common_required))
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .bringIntoViewRequester(reqCountryLiving)
                 )
 
                 val focusManager = LocalFocusManager.current
-                val density = LocalDensity.current
-                var visaFieldWidth by remember { mutableStateOf(0) }
-                val visaInteraction = remember { MutableInteractionSource() }
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable(interactionSource = visaInteraction, indication = null) {
-                            focusManager.clearFocus()
-                            visaExpanded = true
+                ExposedDropdownMenuBox(
+                    expanded = visaExpanded,
+                    onExpandedChange = {
+                        if (!submitting) {
+                            visaExpanded = !visaExpanded
+                            if (visaExpanded) focusManager.clearFocus()
                         }
+                    },
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    OutlinedTextField(
+                    TextField(
                         value = selectedVisa,
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text(stringResource(R.string.project_more_current_visa_status)) },
+                        enabled = !submitting,
+                        isError = showErrors && selectedVisa.isBlank(),
+                        label = { RequiredLabel(stringResource(R.string.project_more_current_visa_status)) },
                         placeholder = { Text(stringResource(R.string.project_more_current_visa_status_hint)) },
-                        trailingIcon = {
-                            Icon(
-                                imageVector = Icons.Outlined.ArrowDropDown,
-                                contentDescription = null,
-                                modifier = Modifier.rotate(if (visaExpanded) 180f else 0f)
-                            )
+                        supportingText = {
+                            if (showErrors && selectedVisa.isBlank()) {
+                                Text(text = stringResource(R.string.common_required))
+                            }
                         },
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = visaExpanded) },
                         modifier = Modifier
+                            .menuAnchor()
                             .fillMaxWidth()
-                            .onGloballyPositioned { layoutCoordinates ->
-                                visaFieldWidth = layoutCoordinates.size.width
-                            },
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = MaterialTheme.colorScheme.primary,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = if (selectedVisa.isEmpty()) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
-                            focusedLabelColor = MaterialTheme.colorScheme.primary,
-                            unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                            focusedTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                            unfocusedTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                            cursorColor = MaterialTheme.colorScheme.primary
-                        ),
-                        interactionSource = visaInteraction
+                            .bringIntoViewRequester(reqVisa),
+                        colors = ExposedDropdownMenuDefaults.textFieldColors()
                     )
-                    DropdownMenu(
+
+                    ExposedDropdownMenu(
                         expanded = visaExpanded,
-                        onDismissRequest = { visaExpanded = false },
-                        modifier = Modifier.width(with(density) { visaFieldWidth.toDp() })
+                        onDismissRequest = { visaExpanded = false }
                     ) {
                         visaOptions.forEach { option ->
-                            DropdownMenuItem(
+                            androidx.compose.material3.DropdownMenuItem(
                                 text = { Text(option) },
                                 onClick = {
                                     selectedVisa = option
@@ -560,37 +683,202 @@ private fun ProjectDetailContent(
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.bringIntoViewRequester(reqAccredited)
                 ) {
                     Checkbox(
                         checked = accreditedInvestor,
-                        onCheckedChange = { accreditedInvestor = it }
+                        onCheckedChange = { if (!submitting) accreditedInvestor = it },
+                        enabled = !submitting
                     )
                     Text(
                         text = stringResource(R.string.project_more_accredited),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.clickable { accreditedInvestor = !accreditedInvestor }
+                        modifier = Modifier.clickable { if (!submitting) accreditedInvestor = !accreditedInvestor }
                     )
                 }
-
-                Button(
-                    onClick = { /* TODO handle form submission */ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(64.dp)
-                ) {
+                if (showErrors && !accreditedInvestor) {
                     Text(
-                        text = stringResource(R.string.project_more_submit).uppercase(Locale.getDefault()),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold
+                        text = stringResource(R.string.common_required),
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
                     )
+                }
+                }
+                // Form submission helper
+                suspend fun submitForm(): Pair<Boolean, String?> = withContext(Dispatchers.IO) {
+                    try {
+                        val endpoint = BuildConfig.PROJECT_FORM_ENDPOINT
+                        Log.d("ProjectForm", "=== FORM SUBMISSION START ===")
+                        Log.d("ProjectForm", "URL: $endpoint")
+
+                        val url = java.net.URL(endpoint)
+                        val conn = (url.openConnection() as java.net.HttpURLConnection).apply {
+                            requestMethod = "POST"
+                            connectTimeout = 15000
+                            readTimeout = 20000
+                            doOutput = true
+                            setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+                            Log.d("ProjectForm", "Content-Type: application/json; charset=UTF-8")
+                            if (BuildConfig.PROJECT_FORM_API_KEY.isNotEmpty()) {
+                                setRequestProperty("x-api-key", BuildConfig.PROJECT_FORM_API_KEY)
+                                Log.d("ProjectForm", "API Key: ${BuildConfig.PROJECT_FORM_API_KEY}")
+                            } else {
+                                Log.d("ProjectForm", "API Key: NOT SET (public endpoint)")
+                            }
+                        }
+
+                        val payload = JSONObject().apply {
+                            put("project_id", project.id ?: JSONObject.NULL)
+                            put("project_title", project.title ?: JSONObject.NULL)
+                            put("first_name", firstName)
+                            put("last_name", lastName)
+                            put("email", email)
+                            put("phone", phone)
+                            put("country_of_birth", countryBirth)
+                            put("country_of_living", countryLiving)
+                            put("current_visa_status", selectedVisa)
+                            put("accredited_investor", accreditedInvestor)
+                            put("timestamp", System.currentTimeMillis())
+                        }
+
+                        val jsonString = payload.toString()
+                        Log.d("ProjectForm", "JSON Payload: $jsonString")
+
+                        conn.outputStream.use { os ->
+                            os.write(jsonString.toByteArray(Charsets.UTF_8))
+                        }
+
+                        Log.d("ProjectForm", "Request sent, waiting for response...")
+
+                        val code = conn.responseCode
+                        Log.d("ProjectForm", "HTTP Status Code: $code")
+
+                        val body = try {
+                            (if (code in 200..299) conn.inputStream else conn.errorStream)?.bufferedReader()?.use { it.readText() }
+                        } catch (e: Exception) {
+                            Log.e("ProjectForm", "Error reading response body", e)
+                            null
+                        }
+
+                        Log.d("ProjectForm", "Response Body: $body")
+                        conn.disconnect()
+
+                        Log.d("ProjectForm", "=== FORM SUBMISSION END ===")
+
+                        if (code in 200..299) true to (body ?: "")
+                        else false to (body ?: "Server error ($code)")
+                    } catch (e: Exception) {
+                        Log.e("ProjectForm", "Exception during form submission", e)
+                        Log.e("ProjectForm", "Exception message: ${e.message}")
+                        Log.e("ProjectForm", "Exception type: ${e.javaClass.name}")
+                        false to (e.message ?: "Network error")
+                    }
+                }
+
+                if (submittedSuccessfully) {
+                    // Success message UI
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        shape = MaterialTheme.shapes.large,
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        tonalElevation = 2.dp
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(32.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.CheckCircle,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = "Thank You!",
+                                style = MaterialTheme.typography.headlineMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                            Text(
+                                text = "Your inquiry has been submitted successfully. We will contact you within 24 hours.",
+                                style = MaterialTheme.typography.bodyLarge,
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                    }
+                } else {
+                    Button(
+                        onClick = {
+                            showErrors = true
+                            if (isFormValid && !submitting) {
+                                scope.launch {
+                                    submitting = true
+                                    val (ok, msg) = submitForm()
+                                    submitting = false
+                                    if (ok) {
+                                        // Clear form on success
+                                        firstName = ""
+                                        lastName = ""
+                                        email = ""
+                                        phone = ""
+                                        countryBirth = ""
+                                        countryLiving = ""
+                                        selectedVisa = ""
+                                        accreditedInvestor = false
+                                        visaExpanded = false
+                                        showErrors = false
+                                        submittedSuccessfully = true
+                                    } else {
+                                        val message = if (!msg.isNullOrBlank()) msg else context.getString(R.string.common_submitted_fail)
+                                        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                                        bringFirstErrorIntoView()
+                                    }
+                                }
+                            } else if (!isFormValid) {
+                                bringFirstErrorIntoView()
+                            }
+                        },
+                        enabled = !submitting,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(64.dp)
+                    ) {
+                        if (submitting) {
+                            CircularProgressIndicator(modifier = Modifier.size(22.dp), color = MaterialTheme.colorScheme.onPrimary)
+                        } else {
+                            Text(
+                                text = stringResource(R.string.project_more_submit).uppercase(Locale.getDefault()),
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                    }
                 }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
+}
+
+
+@Composable
+private fun RequiredLabel(text: String) {
+    Text(
+        buildAnnotatedString {
+            append(text)
+            append(" ")
+            withStyle(SpanStyle(color = MaterialTheme.colorScheme.error)) {
+                append("*")
+            }
+        }
+    )
 }
 
 @Composable

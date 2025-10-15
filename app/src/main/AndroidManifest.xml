@@ -10,7 +10,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EB5">
+        android:theme="@style/Theme.EB5AndNext">
+        <!-- Default icon for Firebase notifications -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
         <activity
             android:name="com.eb5.app.MainActivity"
             android:exported="true"

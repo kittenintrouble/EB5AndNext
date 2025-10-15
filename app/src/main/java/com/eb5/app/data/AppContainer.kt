@@ -21,7 +21,7 @@ class AppContainer(
     val userPreferencesRepository = UserPreferencesRepository(dataStore)
     val contentRepository = ContentRepository(appContext.assets)
     val quizRepository = QuizRepository(appContext.assets)
-    private val projectsApiService = createProjectsApiService(BuildConfig.NEWS_BASE_URL)
+    private val projectsApiService = createProjectsApiService(BuildConfig.PROJECTS_BASE_URL)
     val projectRepository = ProjectRepository(projectsApiService)
     private val newsApiService = createNewsApiService(BuildConfig.NEWS_BASE_URL)
     val newsRepository = NewsRepository(newsApiService)

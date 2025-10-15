@@ -213,6 +213,9 @@
     <string name="project_status_completed_value">Completed</string>
     <string name="common_yes">Yes</string>
     <string name="common_no">No</string>
+    <string name="common_required">Required</string>
+    <string name="common_invalid_email">Invalid email address</string>
+    <string name="common_invalid_phone">Invalid phone number</string>
 
     <string name="settings_language_title">Language</string>
     <string name="settings_version">App version %1$s</string>
@@ -230,4 +233,7 @@
     <string name="base_next_prefix">Next:</string>
     <string name="base_resume">Resume</string>
     <string name="base_all_done">All done</string>
+
+    <string name="common_submitted_ok">Submitted successfully</string>
+    <string name="common_submitted_fail">Submission failed. Please try again.</string>
 </resources>

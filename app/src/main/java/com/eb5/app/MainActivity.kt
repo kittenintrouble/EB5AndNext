@@ -131,12 +131,9 @@ class MainActivity : ComponentActivity() {
         if (projectUpdateReceiver != null) return
         projectUpdateReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val projectId = intent?.getStringExtra(AppMessagingService.EXTRA_PROJECT_ID)
-                val language = intent?.getStringExtra(AppMessagingService.EXTRA_LANGUAGE)
+                // Only refresh the list, don't auto-open the project
+                // Project will be opened only when user clicks on notification
                 appViewModel.refreshProjects()
-                if (!projectId.isNullOrBlank()) {
-                    appViewModel.openProject(projectId, language, AppDestination.Projects.route)
-                }
             }
         }
         val filter = IntentFilter(AppMessagingService.ACTION_REFRESH_PROJECTS)
