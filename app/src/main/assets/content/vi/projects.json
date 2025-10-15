@@ -1,0 +1,26 @@
+[
+  {
+    "id": "riverfront-hotel",
+    "title": "Tái phát triển khách sạn ven sông",
+    "shortDescription": "Cải tạo khách sạn lịch sử bên bờ sông thành tổ hợp khách sạn - hội nghị hiện đại.",
+    "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+    "category": "Trung tâm vùng",
+    "location": "Baltimore, Maryland",
+    "teaStatus": "TEA thất nghiệp cao",
+    "minInvestmentUsd": 800000,
+    "jobCreationModel": "RegionalCenter",
+    "fullDescription": "Dự án phục hồi khách sạn nằm tại Inner Harbor, bổ sung 180 phòng, trung tâm hội nghị và khu bán lẻ; mô hình trung tâm vùng cho phép tính việc làm gián tiếp."
+  },
+  {
+    "id": "green-tech-manufacturing",
+    "title": "Khu sản xuất công nghệ xanh",
+    "shortDescription": "Đầu tư trực tiếp vào nhà máy sản xuất linh kiện pin cho xe điện.",
+    "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+    "category": "Trực tiếp",
+    "location": "Reno, Nevada",
+    "teaStatus": "TEA nông thôn",
+    "minInvestmentUsd": 800000,
+    "jobCreationModel": "Direct",
+    "fullDescription": "Nhà máy sản xuất bộ pin lithium cho xe điện và dự kiến tuyển 35 nhân viên toàn thời gian trong vòng hai năm."
+  }
+]

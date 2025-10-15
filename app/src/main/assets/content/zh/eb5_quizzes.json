@@ -1,0 +1,34 @@
+[
+  {
+    "termId": 1,
+    "title": "项目基础测验",
+    "questions": [
+      {
+        "question": "EB-5 投资者至少需要创造多少个全职工作岗位？",
+        "options": ["5 个", "10 个", "15 个", "20 个"],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "EB-5 申请获批后授予有条件居留的文件是？",
+        "options": ["I-829 表", "I-526E 表", "绿卡", "工作许可"],
+        "correctAnswerIndex": 2
+      }
+    ]
+  },
+  {
+    "termId": 2,
+    "title": "投资模式测验",
+    "questions": [
+      {
+        "question": "区域中心项目的一个关键特征是什么？",
+        "options": ["投资者直接管理日常运营", "可以计算间接就业", "最低投资额为 50 万美元", "仅限制造业项目"],
+        "correctAnswerIndex": 1
+      },
+      {
+        "question": "以下哪项描述了直接 EB-5 投资？",
+        "options": ["投资者加入集合基金", "投资者购买美国国债", "投资者积极管理企业", "投资者选择指数基金"],
+        "correctAnswerIndex": 2
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "EB-5 프로그램 개요",
+    "category": "기초",
+    "subcategory": "프로그램 기본",
+    "description": "EB-5 투자이민 프로그램은 자격을 갖춘 해외 투자자가 미국 근로자를 위한 일자리를 창출하는 신규 상업 기업에 투자하여 영주권을 취득할 수 있도록 허용합니다.",
+    "shortDescription": "투자가 어떻게 영주권으로 연결되는지 이해합니다.",
+    "examples": [
+      "목표고용지역(TEA) 프로젝트에 80만 달러 투자",
+      "미국 내 최소 10개의 정규직 일자리 창출 또는 유지"
+    ],
+    "dayNumber": 1,
+    "isCompleted": false
+  },
+  {
+    "id": 2,
+    "title": "직접 투자와 지역센터 투자",
+    "category": "기초",
+    "subcategory": "투자 모델",
+    "description": "투자자는 비즈니스를 직접 운영하는 직접 투자와, 전문가가 관리하는 프로젝트에 참여하는 지역센터 투자 중에서 선택할 수 있습니다.",
+    "shortDescription": "EB-5의 두 가지 주요 투자 경로 비교.",
+    "examples": [
+      "직접 투자자로 레스토랑을 운영",
+      "지역센터를 통해 대규모 부동산 개발에 참여"
+    ],
+    "dayNumber": 2,
+    "isCompleted": false
+  },
+  {
+    "id": 3,
+    "title": "고용 창출 요건",
+    "category": "준수",
+    "subcategory": "USCIS 기준",
+    "description": "EB-5 투자는 투자자가 조건부 영주권을 받은 후 2년 이내에 자격을 갖춘 미국 근로자를 위한 정규직 10개 이상의 일자리를 창출해야 합니다.",
+    "shortDescription": "고용 창출이 EB-5 심사의 핵심인 이유.",
+    "examples": [
+      "신규 호텔 직원 채용",
+      "지역센터 프로젝트에서 간접 고용을 계산"
+    ],
+    "dayNumber": 3,
+    "isCompleted": false
+  }
+]
