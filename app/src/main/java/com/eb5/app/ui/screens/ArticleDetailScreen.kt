@@ -1,5 +1,6 @@
 package com.eb5.app.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -46,6 +47,8 @@ fun ArticleDetailScreen(
     onToggleStatus: () -> Unit,
     onBack: () -> Unit
 ) {
+    BackHandler(onBack = onBack)
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()

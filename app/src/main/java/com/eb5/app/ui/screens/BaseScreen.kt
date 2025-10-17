@@ -23,8 +23,6 @@ import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
@@ -36,9 +34,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
@@ -56,6 +52,7 @@ import com.eb5.app.R
 import com.eb5.app.data.model.Article
 import com.eb5.app.data.model.ArticleStatus
 import com.eb5.app.ui.AppViewModel
+import android.util.Log
 import kotlin.math.ceil
 import kotlin.math.max
 
@@ -83,21 +80,36 @@ fun BaseScreen(
     onScrollHandled: () -> Unit = {},
     resetToken: Int = 0,
     baseReturn: AppViewModel.BaseReturnSnapshot? = null,
+    selectedCategory: String?,
+    selectedSubcategory: String?,
+    onSelectCategory: (String?) -> Unit,
+    onSelectSubcategory: (String?) -> Unit,
     onRecordBaseReturn: (String?, String?, Int, Int) -> Unit,
     onConsumeBaseReturn: () -> Unit
 ) {
     val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
-    var selectedCategory by remember { mutableStateOf<String?>(null) }
-    var selectedSubcategory by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(baseReturn) {
         baseReturn?.let { snapshot ->
             if (!snapshot.pending) {
-                selectedCategory = snapshot.category
-                selectedSubcategory = snapshot.subcategory
-                scope.launch { listState.scrollToItem(snapshot.index, snapshot.offset) }
-                onConsumeBaseReturn()
+                onSelectCategory(snapshot.category)
+                onSelectSubcategory(snapshot.subcategory)
             }
+        }
+    }
+
+    LaunchedEffect(selectedCategory, selectedSubcategory) {
+        Log.d("BaseScreen", "selectedCategory=$selectedCategory selectedSubcategory=$selectedSubcategory")
+    }
+
+    LaunchedEffect(baseReturn?.pending, selectedCategory, selectedSubcategory) {
+        val snapshot = baseReturn ?: return@LaunchedEffect
+        if (!snapshot.pending &&
+            selectedCategory == snapshot.category &&
+            selectedSubcategory == snapshot.subcategory
+        ) {
+            scope.launch { listState.scrollToItem(snapshot.index, snapshot.offset) }
+            onConsumeBaseReturn()
         }
     }
 
@@ -191,8 +203,8 @@ fun BaseScreen(
 
     LaunchedEffect(resetToken) {
         if (resetToken > 0) {
-            selectedCategory = null
-            selectedSubcategory = null
+            onSelectCategory(null)
+            onSelectSubcategory(null)
             listState.scrollToItem(0)
             onScrollHandled()
         }
@@ -207,10 +219,10 @@ fun BaseScreen(
     LaunchedEffect(targetArticle) {
         val article = targetArticle ?: return@LaunchedEffect
         if (selectedCategory != article.category) {
-            selectedCategory = article.category
+            onSelectCategory(article.category)
         }
         if (selectedSubcategory != article.subcategory) {
-            selectedSubcategory = article.subcategory
+            onSelectSubcategory(article.subcategory)
         }
     }
 
@@ -247,7 +259,10 @@ fun BaseScreen(
                     Surface(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { selectedCategory = null; selectedSubcategory = null },
+                            .clickable {
+                                onSelectCategory(null)
+                                onSelectSubcategory(null)
+                            },
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.surface
                     ) {
@@ -292,7 +307,7 @@ fun BaseScreen(
                     Surface(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { selectedSubcategory = null },
+                            .clickable { onSelectSubcategory(null) },
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.surface
                     ) {
@@ -356,8 +371,8 @@ fun BaseScreen(
                                 maxLines = 2,
                                 overflow = TextOverflow.Clip,
                                 modifier = Modifier.clickable {
-                                    selectedCategory = summary.name
-                                    selectedSubcategory = null
+                                    onSelectCategory(summary.name)
+                                    onSelectSubcategory(null)
                                     scope.launch { listState.scrollToItem(0) }
                                 }
                             )
@@ -447,7 +462,7 @@ fun BaseScreen(
                                 maxLines = 2,
                                 overflow = TextOverflow.Clip,
                                 modifier = Modifier.clickable {
-                                    selectedSubcategory = summary.name
+                                    onSelectSubcategory(summary.name)
                                     scope.launch { listState.scrollToItem(0) }
                                 }
                             )

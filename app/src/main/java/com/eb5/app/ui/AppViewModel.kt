@@ -2,6 +2,7 @@ package com.eb5.app.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.util.Log
 import com.eb5.app.BuildConfig
 import com.eb5.app.data.model.AppLanguage
 import com.eb5.app.data.model.Article
@@ -42,7 +43,7 @@ class AppViewModel(
         val index: Int,
         val offset: Int,
         val pending: Boolean = true
-    )
+    ) : java.io.Serializable
 
     init {
         viewModelScope.launch {
@@ -107,7 +108,10 @@ class AppViewModel(
                         pendingNewsReturnRoute = it.pendingNewsReturnRoute,
                         pendingProjectId = it.pendingProjectId,
                         pendingProjectLanguage = it.pendingProjectLanguage,
-                        pendingProjectReturnRoute = it.pendingProjectReturnRoute
+                        pendingProjectReturnRoute = it.pendingProjectReturnRoute,
+                        pendingArticleReturnRoute = it.pendingArticleReturnRoute,
+                        baseSelectedCategory = it.baseSelectedCategory,
+                        baseSelectedSubcategory = it.baseSelectedSubcategory
                     )
                 }
             }
@@ -170,7 +174,9 @@ class AppViewModel(
         _uiState.update {
             it.copy(
                 pendingScrollArticleId = null,
-                baseResetToken = it.baseResetToken + 1
+                baseResetToken = it.baseResetToken + 1,
+                baseSelectedCategory = null,
+                baseSelectedSubcategory = null
             )
         }
     }
@@ -254,20 +260,72 @@ class AppViewModel(
     }
 
     fun recordBaseReturn(category: String?, subcategory: String?, index: Int, offset: Int) {
+        Log.d("AppViewModel", "recordBaseReturn category=$category subcategory=$subcategory index=$index offset=$offset")
         _uiState.update {
-            it.copy(baseReturn = BaseReturnSnapshot(category, subcategory, index, offset, pending = true))
+            it.copy(
+                baseReturn = BaseReturnSnapshot(category, subcategory, index, offset, pending = true),
+                pendingArticleReturnRoute = AppDestination.Base.route
+            )
         }
     }
 
     fun activateBaseReturn() {
         _uiState.update { state ->
             val snapshot = state.baseReturn ?: return@update state
-            state.copy(baseReturn = snapshot.copy(pending = false))
+            Log.d("AppViewModel", "activateBaseReturn category=${snapshot.category} subcategory=${snapshot.subcategory} index=${snapshot.index} offset=${snapshot.offset}")
+            state.copy(
+                baseSelectedCategory = snapshot.category,
+                baseSelectedSubcategory = snapshot.subcategory,
+                baseReturn = snapshot.copy(pending = false)
+            )
         }
     }
 
     fun clearBaseReturn() {
         _uiState.update { it.copy(baseReturn = null) }
+    }
+
+    fun restoreBaseFromSnapshot(snapshot: BaseReturnSnapshot) {
+        _uiState.update { state ->
+            state.copy(
+                baseSelectedCategory = snapshot.category,
+                baseSelectedSubcategory = snapshot.subcategory,
+                baseReturn = snapshot.copy(pending = false)
+            )
+        }
+    }
+
+    fun setArticleReturnRoute(route: String?) {
+        val snapshot = _uiState.value.baseReturn ?: return
+        _uiState.update {
+            it.copy(
+                pendingArticleReturnRoute = route,
+                baseSelectedCategory = snapshot.category,
+                baseSelectedSubcategory = snapshot.subcategory
+            )
+        }
+    }
+
+    fun clearArticleReturnRoute() {
+        _uiState.update { it.copy(pendingArticleReturnRoute = null) }
+    }
+
+    fun selectBaseCategory(category: String?) {
+        _uiState.update { state ->
+            val normalizedCategory = category?.takeIf { it.isNotBlank() }
+            val preserveSubcategory = normalizedCategory != null && state.baseSelectedCategory == normalizedCategory
+            state.copy(
+                baseSelectedCategory = normalizedCategory,
+                baseSelectedSubcategory = state.baseSelectedSubcategory.takeIf { preserveSubcategory }
+            )
+        }
+    }
+
+    fun selectBaseSubcategory(subcategory: String?) {
+        _uiState.update { state ->
+            val normalized = subcategory?.takeIf { it.isNotBlank() }
+            state.copy(baseSelectedSubcategory = normalized)
+        }
     }
 
     fun updateCurrentDestination(route: String?) {
@@ -343,5 +401,8 @@ data class AppUiState(
     val pendingNewsReturnRoute: String? = null,
     val pendingProjectId: String? = null,
     val pendingProjectLanguage: String? = null,
-    val pendingProjectReturnRoute: String? = null
+    val pendingProjectReturnRoute: String? = null,
+    val pendingArticleReturnRoute: String? = null,
+    val baseSelectedCategory: String? = null,
+    val baseSelectedSubcategory: String? = null
 )

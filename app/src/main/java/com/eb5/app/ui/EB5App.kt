@@ -62,6 +62,10 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.eb5.app.ui.news.NewsDetailViewModel
 import com.eb5.app.ui.projects.ProjectDetailViewModel
+import android.util.Log
+import kotlinx.coroutines.flow.collectLatest
+
+private const val BaseReturnSavedStateKey = "base_return_snapshot"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -198,6 +202,7 @@ fun EB5App(viewModel: AppViewModel) {
                                     navController.navigate(AppDestination.Base.route)
                                 },
                                 onOpenArticle = { articleId ->
+                                    viewModel.setArticleReturnRoute(AppDestination.Home.route)
                                     navController.navigate(AppDestination.ArticleDetail.routeWithId(articleId))
                                 },
                                 onToggleFavorite = viewModel::toggleFavorite,
@@ -216,7 +221,16 @@ fun EB5App(viewModel: AppViewModel) {
                                 onToggleProjectFavorite = viewModel::toggleProjectFavorite
                             )
                         }
-                        composable(AppDestination.Base.route) {
+                        composable(AppDestination.Base.route) { baseBackStackEntry ->
+                            val savedStateHandle = baseBackStackEntry.savedStateHandle
+                            LaunchedEffect(savedStateHandle) {
+                                savedStateHandle.getStateFlow<AppViewModel.BaseReturnSnapshot?>(BaseReturnSavedStateKey, null)
+                                    .collectLatest { snapshot ->
+                                        snapshot ?: return@collectLatest
+                                        viewModel.restoreBaseFromSnapshot(snapshot)
+                                        savedStateHandle[BaseReturnSavedStateKey] = null
+                                    }
+                            }
                             BaseScreen(
                                 articles = state.articles,
                                 articleStatuses = state.articleStatuses,
@@ -224,12 +238,17 @@ fun EB5App(viewModel: AppViewModel) {
                                 onToggleFavorite = viewModel::toggleFavorite,
                                 onToggleStatus = viewModel::toggleArticleStatus,
                                 onArticleSelected = { articleId ->
+                                    viewModel.setArticleReturnRoute(AppDestination.Base.route)
                                     navController.navigate(AppDestination.ArticleDetail.routeWithId(articleId))
                                 },
                                 scrollToArticleId = state.pendingScrollArticleId,
                                 onScrollHandled = viewModel::clearPendingArticleFocus,
                                 resetToken = state.baseResetToken,
                                 baseReturn = state.baseReturn,
+                                selectedCategory = state.baseSelectedCategory,
+                                selectedSubcategory = state.baseSelectedSubcategory,
+                                onSelectCategory = viewModel::selectBaseCategory,
+                                onSelectSubcategory = viewModel::selectBaseSubcategory,
                                 onRecordBaseReturn = viewModel::recordBaseReturn,
                                 onConsumeBaseReturn = viewModel::clearBaseReturn
                             )
@@ -303,13 +322,42 @@ fun EB5App(viewModel: AppViewModel) {
                                     onToggleFavorite = { viewModel.toggleFavorite(article.id) },
                                     onToggleStatus = { viewModel.toggleArticleStatus(article.id) },
                                     onBack = {
+                                        val currentState = viewModel.uiState.value
+                                        val baseSnapshot = currentState.baseReturn
+                                        val recordedRoute = currentState.pendingArticleReturnRoute
                                         val previousRoute = navController.previousBackStackEntry?.destination?.route
-                                        if (previousRoute == AppDestination.Base.route) {
+                                        val targetRoute = recordedRoute ?: previousRoute
+
+                                        if (baseSnapshot != null) {
+                                            navController.previousBackStackEntry?.savedStateHandle?.set(BaseReturnSavedStateKey, baseSnapshot)
+                                            Log.d("ArticleDetailBack", "Restoring base snapshot category=${baseSnapshot.category} subcategory=${baseSnapshot.subcategory}")
                                             viewModel.activateBaseReturn()
-                                        } else {
-                                            viewModel.focusArticleOnReturn(article.id)
+                                        } else when {
+                                            targetRoute?.startsWith(AppDestination.Home.route) == true -> viewModel.focusArticleOnReturn(article.id)
+                                            previousRoute?.startsWith(AppDestination.Home.route) == true -> viewModel.focusArticleOnReturn(article.id)
                                         }
-                                        navController.navigateUp()
+
+                                        val popped = navController.popBackStack()
+                                        if (!popped) {
+                                            val fallback = when {
+                                                baseSnapshot != null -> AppDestination.Base.route
+                                                targetRoute != null -> targetRoute
+                                                else -> AppDestination.Home.route
+                                            }
+                                            val fallbackPrefix = fallback.substringBefore("/{")
+                                            val alreadyOnFallback = navController.currentDestination?.route?.startsWith(fallbackPrefix) == true
+                                            if (!alreadyOnFallback) {
+                                                navController.navigate(fallback) {
+                                                    popUpTo(navController.graph.findStartDestination().id) {
+                                                        saveState = true
+                                                    }
+                                                    launchSingleTop = true
+                                                    restoreState = true
+                                                }
+                                            }
+                                        }
+
+                                        viewModel.clearArticleReturnRoute()
                                     }
                                 )
                             }
