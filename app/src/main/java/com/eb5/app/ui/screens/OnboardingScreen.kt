@@ -23,7 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import com.eb5.app.ui.localization.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.eb5.app.R
@@ -62,7 +62,7 @@ fun OnboardingScreen(
                     .menuAnchor(MenuAnchorType.PrimaryEditable, enabled = true)
                     .fillMaxWidth(),
                 readOnly = true,
-                value = stringResource(language.displayName),
+                value = stringResource(language.nativeName),
                 onValueChange = {},
                 label = { Text(stringResource(R.string.label_language)) },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
@@ -73,7 +73,7 @@ fun OnboardingScreen(
             ) {
                 availableLanguages.forEach { option ->
                     androidx.compose.material3.DropdownMenuItem(
-                        text = { Text(text = stringResource(option.displayName)) },
+                        text = { Text(text = stringResource(option.nativeName)) },
                         onClick = {
                             expanded = false
                             onLanguageChanged(option)

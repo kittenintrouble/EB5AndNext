@@ -6,6 +6,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,8 +26,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BookmarkAdd
-import androidx.compose.material.icons.outlined.BookmarkAdded
+import androidx.compose.material.icons.filled.PushPin
+import androidx.compose.material.icons.outlined.PushPin
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
@@ -33,6 +35,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -40,28 +43,42 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
+import com.eb5.app.ui.localization.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.launch
-import com.eb5.app.R
+import android.os.Build
+import java.lang.String.CASE_INSENSITIVE_ORDER
 import java.time.Instant
+import java.time.Duration
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Locale
+import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.eb5.app.R
 
 @Composable
 fun QuizzesRoute(
@@ -89,9 +106,7 @@ fun QuizzesRoute(
         },
         onShowFilters = viewModel::onToggleFilterSheet,
         onToggleFilter = viewModel::onToggleFilterChip,
-        onResetFilters = viewModel::onResetFilters,
-        onCertificateDownload = viewModel::onCertificateDownload,
-        onCertificateShare = viewModel::onCertificateShare
+        onResetFilters = viewModel::onResetFilters
     )
 }
 
@@ -106,9 +121,7 @@ fun QuizzesScreen(
     onOpenTrack: (TrackUi) -> Unit,
     onShowFilters: (Boolean) -> Unit,
     onToggleFilter: (FilterGroup, String) -> Unit,
-    onResetFilters: () -> Unit,
-    onCertificateDownload: (String) -> Unit,
-    onCertificateShare: (String) -> Unit
+    onResetFilters: () -> Unit
 ) {
     val tabs = listOf(QuizzesTab.Tracks, QuizzesTab.All, QuizzesTab.Results)
     val sheetState = rememberModalBottomSheetState()
@@ -139,18 +152,28 @@ fun QuizzesScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .padding(horizontal = 16.dp)
         ) {
-            Spacer(Modifier.height(12.dp))
-            Text(
-                text = stringResource(R.string.quizzes_subheader),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Spacer(Modifier.height(16.dp))
-            val selectedIndex = tabs.indexOf(state.tab)
-            TabRow(selectedTabIndex = selectedIndex) {
+            val selectedIndexLocal = tabs.indexOf(state.tab)
+            TabRow(
+                selectedTabIndex = selectedIndexLocal,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                containerColor = MaterialTheme.colorScheme.surface,
+                indicator = { tabPositions ->
+                    Box(Modifier.fillMaxSize()) {
+                        if (selectedIndexLocal in tabPositions.indices) {
+                            TabRowDefaults.SecondaryIndicator(
+                                modifier = Modifier
+                                    .tabIndicatorOffset(tabPositions[selectedIndexLocal])
+                                    .align(Alignment.BottomCenter),
+                                height = 4.dp
+                            )
+                        }
+                    }
+                },
+                divider = {}
+            ) {
                 tabs.forEachIndexed { index, tab ->
                     val label = when (tab) {
                         QuizzesTab.Tracks -> stringResource(R.string.quizzes_tab_tracks)
@@ -158,31 +181,44 @@ fun QuizzesScreen(
                         QuizzesTab.Results -> stringResource(R.string.quizzes_tab_results)
                     }
                     Tab(
-                        selected = index == selectedIndex,
+                        selected = index == selectedIndexLocal,
                         onClick = { onTabSelected(tab) },
-                        text = { Text(label) }
+                        modifier = Modifier.fillMaxHeight(),
+                        text = { Text(label.uppercase(Locale.getDefault())) }
                     )
                 }
             }
-            Spacer(Modifier.height(24.dp))
-            when (state.tab) {
-                QuizzesTab.Tracks -> TracksTab(
-                    state = state,
-                    onResumeQuiz = onResumeQuiz,
-                    onOpenTrack = onOpenTrack
-                )
-                QuizzesTab.All -> AllQuizzesTab(
-                    state = state,
-                    onShowFilters = onShowFilters,
-                    onToggleFilter = onToggleFilter,
-                    onOpenQuiz = onOpenQuiz,
-                    onSaveToggle = onSaveToggle
-                )
-                QuizzesTab.Results -> ResultsTab(
-                    state = state,
-                    onDownloadCertificate = onCertificateDownload,
-                    onShareCertificate = onCertificateShare
-                )
+            val layoutDirection = LocalLayoutDirection.current
+            val startPadding = padding.calculateStartPadding(layoutDirection)
+            val endPadding = padding.calculateEndPadding(layoutDirection)
+            val bottomPadding = padding.calculateBottomPadding()
+            Spacer(Modifier.height(12.dp))
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+                    .padding(
+                        start = startPadding,
+                        end = endPadding,
+                        bottom = bottomPadding
+                    )
+                    .padding(horizontal = 16.dp)
+            ) {
+                when (state.tab) {
+                    QuizzesTab.Tracks -> TracksTab(
+                        state = state,
+                        onResumeQuiz = onResumeQuiz,
+                        onOpenTrack = onOpenTrack
+                    )
+                    QuizzesTab.All -> AllQuizzesTab(
+                        state = state,
+                        onShowFilters = onShowFilters,
+                        onToggleFilter = onToggleFilter,
+                        onOpenQuiz = onOpenQuiz,
+                        onSaveToggle = onSaveToggle
+                    )
+                    QuizzesTab.Results -> ResultsTab(state = state)
+                }
             }
         }
     }
@@ -261,8 +297,7 @@ private fun ResumeCard(
                 text = stringResource(
                     R.string.quizzes_quiz_meta,
                     quiz.durationMin,
-                    quiz.questionsCount,
-                    quiz.format
+                    quiz.questionsCount
                 ),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -380,14 +415,17 @@ private fun AllQuizzesTab(
             onOpenSheet = { onShowFilters(true) }
         )
         Spacer(Modifier.height(12.dp))
-        if (state.allQuizzes.isEmpty()) {
+        val grouped = state.allQuizzes.takeUnless { it.isEmpty() }
+            ?: state.quizList.groupBy { it.category }
+                .toSortedMap(CASE_INSENSITIVE_ORDER)
+        if (grouped.isEmpty()) {
             EmptyState(text = stringResource(R.string.quizzes_all_empty))
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                state.allQuizzes.entries.forEach { (category, quizzes) ->
+                grouped.entries.forEach { (category, quizzes) ->
                     item(key = "header_$category") {
                         Text(
                             text = category,
@@ -427,23 +465,13 @@ private fun FilterRow(
         OutlinedButton(onClick = onOpenSheet) {
             Text(text = stringResource(R.string.quizzes_filters_button))
         }
-        state.sorts.forEach { chip ->
-            AssistChip(
-                onClick = { onToggle(FilterGroup.Sort, chip.id) },
-                label = { Text(chip.label) },
-                colors = AssistChipDefaults.assistChipColors(
-                    containerColor = if (chip.selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
-                    labelColor = if (chip.selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            )
-        }
         state.goals.forEach {
             AssistChip(
                 onClick = { onToggle(FilterGroup.Goal, it.id) },
                 label = { Text(it.label) },
                 colors = AssistChipDefaults.assistChipColors(
-                    containerColor = if (it.selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
-                    labelColor = if (it.selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+                    containerColor = if (it.selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+                    labelColor = if (it.selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             )
         }
@@ -452,18 +480,8 @@ private fun FilterRow(
                 onClick = { onToggle(FilterGroup.Duration, it.id) },
                 label = { Text(it.label) },
                 colors = AssistChipDefaults.assistChipColors(
-                    containerColor = if (it.selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
-                    labelColor = if (it.selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            )
-        }
-        state.formats.forEach {
-            AssistChip(
-                onClick = { onToggle(FilterGroup.Format, it.id) },
-                label = { Text(it.label) },
-                colors = AssistChipDefaults.assistChipColors(
-                    containerColor = if (it.selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
-                    labelColor = if (it.selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+                    containerColor = if (it.selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+                    labelColor = if (it.selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             )
         }
@@ -472,8 +490,8 @@ private fun FilterRow(
                 onClick = { onToggle(FilterGroup.Level, it.id) },
                 label = { Text(it.label) },
                 colors = AssistChipDefaults.assistChipColors(
-                    containerColor = if (it.selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
-                    labelColor = if (it.selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+                    containerColor = if (it.selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+                    labelColor = if (it.selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             )
         }
@@ -486,10 +504,14 @@ private fun QuizCard(
     onPrimaryClick: (QuizUi) -> Unit,
     onSaveToggle: (String, Boolean) -> Unit
 ) {
+    val isCompleted = quiz.passed || (!quiz.inProgress && (quiz.bestScore != null))
+    val cardModifier = Modifier
+        .fillMaxWidth()
+        .let { if (isCompleted) it.alpha(0.5f) else it }
     Surface(
         shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = Modifier.fillMaxWidth()
+        modifier = cardModifier
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -497,7 +519,11 @@ private fun QuizCard(
         ) {
             Text(quiz.title, style = MaterialTheme.typography.titleMedium, maxLines = 2)
             Text(
-                text = quiz.estimatedDurationLabel,
+                text = stringResource(
+                    R.string.quizzes_quiz_meta,
+                    quiz.durationMin,
+                    quiz.questionsCount
+                ),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -512,12 +538,14 @@ private fun QuizCard(
                     style = MaterialTheme.typography.labelMedium
                 )
                 Spacer(Modifier.weight(1f))
+                val pinTint = if (quiz.isSaved) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                 IconButton(onClick = { onSaveToggle(quiz.id, !quiz.isSaved) }) {
                     Icon(
-                        imageVector = if (quiz.isSaved) Icons.Outlined.BookmarkAdded else Icons.Outlined.BookmarkAdd,
+                        imageVector = if (quiz.isSaved) Icons.Filled.PushPin else Icons.Outlined.PushPin,
                         contentDescription = if (quiz.isSaved) stringResource(R.string.quizzes_saved_toggle_remove) else stringResource(
                             R.string.quizzes_saved_toggle_add
-                        )
+                        ),
+                        tint = pinTint
                     )
                 }
             }
@@ -562,15 +590,20 @@ private fun LevelChip(level: String) {
 }
 
 @Composable
-private fun ResultsTab(
-    state: QuizzesUiState,
-    onDownloadCertificate: (String) -> Unit,
-    onShareCertificate: (String) -> Unit
-) {
+private fun ResultsTab(state: QuizzesUiState) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        val showOverview = state.categoryProgress.isNotEmpty() || state.overallProgress.total > 0
+        if (showOverview) {
+            item {
+                ResultsOverview(
+                    overall = state.overallProgress,
+                    categories = state.categoryProgress
+                )
+            }
+        }
         if (state.results.isEmpty()) {
             item { EmptyState(text = stringResource(R.string.quizzes_results_empty)) }
         } else {
@@ -585,24 +618,145 @@ private fun ResultsTab(
                 ResultCard(attempt)
             }
         }
-        item {
-            Text(
-                text = stringResource(R.string.quizzes_results_certificates),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
-            )
-        }
-        if (state.certificates.isEmpty()) {
-            item { EmptyState(text = stringResource(R.string.quizzes_certificates_empty)) }
-        } else {
-            items(state.certificates, key = { it.trackId }) { certificate ->
-                CertificateCard(
-                    certificate = certificate,
-                    onDownload = { onDownloadCertificate(certificate.trackId) },
-                    onShare = { onShareCertificate(certificate.trackId) }
-                )
+    }
+}
+
+@Composable
+private fun ResultsOverview(
+    overall: OverallQuizProgress,
+    categories: List<CategoryProgressUi>
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        val containerShape = RoundedCornerShape(16.dp)
+        if (overall.total > 0) {
+            val overallPercent = (overall.progressFraction * 100).roundToInt().coerceIn(0, 100)
+            Surface(
+                shape = containerShape,
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                tonalElevation = 2.dp,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Text(
+                        text = stringResource(
+                            R.string.quizzes_results_overall_summary,
+                            overall.completed,
+                            overall.total
+                        ),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        QuizProgressBar(
+                            progress = overall.progressFraction,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Spacer(Modifier.width(12.dp))
+                        Text(
+                            text = "${overallPercent}%",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                    Text(
+                        text = stringResource(R.string.quizzes_results_overall_remaining, overall.remaining),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         }
+        // Removed extra vertical space between overall progress card and first category card
+        // if (overall.total > 0 && categories.isNotEmpty()) {
+        //     Spacer(modifier = Modifier.height(4.dp))
+        // }
+        if (categories.isNotEmpty()) {
+            Surface(
+                shape = containerShape,
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                tonalElevation = 1.dp,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    categories.forEach { category ->
+                        CategoryProgressRow(categoryProgress = category)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CategoryProgressRow(categoryProgress: CategoryProgressUi) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        Text(
+            text = categoryProgress.category,
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Medium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+        val percent = (categoryProgress.progressFraction * 100).roundToInt().coerceIn(0, 100)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = stringResource(
+                    R.string.quizzes_results_category_summary,
+                    categoryProgress.completed,
+                    categoryProgress.total,
+                    categoryProgress.remaining
+                ),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f, fill = true)
+            )
+            Spacer(Modifier.width(12.dp))
+            Text(
+                text = "${percent}%",
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Medium
+            )
+        }
+        QuizProgressBar(
+            progress = categoryProgress.progressFraction
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+    }
+}
+
+@Composable
+private fun QuizProgressBar(
+    progress: Float,
+    modifier: Modifier = Modifier
+) {
+    val clamped = progress.coerceIn(0f, 1f)
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(6.dp)
+            .clip(RoundedCornerShape(3.dp))
+            .background(Color.White)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(clamped)
+                .clip(RoundedCornerShape(3.dp))
+                .background(MaterialTheme.colorScheme.primary)
+        )
     }
 }
 
@@ -618,47 +772,26 @@ private fun ResultCard(summary: AttemptSummary) {
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             Text(summary.title, style = MaterialTheme.typography.titleMedium, maxLines = 2)
-            Text(
-                text = stringResource(R.string.quizzes_attempt_best, summary.bestScore, summary.totalQuestions),
-                style = MaterialTheme.typography.bodyMedium
+            val bestLabel = stringResource(
+                R.string.quizzes_attempt_best,
+                summary.bestScore,
+                summary.totalQuestions
+            )
+            val completedLabel = stringResource(
+                R.string.quizzes_attempt_completed,
+                summary.completedDateLabel()
             )
             Text(
-                text = stringResource(R.string.quizzes_attempt_completed, summary.completedDateLabel()),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-    }
-}
-
-@Composable
-private fun CertificateCard(
-    certificate: CertificateUi,
-    onDownload: () -> Unit,
-    onShare: () -> Unit
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(20.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(certificate.title, style = MaterialTheme.typography.titleMedium, maxLines = 2)
-            Text(
-                text = certificate.completedLabel(),
+                text = buildAnnotatedString {
+                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(bestLabel)
+                    }
+                    append(" ")
+                    append(completedLabel)
+                },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                OutlinedButton(onClick = onDownload) {
-                    Text(text = stringResource(R.string.quizzes_certificate_download))
-                }
-                OutlinedButton(onClick = onShare) {
-                    Text(text = stringResource(R.string.quizzes_certificate_share))
-                }
-            }
         }
     }
 }
@@ -682,15 +815,21 @@ private fun EmptyState(text: String) {
 
 @Composable
 private fun QuizUi.lastAttemptRelative(): String {
-    val now = Instant.now()
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        return ""
+    }
     val attempt = lastAttemptAt ?: return ""
-    val days = java.time.Duration.between(attempt, now).toDays()
+    val days = remember(attempt) {
+        Duration.between(attempt, Instant.now()).toDays()
+    }
     return when {
         days <= 0 -> stringResource(R.string.quizzes_last_attempt_today)
         days < 7 -> stringResource(R.string.quizzes_last_attempt_days, days)
         else -> {
-            val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
-                .withZone(ZoneId.systemDefault())
+            val formatter = remember {
+                DateTimeFormatter.ofPattern("MMM d, yyyy")
+                    .withZone(ZoneId.systemDefault())
+            }
             stringResource(R.string.quizzes_last_attempt_date, formatter.format(attempt))
         }
     }
@@ -714,9 +853,6 @@ private fun FilterSheetContent(
 
         Text(text = stringResource(R.string.quizzes_filter_duration), style = MaterialTheme.typography.titleMedium)
         FlowChipGroup(chips = filters.durations) { onToggle(FilterGroup.Duration, it) }
-
-        Text(text = stringResource(R.string.quizzes_filter_format), style = MaterialTheme.typography.titleMedium)
-        FlowChipGroup(chips = filters.formats) { onToggle(FilterGroup.Format, it) }
 
         Text(text = stringResource(R.string.quizzes_filter_level), style = MaterialTheme.typography.titleMedium)
         FlowChipGroup(chips = filters.levels) { onToggle(FilterGroup.Level, it) }
@@ -747,8 +883,8 @@ private fun FlowChipGroup(
                 onClick = { onToggle(chip.id) },
                 label = { Text(chip.label) },
                 colors = AssistChipDefaults.assistChipColors(
-                    containerColor = if (chip.selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
-                    labelColor = if (chip.selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+                    containerColor = if (chip.selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+                    labelColor = if (chip.selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             )
         }

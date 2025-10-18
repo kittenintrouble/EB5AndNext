@@ -8,19 +8,10 @@ import kotlin.math.ceil
 
 enum class QuizzesTab { Tracks, All, Results }
 
-enum class QuizSortOption {
-    Recommended,
-    InProgressFirst,
-    Newest,
-    Difficulty
-}
-
 data class QuizFilters(
     val goals: Set<String> = emptySet(),
     val duration: IntRange? = null,
-    val formats: Set<String> = emptySet(),
-    val levels: Set<String> = emptySet(),
-    val sort: QuizSortOption = QuizSortOption.Recommended
+    val levels: Set<String> = emptySet()
 )
 
 data class QuizUi(
@@ -45,9 +36,6 @@ data class QuizUi(
             "H" -> "Advanced"
             else -> level
         }
-
-    val estimatedDurationLabel: String
-        get() = "${durationMin} min · ${questionsCount} Q · $format"
 
     fun ctaLabel(): String = when {
         inProgress -> "Resume"
@@ -113,16 +101,23 @@ data class AttemptSummary(
     }
 }
 
-data class CertificateUi(
-    val trackId: String,
-    val title: String,
-    val completedAt: Instant
+data class OverallQuizProgress(
+    val completed: Int = 0,
+    val total: Int = 0
 ) {
-    fun completedLabel(): String {
-        val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
-            .withZone(ZoneId.systemDefault())
-        return formatter.format(completedAt)
-    }
+    val remaining: Int get() = (total - completed).coerceAtLeast(0)
+    val progressFraction: Float
+        get() = if (total == 0) 0f else (completed.toFloat() / total).coerceIn(0f, 1f)
+}
+
+data class CategoryProgressUi(
+    val category: String,
+    val completed: Int,
+    val total: Int
+) {
+    val remaining: Int get() = (total - completed).coerceAtLeast(0)
+    val progressFraction: Float
+        get() = if (total == 0) 0f else (completed.toFloat() / total).coerceIn(0f, 1f)
 }
 
 data class QuizzesUiState(
@@ -130,24 +125,23 @@ data class QuizzesUiState(
     val resumeQuizzes: List<QuizUi> = emptyList(),
     val tracks: List<TrackUi> = emptyList(),
     val allQuizzes: Map<String, List<QuizUi>> = emptyMap(),
+    val quizList: List<QuizUi> = emptyList(),
     val filters: QuizFilters = QuizFilters(),
     val filterChips: QuizFilterUi = QuizFilterUi(),
     val results: List<AttemptSummary> = emptyList(),
-    val certificates: List<CertificateUi> = emptyList(),
+    val categoryProgress: List<CategoryProgressUi> = emptyList(),
+    val overallProgress: OverallQuizProgress = OverallQuizProgress(),
     val isFilterSheetVisible: Boolean = false
 ) {
     val hasResume: Boolean get() = resumeQuizzes.isNotEmpty()
     val hasTracks: Boolean get() = tracks.isNotEmpty()
     val hasResults: Boolean get() = results.isNotEmpty()
-    val hasCertificates: Boolean get() = certificates.isNotEmpty()
 }
 
 data class QuizFilterUi(
     val goals: List<FilterChipState> = emptyList(),
     val durations: List<FilterChipState> = emptyList(),
-    val formats: List<FilterChipState> = emptyList(),
-    val levels: List<FilterChipState> = emptyList(),
-    val sorts: List<FilterChipState> = emptyList()
+    val levels: List<FilterChipState> = emptyList()
 )
 
 data class FilterChipState(

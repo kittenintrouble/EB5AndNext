@@ -1,9 +1,9 @@
 package com.eb5.app.ui.screens
 
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -12,18 +12,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.ErrorOutline
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,19 +30,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import com.eb5.app.ui.localization.stringResource
 import com.eb5.app.R
 import com.eb5.app.data.model.ArticleBlock
+import com.eb5.app.data.model.AppLanguage
 import com.eb5.app.data.model.NewsArticle
 import com.eb5.app.ui.news.NewsDetailUiState
+import com.eb5.app.ui.components.DetailTopBar
+import com.eb5.app.ui.theme.LocalAppLanguage
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.Locale
 
 @Composable
@@ -129,115 +133,96 @@ private fun ArticleContent(
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val publishedLabel = remember(article.publishedAt) { formatPublishedDate(article.publishedAt) }
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 0.dp, bottom = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+    val appLanguage = LocalAppLanguage.current
+    val publishedLabel = remember(article.publishedAt, appLanguage) { formatPublishedDate(article.publishedAt, appLanguage) }
+    Column(
+        modifier = modifier.fillMaxSize()
     ) {
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 0.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    modifier = Modifier.clickable { onBack() },
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                        contentDescription = stringResource(R.string.action_back),
-                        modifier = Modifier.size(32.dp)
+        DetailTopBar(
+            isFavorite = isFavorite,
+            onToggleFavorite = onToggleFavorite,
+            onBack = onBack,
+            favoriteEnabled = !isLoading,
+            favoriteOnContentDescription = R.string.article_remove_favorite,
+            favoriteOffContentDescription = R.string.article_add_favorite
+        )
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(
+                        text = article.title,
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = stringResource(R.string.action_back),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = onToggleFavorite, enabled = !isLoading) {
-                    Icon(
-                        imageVector = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
-                        contentDescription = stringResource(
-                            if (isFavorite) R.string.article_remove_favorite else R.string.article_add_favorite
-                        )
+                        text = publishedLabel,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(24.dp))
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(
-                    text = article.title,
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = publishedLabel,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+            article.heroImage?.let { hero ->
+                item {
+                    Card(shape = MaterialTheme.shapes.large) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(hero.url)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = hero.alt,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        if (!hero.caption.isNullOrBlank()) {
+                            Text(
+                                text = hero.caption,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                                    .padding(12.dp)
+                            )
+                        }
+                    }
+                }
             }
-        }
-        article.heroImage?.let { hero ->
-            item {
-                Card(shape = MaterialTheme.shapes.large) {
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(hero.url)
-                            .crossfade(true)
-                            .build(),
-                        contentDescription = hero.alt,
-                        modifier = Modifier.fillMaxWidth()
+            if (!article.shortDescription.isNullOrBlank()) {
+                item {
+                    Text(
+                        text = article.shortDescription,
+                        style = MaterialTheme.typography.bodyLarge
                     )
-                    if (!hero.caption.isNullOrBlank()) {
-                        Text(
-                            text = hero.caption,
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.surfaceVariant)
-                                .padding(12.dp)
-                        )
+                }
+            }
+            items(article.article) { block ->
+                ArticleBlockView(block = block)
+            }
+            article.meta?.let { meta ->
+                item {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        meta.author?.takeIf { it.isNotBlank() }?.let {
+                            Text(
+                                text = stringResource(R.string.news_author, it),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        meta.source?.takeIf { it.isNotBlank() }?.let {
+                            Text(
+                                text = stringResource(R.string.news_source, it),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                     }
                 }
             }
+            item { Spacer(modifier = Modifier.height(24.dp)) }
         }
-        if (!article.shortDescription.isNullOrBlank()) {
-            item {
-                Text(
-                    text = article.shortDescription,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-        }
-        items(article.article) { block ->
-            ArticleBlockView(block = block)
-        }
-        article.meta?.let { meta ->
-            item {
-                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    meta.author?.takeIf { it.isNotBlank() }?.let {
-                        Text(
-                            text = stringResource(R.string.news_author, it),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                    meta.source?.takeIf { it.isNotBlank() }?.let {
-                        Text(
-                            text = stringResource(R.string.news_source, it),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-            }
-        }
-        item { Spacer(modifier = Modifier.height(24.dp)) }
     }
 }
 
@@ -251,6 +236,18 @@ private fun ArticleBlockView(block: ArticleBlock) {
                     1 -> MaterialTheme.typography.headlineSmall
                     2 -> MaterialTheme.typography.titleLarge
                     else -> MaterialTheme.typography.titleMedium
+                },
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+
+        "subheading" -> {
+            Text(
+                text = block.text.orEmpty(),
+                style = when (block.level) {
+                    1 -> MaterialTheme.typography.titleLarge
+                    2 -> MaterialTheme.typography.titleMedium
+                    else -> MaterialTheme.typography.titleSmall
                 },
                 fontWeight = FontWeight.SemiBold
             )
@@ -309,6 +306,10 @@ private fun ArticleBlockView(block: ArticleBlock) {
             }
         }
 
+        "callout" -> {
+            CalloutBlock(block = block)
+        }
+
         "list" -> {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 block.items.orEmpty().forEach { item ->
@@ -346,6 +347,84 @@ private fun ArticleBlockView(block: ArticleBlock) {
 }
 
 @Composable
+private fun CalloutBlock(block: ArticleBlock) {
+    val variant = block.variant?.lowercase(Locale.getDefault()) ?: "info"
+    val colorScheme = MaterialTheme.colorScheme
+    val style = when (variant) {
+        "success" -> CalloutStyle(
+            containerColor = colorScheme.tertiaryContainer,
+            contentColor = colorScheme.onTertiaryContainer,
+            accentColor = colorScheme.tertiary,
+            icon = Icons.Outlined.CheckCircle
+        )
+
+        "warning" -> CalloutStyle(
+            containerColor = colorScheme.secondaryContainer,
+            contentColor = colorScheme.onSecondaryContainer,
+            accentColor = colorScheme.secondary,
+            icon = Icons.Outlined.Warning
+        )
+
+        "danger", "error" -> CalloutStyle(
+            containerColor = colorScheme.errorContainer,
+            contentColor = colorScheme.onErrorContainer,
+            accentColor = colorScheme.error,
+            icon = Icons.Outlined.ErrorOutline
+        )
+
+        else -> CalloutStyle(
+            containerColor = colorScheme.primaryContainer,
+            contentColor = colorScheme.onPrimaryContainer,
+            accentColor = colorScheme.primary,
+            icon = Icons.Outlined.Info
+        )
+    }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = style.containerColor),
+        border = BorderStroke(1.dp, style.accentColor)
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.Top
+        ) {
+            Icon(
+                imageVector = style.icon,
+                contentDescription = null,
+                tint = style.accentColor,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                block.title?.takeIf { it.isNotBlank() }?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = style.contentColor,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+                block.text?.takeIf { it.isNotBlank() }?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = style.contentColor
+                    )
+                }
+            }
+        }
+    }
+}
+
+private data class CalloutStyle(
+    val containerColor: Color,
+    val contentColor: Color,
+    val accentColor: Color,
+    val icon: ImageVector
+)
+
+@Composable
 private fun RowWithCells(values: List<String>, header: Boolean) {
     androidx.compose.foundation.layout.Row(
         modifier = Modifier
@@ -368,10 +447,11 @@ private fun RowWithCells(values: List<String>, header: Boolean) {
     }
 }
 
-private fun formatPublishedDate(raw: String): String {
+private fun formatPublishedDate(raw: String, language: AppLanguage): String {
     return runCatching {
         val parsed = OffsetDateTime.parse(raw)
-        val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.getDefault())
-        formatter.format(parsed)
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+            .withLocale(Locale.forLanguageTag(language.tag))
+            .format(parsed)
     }.getOrElse { raw }
 }

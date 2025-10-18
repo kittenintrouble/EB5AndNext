@@ -21,15 +21,22 @@ sealed class AppDestination(val route: String) {
     }
     data object Progress : AppDestination("progress")
     data object Projects : AppDestination("projects")
-    data object Settings : AppDestination("settings")
     data object ArticleDetail : AppDestination("articleDetail/{articleId}") {
         fun routeWithId(articleId: Int) = "articleDetail/$articleId"
     }
-    data object QuizRunner : AppDestination("quizRunner/{quizId}") {
-        fun routeWithId(quizId: String) = "quizRunner/$quizId"
+    data object QuizRunner : AppDestination("quizRunner/{quizId}?trackId={trackId}") {
+        fun routeWithId(quizId: String, trackId: String? = null): String {
+            val base = "quizRunner/$quizId"
+            val encodedTrack = trackId?.takeIf { it.isNotBlank() }?.let { Uri.encode(it) }
+            return encodedTrack?.let { "$base?trackId=$it" } ?: base
+        }
     }
-    data object QuizResult : AppDestination("quizResult/{quizId}/{score}") {
-        fun routeWithScore(quizId: String, score: Int) = "quizResult/$quizId/$score"
+    data object QuizResult : AppDestination("quizResult/{quizId}/{score}?trackId={trackId}") {
+        fun routeWithScore(quizId: String, score: Int, trackId: String? = null): String {
+            val base = "quizResult/$quizId/$score"
+            val encodedTrack = trackId?.takeIf { it.isNotBlank() }?.let { Uri.encode(it) }
+            return encodedTrack?.let { "$base?trackId=$it" } ?: base
+        }
     }
     data object ProjectDetail : AppDestination("projectDetail/{projectId}?lang={lang}") {
         fun routeWithId(projectId: String, language: String? = null): String {

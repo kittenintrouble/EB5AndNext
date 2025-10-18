@@ -10,6 +10,12 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.eb5.app.data.model.AppLanguage
 import com.eb5.app.data.model.ArticleStatus
 import com.eb5.app.data.model.QuizProgress
+import com.eb5.app.data.model.QuizAttemptRecord
+import com.eb5.app.data.model.QuizInProgressState
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -18,6 +24,9 @@ private const val FAVORITE_PREFIX = "favorite:"
 private const val QUIZ_BEST_PREFIX = "quiz:bestScore:"
 private const val QUIZ_LAST_ATTEMPT_PREFIX = "quiz:lastAttempt:"
 private const val QUIZ_LAST_SCORE_PREFIX = "quiz:lastScore:"
+private const val QUIZ_ATTEMPTS_KEY = "quiz:attempts"
+private const val QUIZ_PROGRESS_STATE_KEY = "quiz:progress"
+private const val QUIZ_SAVED_PREFIX = "quiz:saved:"
 
 class UserPreferencesRepository(
     private val dataStore: DataStore<Preferences>
@@ -30,13 +39,21 @@ class UserPreferencesRepository(
         val favorites: Set<Int> = emptySet(),
         val newsFavorites: Set<String> = emptySet(),
         val projectFavorites: Set<String> = emptySet(),
-        val quizProgress: Map<String, QuizProgress> = emptyMap()
+        val quizProgress: Map<String, QuizProgress> = emptyMap(),
+        val savedQuizzes: Set<String> = emptySet(),
+        val quizAttempts: List<QuizAttemptRecord> = emptyList(),
+        val quizInProgressStates: Map<String, QuizInProgressState> = emptyMap()
     )
 
     private val languageKey = stringPreferencesKey("language")
     private val onboardingKey = booleanPreferencesKey("onboardingCompleted")
     private val newsFavoritePrefix = "newsFavorite:"
     private val projectFavoritePrefix = "projectFavorite:"
+    private val quizAttemptsPrefKey = stringPreferencesKey(QUIZ_ATTEMPTS_KEY)
+    private val quizProgressPrefKey = stringPreferencesKey(QUIZ_PROGRESS_STATE_KEY)
+    private val json = Json { ignoreUnknownKeys = true }
+    private val attemptListSerializer = ListSerializer(QuizAttemptRecord.serializer())
+    private val progressListSerializer = ListSerializer(QuizInProgressState.serializer())
 
     val snapshot: Flow<Snapshot> = dataStore.data.map { preferences ->
         val language = AppLanguage.fromTag(preferences[languageKey])
@@ -46,6 +63,7 @@ class UserPreferencesRepository(
         val newsFavorites = mutableSetOf<String>()
         val projectFavorites = mutableSetOf<String>()
         val quizProgress = mutableMapOf<String, QuizProgress>()
+        val savedQuizzes = mutableSetOf<String>()
 
         preferences.asMap().forEach { (key, value) ->
             when {
@@ -82,8 +100,23 @@ class UserPreferencesRepository(
                     val lastAttempt = preferences[longPreferencesKey(QUIZ_LAST_ATTEMPT_PREFIX + id)] ?: 0L
                     quizProgress[id] = QuizProgress(bestScore, lastScore, lastAttempt)
                 }
+                key.name.startsWith(QUIZ_SAVED_PREFIX) -> {
+                    val id = key.name.removePrefix(QUIZ_SAVED_PREFIX)
+                    val saved = value as? Boolean ?: false
+                    if (saved && id.isNotBlank()) {
+                        savedQuizzes.add(id)
+                    }
+                }
             }
         }
+
+        val attempts = preferences[quizAttemptsPrefKey]?.let { raw ->
+            runCatching { json.decodeFromString(attemptListSerializer, raw) }.getOrDefault(emptyList())
+        } ?: emptyList()
+        val progressStatesList = preferences[quizProgressPrefKey]?.let { raw ->
+            runCatching { json.decodeFromString(progressListSerializer, raw) }.getOrDefault(emptyList())
+        } ?: emptyList()
+        val progressStates = progressStatesList.associateBy { it.quizId }
 
         Snapshot(
             language = language,
@@ -92,7 +125,10 @@ class UserPreferencesRepository(
             favorites = favorites,
             newsFavorites = newsFavorites,
             projectFavorites = projectFavorites,
-            quizProgress = quizProgress
+            quizProgress = quizProgress,
+            savedQuizzes = savedQuizzes,
+            quizAttempts = attempts,
+            quizInProgressStates = progressStates
         )
     }
 
@@ -150,4 +186,49 @@ class UserPreferencesRepository(
             preferences[timestampKey] = timestamp
         }
     }
+
+    suspend fun toggleQuizSaved(quizId: String) {
+        dataStore.edit { preferences ->
+            val key = booleanPreferencesKey(QUIZ_SAVED_PREFIX + quizId)
+            val current = preferences[key] ?: false
+            preferences[key] = !current
+        }
+    }
+
+    suspend fun setQuizSaved(quizId: String, saved: Boolean) {
+        dataStore.edit { preferences ->
+            val key = booleanPreferencesKey(QUIZ_SAVED_PREFIX + quizId)
+            preferences[key] = saved
+        }
+    }
+
+    suspend fun appendQuizAttempt(record: QuizAttemptRecord, maxEntries: Int = 50) {
+        dataStore.edit { preferences ->
+            val current = preferences[quizAttemptsPrefKey]?.let { raw ->
+                runCatching { json.decodeFromString(attemptListSerializer, raw) }.getOrDefault(emptyList())
+            } ?: emptyList()
+            val updated = (current + record).takeLast(maxEntries)
+            preferences[quizAttemptsPrefKey] = json.encodeToString(attemptListSerializer, updated)
+        }
+    }
+
+    suspend fun updateQuizInProgress(quizId: String, state: QuizInProgressState?) {
+        dataStore.edit { preferences ->
+            val current = preferences[quizProgressPrefKey]?.let { raw ->
+                runCatching { json.decodeFromString(progressListSerializer, raw) }.getOrDefault(emptyList())
+            } ?: emptyList()
+            val mutable = current.associateBy { it.quizId }.toMutableMap()
+            if (state == null) {
+                mutable.remove(quizId)
+            } else {
+                mutable[quizId] = state
+            }
+            if (mutable.isEmpty()) {
+                preferences.remove(quizProgressPrefKey)
+            } else {
+                preferences[quizProgressPrefKey] = json.encodeToString(progressListSerializer, mutable.values.toList())
+            }
+        }
+    }
+
 }

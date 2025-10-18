@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -42,13 +41,10 @@ import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import kotlinx.coroutines.launch
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.AttachMoney
 import androidx.compose.material.icons.outlined.Badge
 import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.material.icons.outlined.Event
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Gavel
 import androidx.compose.material.icons.outlined.Map
 import androidx.compose.material.icons.outlined.Place
@@ -59,7 +55,6 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -68,6 +63,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -86,7 +82,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import com.eb5.app.ui.localization.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -104,6 +100,7 @@ import com.eb5.app.ui.projects.projectTypeLabel
 import com.eb5.app.data.model.Project
 import com.eb5.app.data.model.ProjectImage
 import com.eb5.app.ui.projects.ProjectDetailUiState
+import com.eb5.app.ui.components.DetailTopBar
 import java.text.NumberFormat
 import java.time.Instant
 import java.time.OffsetDateTime
@@ -174,34 +171,13 @@ private fun ProjectDetailContent(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Row(
-                modifier = Modifier.clickable { onBack() },
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                    contentDescription = stringResource(R.string.action_back),
-                    modifier = Modifier.size(32.dp)
-                )
-                Text(
-                    text = stringResource(R.string.action_back),
-                    style = MaterialTheme.typography.headlineSmall
-                )
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            IconButton(onClick = onToggleFavorite) {
-                val icon = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder
-                val cd = if (isFavorite) R.string.project_remove_favorite else R.string.project_add_favorite
-                Icon(imageVector = icon, contentDescription = stringResource(cd))
-            }
-        }
+        DetailTopBar(
+            isFavorite = isFavorite,
+            onToggleFavorite = onToggleFavorite,
+            onBack = onBack,
+            favoriteOnContentDescription = R.string.project_remove_favorite,
+            favoriteOffContentDescription = R.string.project_add_favorite
+        )
 
         Box(
             modifier = Modifier
@@ -659,7 +635,7 @@ private fun ProjectDetailContent(
                         },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = visaExpanded) },
                         modifier = Modifier
-                            .menuAnchor()
+                            .menuAnchor(MenuAnchorType.PrimaryEditable, enabled = !submitting)
                             .fillMaxWidth()
                             .bringIntoViewRequester(reqVisa),
                         colors = ExposedDropdownMenuDefaults.textFieldColors()

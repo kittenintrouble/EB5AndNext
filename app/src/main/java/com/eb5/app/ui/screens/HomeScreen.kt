@@ -9,8 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -18,13 +21,25 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.Surface
+import androidx.compose.material3.MenuAnchorType
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.Alignment
+import com.eb5.app.ui.localization.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,19 +53,27 @@ import androidx.compose.ui.res.painterResource
 import com.eb5.app.R
 import com.eb5.app.data.model.Article
 import com.eb5.app.data.model.ArticleStatus
+import com.eb5.app.data.model.AppLanguage
 import com.eb5.app.data.model.Project
 import com.eb5.app.data.model.NewsArticle
 import java.text.NumberFormat
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.Locale
+
+import com.eb5.app.ui.theme.LocalAppLanguage
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    language: AppLanguage,
+    availableLanguages: List<AppLanguage>,
+    onLanguageChanged: (AppLanguage) -> Unit,
     articles: List<Article>,
     articleStatuses: Map<Int, ArticleStatus>,
     favorites: Set<Int>,
@@ -64,7 +87,8 @@ fun HomeScreen(
     onOpenNews: (NewsArticle) -> Unit,
     onToggleNewsFavorite: (String) -> Unit,
     onOpenProject: (Project) -> Unit,
-    onToggleProjectFavorite: (String) -> Unit
+    onToggleProjectFavorite: (String) -> Unit,
+    homeResetToken: Int
 ) {
     val completedArticles = articleStatuses.count { it.value == ArticleStatus.COMPLETED }
     val favoriteArticles = remember(articles, favorites) {
@@ -75,8 +99,10 @@ fun HomeScreen(
         news.filter { newsFavorites.contains(it.id) }
     }
     val context = LocalContext.current
-    val newsDateFormatter = remember {
-        DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.getDefault())
+    val appLanguage = LocalAppLanguage.current
+    val newsDateFormatter = remember(appLanguage) {
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+            .withLocale(Locale.forLanguageTag(appLanguage.tag))
     }
     val favoriteProjects = remember(projects, projectFavorites) {
         projects.filter { projectFavorites.contains(it.id) }
@@ -84,19 +110,69 @@ fun HomeScreen(
     val currencyFormatter = remember {
         NumberFormat.getCurrencyInstance(Locale.US)
     }
+    var languageMenuExpanded by remember { mutableStateOf(false) }
+    var selectedLanguage by remember(language) { mutableStateOf(language) }
+    val listState = rememberLazyListState()
 
+    LaunchedEffect(homeResetToken) {
+        listState.scrollToItem(0)
+    }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp),
+        state = listState,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            Text(
-                text = stringResource(R.string.home_greeting),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(R.string.home_header_title),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(1f)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ExposedDropdownMenuBox(
+                    expanded = languageMenuExpanded,
+                    onExpandedChange = { languageMenuExpanded = !languageMenuExpanded }
+                ) {
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .widthIn(max = 220.dp)
+                            .menuAnchor(MenuAnchorType.PrimaryEditable, enabled = true),
+                        value = stringResource(selectedLanguage.nativeName),
+                        onValueChange = {},
+                        readOnly = true,
+                        label = { Text(text = stringResource(R.string.label_language)) },
+                        leadingIcon = {
+                            Text(text = flagForLanguage(selectedLanguage))
+                        },
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageMenuExpanded) }
+                    )
+                    DropdownMenu(
+                        expanded = languageMenuExpanded,
+                        onDismissRequest = { languageMenuExpanded = false },
+                        modifier = Modifier.exposedDropdownSize()
+                    ) {
+                        availableLanguages.forEach { option ->
+                            DropdownMenuItem(
+                                leadingIcon = { Text(text = flagForLanguage(option)) },
+                                text = { Text(text = stringResource(option.nativeName)) },
+                                onClick = {
+                                    languageMenuExpanded = false
+                                    selectedLanguage = option
+                                    onLanguageChanged(option)
+                                }
+                            )
+                        }
+                    }
+                }
+            }
         }
         item {
             Card(modifier = Modifier.fillMaxWidth()) {
@@ -208,7 +284,7 @@ fun HomeScreen(
                             .padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        val publishedLabel = remember(news.id, news.publishedAt) {
+                        val publishedLabel = remember(news.id, news.publishedAt, appLanguage) {
                             runCatching {
                                 val parsed = OffsetDateTime.parse(news.publishedAt)
                                 newsDateFormatter.format(parsed)
@@ -398,3 +474,11 @@ private fun HomeProjectBadge(text: String) {
         )
     }
 }
+
+private fun flagForLanguage(language: AppLanguage): String =
+    when (language) {
+        AppLanguage.EN -> "\uD83C\uDDFA\uD83C\uDDF8" // 🇺🇸
+        AppLanguage.ZH -> "\uD83C\uDDE8\uD83C\uDDF3" // 🇨🇳
+        AppLanguage.VI -> "\uD83C\uDDFB\uD83C\uDDF3" // 🇻🇳
+        AppLanguage.KO -> "\uD83C\uDDF0\uD83C\uDDF7" // 🇰🇷
+    }

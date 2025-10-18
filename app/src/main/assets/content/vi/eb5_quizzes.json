@@ -1,34 +1,855 @@
-[
-  {
-    "termId": 1,
-    "title": "Kiểm tra kiến thức cơ bản",
-    "questions": [
-      {
-        "question": "Nhà đầu tư EB-5 phải tạo tối thiểu bao nhiêu việc làm toàn thời gian?",
-        "options": ["5 việc làm", "10 việc làm", "15 việc làm", "20 việc làm"],
-        "correctAnswerIndex": 1
+{
+  "tracks": [
+    {
+      "id": "track_foundations_ready",
+      "title": "Sẵn sàng nền tảng EB-5",
+      "description": "Xây dựng nền tảng vững chắc về mục tiêu chương trình, nguồn vốn hợp lệ và chỉ số tạo việc làm trước khi phân tích hồ sơ dự án.",
+      "quizIds": [
+        "quiz_program_foundations",
+        "quiz_investment_thresholds",
+        "quiz_job_creation_models"
+      ],
+      "estimatedDurationMinutes": 18,
+      "goalTag": "deal_ready",
+      "category": "Nền tảng",
+      "unlock": {
+        "minimumArticlesCompleted": 1,
+        "categoryRequirements": [
+          {
+            "category": "Nền tảng",
+            "minCompleted": 1
+          }
+        ]
       },
-      {
-        "question": "Giấy tờ nào cấp thẻ xanh có điều kiện sau khi hồ sơ EB-5 được chấp thuận?",
-        "options": ["Mẫu I-829", "Mẫu I-526E", "Thẻ xanh", "Giấy phép lao động"],
-        "correctAnswerIndex": 2
+      "certificate": {
+        "accentColor": "#0B5FFF",
+        "secondaryColor": "#EEF4FF",
+        "backgroundGradient": [
+          "#F5FAFF",
+          "#E5F0FF"
+        ],
+        "signatureLabel": "Giám đốc chương trình",
+        "signatureName": "Alex Morgan"
       }
-    ]
-  },
-  {
-    "termId": 2,
-    "title": "Mô hình đầu tư",
-    "questions": [
-      {
-        "question": "Đặc điểm nổi bật của dự án trung tâm vùng là gì?",
-        "options": ["Nhà đầu tư tự quản lý hoạt động hằng ngày", "Có thể tính việc làm gián tiếp", "Vốn tối thiểu 500.000 USD", "Chỉ áp dụng cho sản xuất"],
-        "correctAnswerIndex": 1
+    },
+    {
+      "id": "track_structures_capital",
+      "title": "Phân tích sâu cấu trúc vốn",
+      "description": "So sánh mô hình trực tiếp và trung tâm vùng, phân tích vị thế vốn chủ - vốn vay và đọc cấu trúc vốn như một chuyên gia.",
+      "quizIds": [
+        "quiz_direct_vs_regional",
+        "quiz_equity_vs_debt",
+        "quiz_capital_stack_controls"
+      ],
+      "estimatedDurationMinutes": 21,
+      "goalTag": "deal_ready",
+      "category": "Đầu tư",
+      "unlock": {
+        "minimumArticlesCompleted": 3,
+        "categoryRequirements": [
+          {
+            "category": "Đầu tư",
+            "minCompleted": 2
+          }
+        ]
       },
-      {
-        "question": "Đầu tư EB-5 trực tiếp được mô tả đúng nhất bởi lựa chọn nào?",
-        "options": ["Nhà đầu tư tham gia quỹ hợp vốn", "Nhà đầu tư mua trái phiếu chính phủ Mỹ", "Nhà đầu tư trực tiếp điều hành doanh nghiệp", "Nhà đầu tư chọn quỹ chỉ số"],
-        "correctAnswerIndex": 2
+      "certificate": {
+        "accentColor": "#8247FF",
+        "secondaryColor": "#F0E8FF",
+        "backgroundGradient": [
+          "#F9F5FF",
+          "#ECE3FF"
+        ],
+        "signatureLabel": "Trưởng bộ phận thị trường vốn",
+        "signatureName": "Priya Desai"
       }
-    ]
-  }
-]
+    },
+    {
+      "id": "track_source_of_funds",
+      "title": "Làm chủ nguồn vốn",
+      "description": "Ghi nhận nguồn gốc hợp pháp, giữ dòng tiền minh bạch và xử lý hồ sơ tài chính nhiều lớp một cách tự tin.",
+      "quizIds": [
+        "quiz_source_of_funds_basics",
+        "quiz_source_of_funds_documentation",
+        "quiz_source_of_funds_complex_paths"
+      ],
+      "estimatedDurationMinutes": 24,
+      "goalTag": "source_funds",
+      "category": "Đầu tư",
+      "unlock": {
+        "minimumArticlesCompleted": 4,
+        "categoryRequirements": [
+          {
+            "category": "Đầu tư",
+            "minCompleted": 3
+          }
+        ]
+      },
+      "certificate": {
+        "accentColor": "#0C8576",
+        "secondaryColor": "#E3F4F1",
+        "backgroundGradient": [
+          "#F3FFFC",
+          "#DEF2EC"
+        ],
+        "signatureLabel": "Trưởng bộ phận tuân thủ",
+        "signatureName": "Mia Chen"
+      }
+    },
+    {
+      "id": "track_immigration_compliance",
+      "title": "Luồng tuân thủ & nhập cư",
+      "description": "Theo sát yêu cầu duy trì rủi ro, nghĩa vụ quản trị và mọi mốc hồ sơ để việc phê duyệt I-829 diễn ra suôn sẻ.",
+      "quizIds": [
+        "quiz_at_risk_rules",
+        "quiz_governance_fund_admin",
+        "quiz_petition_process_mastery"
+      ],
+      "estimatedDurationMinutes": 22,
+      "goalTag": "immigration",
+      "category": "Quy trình nhập cư & pháp lý",
+      "unlock": {
+        "minimumArticlesCompleted": 5,
+        "categoryRequirements": [
+          {
+            "category": "Quy trình nhập cư & pháp lý",
+            "minCompleted": 2
+          },
+          {
+            "category": "Quản trị rủi ro",
+            "minCompleted": 2
+          }
+        ]
+      },
+      "certificate": {
+        "accentColor": "#FF6B4A",
+        "secondaryColor": "#FFE8E1",
+        "backgroundGradient": [
+          "#FFF5F2",
+          "#FFE2D9"
+        ],
+        "signatureLabel": "Giám đốc pháp lý",
+        "signatureName": "Jordan Reyes"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "quiz_program_foundations",
+      "termId": 1,
+      "title": "Mục tiêu & tiến trình chương trình",
+      "summary": "Xác nhận cách khoản đầu tư EB-5 mang lại việc làm, thẻ xanh có điều kiện và khoảng thời gian gỡ bỏ điều kiện.",
+      "category": "Nền tảng",
+      "subcategory": "Giới thiệu",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Multi",
+      "level": "L",
+      "durationMinutes": 6,
+      "recommendedArticles": [
+        1,
+        3,
+        4
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "overview",
+        "timeline"
+      ],
+      "questions": [
+        {
+          "question": "Mục tiêu chính sách cốt lõi của chương trình EB-5 là gì?",
+          "options": [
+            "Thúc đẩy tăng trưởng kinh tế Hoa Kỳ thông qua đầu tư tạo việc làm",
+            "Cấp khoản hỗ trợ cho chính quyền bang và địa phương",
+            "Tài trợ trái phiếu Bộ Tài chính Hoa Kỳ bằng vốn nước ngoài",
+            "Đảm bảo lợi nhuận cố định cho nhà đầu tư nhập cư"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Sau khi I-526E được chấp thuận, thẻ xanh có điều kiện thường được cấp trong bao lâu?",
+          "options": [
+            "2 năm",
+            "6 tháng",
+            "5 năm",
+            "10 năm"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Nhà đầu tư EB-5 phải nộp mẫu I-829 khi nào để gỡ điều kiện thẻ xanh?",
+          "options": [
+            "Trong 90 ngày ngay trước khi thẻ xanh có điều kiện hết hạn",
+            "Trong vòng 30 ngày sau khi nhập cảnh Hoa Kỳ",
+            "Chỉ sau khi dự án phân phối hết lợi nhuận",
+            "Đồng thời với hồ sơ I-526E"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_investment_thresholds",
+      "termId": 8,
+      "title": "Mức đầu tư tối thiểu & duy trì",
+      "summary": "Ôn lại mức vốn tối thiểu, quy tắc duy trì và ý nghĩa thực sự của yêu cầu \"at risk\" đối với vốn EB-5.",
+      "category": "Nền tảng",
+      "subcategory": "Tiêu chí USCIS",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Quick Check",
+      "level": "L",
+      "durationMinutes": 5,
+      "recommendedArticles": [
+        5,
+        6,
+        7
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "thresholds",
+        "sustainment"
+      ],
+      "questions": [
+        {
+          "question": "Mức đầu tư tối thiểu hiện tại cho dự án tại khu vực TEA là bao nhiêu?",
+          "options": [
+            "$800,000",
+            "$500,000",
+            "$900,000",
+            "$1,050,000"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Theo Đạo luật Cải cách và Liêm chính, mức đầu tư tối thiểu cho dự án ngoài TEA là bao nhiêu?",
+          "options": [
+            "$1,050,000",
+            "$800,000",
+            "$750,000",
+            "$650,000"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Phát biểu nào mô tả đúng yêu cầu vốn \"at risk\" của EB-5?",
+          "options": [
+            "Vốn phải có khả năng sinh lời hoặc thua lỗ trong suốt giai đoạn duy trì mà không có bảo đảm hợp đồng",
+            "Có thể rút vốn ngay khi công trình hoàn thành",
+            "Vốn được xem là at risk nếu gửi tại bất kỳ ngân hàng Mỹ nào",
+            "Vốn có thể được bảo lãnh bởi chủ đầu tư nếu trả lãi"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_job_creation_models",
+      "termId": 3,
+      "title": "Cẩm nang tạo việc làm",
+      "summary": "Phân biệt việc làm trực tiếp, gián tiếp, lan tỏa và đáp ứng yêu cầu chứng cứ của USCIS.",
+      "category": "Nền tảng",
+      "subcategory": "Tiêu chí USCIS",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "compliance"
+      ],
+      "format": "Scenario",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        3,
+        9,
+        10
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "job_creation",
+        "economics"
+      ],
+      "questions": [
+        {
+          "question": "Những vị trí nào được tính việc làm trong dự án EB-5 trực tiếp?",
+          "options": [
+            "Nhân viên toàn thời gian W-2 do doanh nghiệp thương mại mới tuyển dụng",
+            "Nhà thầu độc lập làm việc thời vụ",
+            "Việc làm tạo ra bên ngoài Hoa Kỳ bởi công ty liên kết nước ngoài",
+            "Bất kỳ vị trí nào do mô hình kinh tế dự báo"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Dự án EB-5 trung tâm vùng có thể tính việc làm gián tiếp như thế nào?",
+          "options": [
+            "Bằng cách sử dụng mô hình kinh tế được chấp nhận để chuyển chi tiêu dự án thành đơn vị việc làm",
+            "Bằng cách trực tiếp tuyển thêm lao động bán thời gian",
+            "Bằng cách tính các việc làm do nhà thầu phụ ở nước ngoài tạo ra",
+            "Bằng cách bảo đảm số lượng việc làm cố định trong hợp đồng vay"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "USCIS kỳ vọng thời hạn tạo việc làm EB-5 như thế nào?",
+          "options": [
+            "Việc làm cần được tạo trong khoảng hai năm kể từ khi nhà đầu tư trở thành thường trú nhân có điều kiện, chỉ gia hạn hạn chế khi có lý do chính đáng",
+            "Việc làm phải được tạo trong vòng sáu tháng kể từ khi nộp I-526E",
+            "Việc làm có thể tạo bất cứ lúc nào trước khi dự án hoàn trả khoản vay EB-5",
+            "Việc làm chỉ cần dự báo mà không cần xác minh"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_direct_vs_regional",
+      "termId": 2,
+      "title": "Mô hình trực tiếp so với trung tâm vùng",
+      "summary": "Đối chiếu trách nhiệm nhà đầu tư, cách tính việc làm và quyền kiểm soát vận hành giữa dự án trực tiếp và trung tâm vùng.",
+      "category": "Đầu tư",
+      "subcategory": "Mô hình đầu tư",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Scenario",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        2,
+        15,
+        18
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "direct",
+        "regional_center"
+      ],
+      "questions": [
+        {
+          "question": "Đặc điểm nổi bật của mô hình EB-5 trực tiếp là gì?",
+          "options": [
+            "Nhà đầu tư trực tiếp tham gia quản lý doanh nghiệp mới",
+            "Nhà đầu tư góp vốn thông qua trung tâm vùng được liên bang phê duyệt",
+            "Việc làm gián tiếp tự động được tính mà không cần chứng cứ",
+            "Bên quản lý thứ ba đảm nhiệm toàn bộ vận hành"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Ưu điểm nào là riêng có của mô hình trung tâm vùng EB-5?",
+          "options": [
+            "Khả năng gom vốn và tính cả việc làm gián tiếp lẫn lan tỏa",
+            "Mức đầu tư tối thiểu thấp hơn dự án TEA",
+            "Được miễn báo cáo hàng năm cho USCIS",
+            "Điều khoản hoàn vốn được trung tâm bảo đảm"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Tình huống nào mô tả đúng nhất dự án EB-5 trực tiếp?",
+          "options": [
+            "Nhà đầu tư tự mở và quản lý một nhà hàng nhượng quyền, tuyển dụng nhân sự mới",
+            "Chủ đầu tư khách sạn huy động vốn thông qua quỹ cho vay của trung tâm vùng",
+            "Quỹ đầu tư mua trái phiếu đô thị để tài trợ hạ tầng công",
+            "Quỹ đầu tư mạo hiểm phân bổ vốn EB-5 cho nhiều startup"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_equity_vs_debt",
+      "termId": 24,
+      "title": "Vị thế vốn chủ và vốn vay",
+      "summary": "Đánh giá sự khác biệt về lợi suất, tài sản bảo đảm và thứ tự hoàn vốn giữa sản phẩm EB-5 vốn chủ và vốn vay.",
+      "category": "Đầu tư",
+      "subcategory": "Đầu tư rủi ro",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "risk"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        22,
+        23,
+        26
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "capital_stack",
+        "returns"
+      ],
+      "questions": [
+        {
+          "question": "Nhà đầu tư EB-5 vốn chủ thường thu lợi bằng cách nào?",
+          "options": [
+            "Thông qua phần lợi nhuận còn lại sau khi trả nợ cấp cao",
+            "Thông qua lãi suất cố định được chủ đầu tư bảo đảm",
+            "Thông qua tín dụng thuế của chính phủ",
+            "Thông qua trợ cấp hàng năm từ USCIS"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Đặc điểm nào gắn liền nhất với sản phẩm EB-5 vốn vay?",
+          "options": [
+            "Lịch trả nợ cố định kèm tài sản thế chấp",
+            "Quyền biểu quyết mọi quyết định dự án",
+            "Tiềm năng lợi nhuận không giới hạn gắn với hiệu quả dự án",
+            "Không có giám sát bởi bên thứ ba"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Lợi thế nào của cấu trúc vốn đa dạng gồm nợ cấp cao, nợ EB-5 và vốn chủ đầu tư?",
+          "options": [
+            "Phân bổ rủi ro qua nhiều tầng và cân bằng lợi ích giữa các bên liên quan",
+            "Tự động bảo đảm phần vốn EB-5 được hoàn trả đầu tiên",
+            "Loại bỏ nhu cầu phân tích tác động kinh tế",
+            "Loại bỏ việc USCIS rà soát hồ sơ chào bán"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_capital_stack_controls",
+      "termId": 41,
+      "title": "Kiểm soát cấu trúc vốn",
+      "summary": "Giải mã điều khoản của chủ nợ cấp cao, theo dõi giải ngân xây dựng và nhận diện việc dùng vốn cầu nối lành mạnh.",
+      "category": "Đầu tư",
+      "subcategory": "Nguồn vốn",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "risk"
+      ],
+      "format": "Case Study",
+      "level": "H",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        32,
+        35,
+        37
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "bridge",
+        "monitoring"
+      ],
+      "questions": [
+        {
+          "question": "Trong cấu trúc vốn EB-5, chủ nợ xây dựng cấp cao nắm quyền gì?",
+          "options": [
+            "Quyền ưu tiên số một trên dòng tiền và tài sản bảo đảm",
+            "Ưu tiên ngang hàng với vốn chủ đầu tư",
+            "Quyền đòi nợ xếp sau nhà đầu tư EB-5",
+            "Chỉ đóng vai trò bảo lãnh, không có tài sản thế chấp"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Vì sao các chủ nợ chuyên nghiệp yêu cầu giám sát xây dựng độc lập?",
+          "options": [
+            "Để đối chiếu ngân sách, tiến độ và các yêu cầu giải ngân với thực tế",
+            "Để đảm bảo dự án hoàn thành trước tiến độ",
+            "Để thay thế quản lý hiện trường của chủ đầu tư",
+            "Để tiếp thị dự án tới nhà đầu tư cá nhân"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Vốn cầu nối thường được dùng như thế nào trong dự án EB-5?",
+          "options": [
+            "Để khởi công khi việc huy động EB-5 vẫn đang diễn ra",
+            "Để trả phí luật sư di trú cho nhà đầu tư",
+            "Để chi trả khoản nợ doanh nghiệp không liên quan",
+            "Để bảo đảm lợi suất cố định cho nhà đầu tư EB-5"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_basics",
+      "termId": 52,
+      "title": "Kiến thức nền tảng về nguồn vốn",
+      "summary": "Đặt nền tảng cho câu chuyện nguồn vốn hợp pháp, bao gồm tặng cho, tích lũy lương và lợi nhuận giữ lại.",
+      "category": "Đầu tư",
+      "subcategory": "Nguồn vốn",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "compliance"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        52,
+        53,
+        55
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "source_of_funds",
+        "documentation"
+      ],
+      "questions": [
+        {
+          "question": "Yêu cầu cốt lõi để chứng minh nguồn vốn EB-5 hợp pháp là gì?",
+          "options": [
+            "Cung cấp hồ sơ chứng từ liên kết dòng tiền với hoạt động hợp pháp",
+            "Xin thư công chứng từ bất kỳ ngân hàng nào",
+            "Để trung tâm vùng xác nhận nguồn tiền",
+            "Xuất trình dấu nhập cảnh trên hộ chiếu"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Khi vốn EB-5 là tiền tặng cho, thường cần những giấy tờ nào?",
+          "options": [
+            "Hợp đồng tặng cho và hồ sơ tài chính chứng minh nguồn tiền hợp pháp của người tặng",
+            "Chỉ cần xác nhận miệng từ người tặng",
+            "Một văn bản từ trung tâm vùng",
+            "Bằng chứng tiền tặng được chuyển bằng tiền mã hóa"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Cách chứng minh khoản tiết kiệm từ lương dài hạn cho mục đích EB-5?",
+          "options": [
+            "Cung cấp hợp đồng lao động, bảng lương và sao kê ngân hàng thể hiện quá trình tiết kiệm",
+            "Nộp bản tường trình cá nhân không kèm chứng cứ",
+            "Chuyển tiền qua nhiều công ty vỏ bọc",
+            "Gửi tiền mặt mà không giải trình"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_documentation",
+      "termId": 60,
+      "title": "Chứng từ dòng tiền",
+      "summary": "Theo dõi mọi giao dịch bằng sao kê ngân hàng, chứng từ quy đổi và hồ sơ thuế đáp ứng chuẩn RIA.",
+      "category": "Đầu tư",
+      "subcategory": "Nguồn vốn",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "compliance"
+      ],
+      "format": "Timeline",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        60,
+        61,
+        63
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "path_of_funds",
+        "currency"
+      ],
+      "questions": [
+        {
+          "question": "Chứng cứ nào thể hiện tốt nhất dòng tiền vào tài khoản ký quỹ EB-5?",
+          "options": [
+            "Chuỗi sao kê ngân hàng thể hiện từng giao dịch từ nguồn gốc tới tài khoản ký quỹ",
+            "Bảng tính tự lập không có xác nhận ngân hàng",
+            "Thư của luật sư không kèm tài liệu",
+            "Chỉ có phiếu rút tiền mặt"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Thông lệ tốt nhất khi quy đổi ngoại tệ để đầu tư EB-5 là gì?",
+          "options": [
+            "Lưu lại chứng từ ngân hàng chính thức và ghi rõ tỷ giá sử dụng",
+            "Dựa vào thỏa thuận miệng với người đổi tiền",
+            "Nộp tiền mặt trực tiếp mà không có chứng từ đổi ngoại tệ",
+            "Chờ tới giai đoạn I-829 mới chứng minh việc quy đổi"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Nhà đầu tư cần chứng minh tuân thủ thuế liên quan đến vốn EB-5 như thế nào?",
+          "options": [
+            "Nộp tờ khai thuế đã nộp hoặc giấy xác nhận hoàn thành nghĩa vụ thuế cho nguồn tiền",
+            "Chỉ nộp bảng tính cá nhân chưa kiểm toán",
+            "Yêu cầu trung tâm vùng xác nhận tình trạng thuế",
+            "Tránh cung cấp hồ sơ thuế cho USCIS"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_complex_paths",
+      "termId": 68,
+      "title": "Chiến lược nguồn vốn phức tạp",
+      "summary": "Xử lý bán tài sản, vay thế chấp và đóng góp từ gia đình nhiều tầng mà vẫn giữ chuỗi chứng cứ.",
+      "category": "Đầu tư",
+      "subcategory": "Nguồn vốn",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "risk"
+      ],
+      "format": "Case Study",
+      "level": "H",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        68,
+        69,
+        70
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "loans",
+        "property_sale"
+      ],
+      "questions": [
+        {
+          "question": "Cần những giấy tờ gì khi dùng tiền bán bất động sản để đầu tư EB-5?",
+          "options": [
+            "Hợp đồng mua bán, giấy chứng nhận, chứng từ hoàn tất và chứng minh đã nộp thuế giao dịch",
+            "Chỉ cần thư của bên mua",
+            "Bản thẩm định chung không có chứng cứ bán hàng",
+            "Lời xác nhận miệng của chủ đầu tư"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Khoản vay cá nhân cần điều kiện gì để được chấp nhận làm vốn EB-5?",
+          "options": [
+            "Phải được bảo đảm bằng tài sản của nhà đầu tư kèm hợp đồng vay đã ký",
+            "Phải là khoản vay không bảo đảm do dự án đứng ra cam kết",
+            "Phải do chính phủ nước ngoài cấp",
+            "Phải mệnh giá bằng USD"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Nhà đầu tư nên trình bày nguồn vốn nhiều tầng như thế nào?",
+          "options": [
+            "Chuẩn bị bản mô tả theo dòng thời gian kèm chứng cứ cho từng lớp vốn",
+            "Chỉ nộp một bản tường trình tổng hợp không kèm chứng cứ",
+            "Gộp toàn bộ vốn thành tiền mặt trước khi lập hồ sơ",
+            "Chỉ dựa vào báo cáo tuân thủ của trung tâm vùng"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_at_risk_rules",
+      "termId": 85,
+      "title": "Hàng rào vốn duy trì rủi ro",
+      "summary": "Đảm bảo tái đầu tư, cam kết và chính sách dự phòng phù hợp chuẩn Integrity Act.",
+      "category": "Quản trị rủi ro",
+      "subcategory": "Rủi ro đầu tư EB-5",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "compliance",
+        "risk"
+      ],
+      "format": "Scenario",
+      "level": "H",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        85,
+        86,
+        88
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "at_risk",
+        "redeployment"
+      ],
+      "questions": [
+        {
+          "question": "Vì sao việc bảo đảm mua lại vốn EB-5 vi phạm yêu cầu at risk?",
+          "options": [
+            "Vì điều đó loại bỏ khả năng lời hoặc lỗ gắn với hiệu quả dự án",
+            "Vì USCIS cấm mọi chiến lược thoái vốn",
+            "Vì chỉ được bảo đảm sau khi I-829 được chấp thuận",
+            "Vì ngăn nhà đầu tư nhận lãi"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Nếu vốn EB-5 được hoàn trả trước khi hết thời gian duy trì thì cần làm gì?",
+          "options": [
+            "Phải tái đầu tư vào một hoạt động at risk đủ điều kiện khác",
+            "Phải giữ tiền trong tài khoản ký quỹ tới khi I-829 được chấp thuận",
+            "Phải hoàn lại vốn cho nhà đầu tư trong 30 ngày",
+            "Có thể chuyển tiền vào tài khoản cá nhân của chủ đầu tư"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Phương án tái đầu tư nào phù hợp nhất với hướng dẫn của USCIS?",
+          "options": [
+            "Tái đầu tư vào doanh nghiệp thương mại khác có mức rủi ro và khả năng tạo việc làm tương tự",
+            "Mua chứng khoán thị trường thụ động có lợi suất đảm bảo",
+            "Giữ tiền mặt trong tài khoản không sinh lãi",
+            "Cho vay sang hoạt động bên lề không liên quan của chủ đầu tư"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_governance_fund_admin",
+      "termId": 93,
+      "title": "Quản trị & quản lý quỹ",
+      "summary": "Đánh giá hệ sinh thái giám sát gồm quản trị viên độc lập, báo cáo kiểm toán và công bố cho nhà đầu tư.",
+      "category": "Quản trị rủi ro",
+      "subcategory": "Bảo vệ pháp lý & tài chính",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "compliance",
+        "risk"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        90,
+        93,
+        95
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "governance",
+        "fund_admin"
+      ],
+      "questions": [
+        {
+          "question": "Lợi ích chính khi thuê đơn vị quản trị quỹ độc lập là gì?",
+          "options": [
+            "Mang lại sự giám sát của bên thứ ba đối với giải ngân và ghi chép",
+            "Quảng bá dự án tới đại lý nước ngoài",
+            "Bảo đảm lợi nhuận cho nhà đầu tư",
+            "Xóa bỏ nhu cầu báo cáo tài chính"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Những thông tin nào phải có trong hợp đồng góp vốn EB-5?",
+          "options": [
+            "Chi tiết kế hoạch sử dụng vốn, biểu phí và cơ chế thoái vốn",
+            "Ý kiến cá nhân về xu hướng thị trường",
+            "Lời chứng thực chưa kiểm chứng của nhà đầu tư cũ",
+            "Chỉ có bản thiết kế dự án"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Theo thông lệ tốt, nhà đầu tư nên nhận báo cáo dự án với tần suất nào?",
+          "options": [
+            "Theo lịch cố định (ví dụ hàng quý) với cập nhật về xây dựng, chi tiêu và việc làm",
+            "Chỉ một lần khi nộp I-829",
+            "Bất cứ khi nào chủ đầu tư có tin quảng bá",
+            "Báo cáo là tùy chọn sau khi I-526E được duyệt"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_petition_process_mastery",
+      "termId": 110,
+      "title": "Làm chủ hồ sơ nhập cư",
+      "summary": "Nắm rõ trình tự từ I-526E tới I-829 và chọn đường xử lý phù hợp cho từng gia đình.",
+      "category": "Quy trình nhập cư & pháp lý",
+      "subcategory": "Quy trình nộp đơn EB-5",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "immigration",
+        "deal_ready"
+      ],
+      "format": "Timeline",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        101,
+        105,
+        109
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "petition",
+        "family"
+      ],
+      "questions": [
+        {
+          "question": "Chu trình nào mô tả chính xác quy trình EB-5?",
+          "options": [
+            "I-526E được chấp thuận → cấp visa hoặc điều chỉnh tình trạng → thường trú nhân có điều kiện → xét I-829",
+            "Phỏng vấn lãnh sự → I-829 → I-526E → thường trú nhân có điều kiện",
+            "I-829 → thẻ xanh vĩnh viễn → I-526E → cấp visa",
+            "Thường trú có điều kiện → I-526E → cấp visa → I-829"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Khi nào có thể điều chỉnh tình trạng thay vì phỏng vấn lãnh sự?",
+          "options": [
+            "Khi nhà đầu tư hiện diện hợp pháp tại Hoa Kỳ và có số visa định cư khả dụng",
+            "Khi nhà đầu tư muốn tránh việc di chuyển",
+            "Chỉ sau khi nộp I-829",
+            "Khi nhà đầu tư giữ visa du lịch và chưa nộp I-526E"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "Thành viên gia đình nào được đi kèm cùng nhà đầu tư EB-5 chính?",
+          "options": [
+            "Vợ/chồng và con chưa kết hôn dưới 21 tuổi",
+            "Cha mẹ của nhà đầu tư chính",
+            "Con đã kết hôn mọi lứa tuổi",
+            "Bất kỳ họ hàng nào được liệt kê trong kế hoạch kinh doanh"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    }
+  ]
+}

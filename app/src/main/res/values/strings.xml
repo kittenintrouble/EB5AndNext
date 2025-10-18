@@ -4,13 +4,18 @@
     <string name="language_chinese">中文</string>
     <string name="language_vietnamese">Tiếng Việt</string>
     <string name="language_korean">한국어</string>
+    <string name="language_native_english" translatable="false">English</string>
+    <string name="language_native_chinese" translatable="false">中文</string>
+    <string name="language_native_vietnamese" translatable="false">Tiếng Việt</string>
+    <string name="language_native_korean" translatable="false">한국어</string>
+
+    <string name="home_header_title">EB-5 HUB</string>
 
     <string name="onboarding_welcome">Welcome to the EB-5 Guide</string>
     <string name="onboarding_description">Choose your preferred language to personalize articles, quizzes, and projects instantly.</string>
     <string name="label_language">Language</string>
     <string name="action_continue">Continue</string>
     <string name="action_back">Back</string>
-    <string name="action_close">Close</string>
     <string name="action_open">Open</string>
     <string name="action_uncompleted">Mark uncompleted</string>
     <string name="action_mark_completed">Mark completed</string>
@@ -20,7 +25,6 @@
     <string name="title_quizzes">Quizzes</string>
     <string name="title_progress">EB-5 News</string>
     <string name="title_projects">Projects</string>
-    <string name="title_settings">Settings</string>
     <string name="title_article_detail">Article Detail</string>
     <string name="title_quiz_runner">Quiz</string>
     <string name="title_quiz_result">Quiz Result</string>
@@ -32,7 +36,6 @@
     <string name="tab_progress">News</string>
     <string name="tab_projects">Projects</string>
 
-    <string name="cd_open_settings">Open settings</string>
 
     <string name="home_greeting">Your EB-5 learning hub</string>
     <string name="home_articles_title">Articles</string>
@@ -105,7 +108,7 @@
     <string name="quizzes_tracks_empty">No tracks available yet.</string>
     <string name="quizzes_resume_empty">You have no quizzes in progress.</string>
     <string name="quizzes_track_duration">%1$d min · %2$d quizzes</string>
-    <string name="quizzes_quiz_meta">⏱ %1$d min · %2$d Q · %3$s</string>
+    <string name="quizzes_quiz_meta">⏱ %1$d min · %2$d Q</string>
     <string name="quizzes_cta_start_track">Start track</string>
     <string name="quizzes_cta_continue_track">Continue</string>
     <string name="quizzes_cta_view_track">View track</string>
@@ -114,9 +117,7 @@
     <string name="quizzes_cta_retake">Retake</string>
     <string name="quizzes_filter_goal">Goal</string>
     <string name="quizzes_filter_duration">Duration</string>
-    <string name="quizzes_filter_format">Format</string>
     <string name="quizzes_filter_level">Level</string>
-    <string name="quizzes_filter_sort">Sort</string>
     <string name="quizzes_filters_button">Filters</string>
     <string name="quizzes_filter_duration_short">≤5 min</string>
     <string name="quizzes_filter_duration_medium">6–10 min</string>
@@ -125,9 +126,10 @@
     <string name="quizzes_filter_apply">Apply filters</string>
     <string name="quizzes_all_empty">No quizzes match filters. Reset filters.</string>
     <string name="quizzes_results_history">History</string>
-    <string name="quizzes_results_certificates">Certificates</string>
     <string name="quizzes_results_empty">No quiz results yet.</string>
-    <string name="quizzes_certificates_empty">Complete a track to unlock certificates.</string>
+    <string name="quizzes_results_overall_summary">%1$d of %2$d quizzes passed</string>
+    <string name="quizzes_results_overall_remaining">Remaining: %1$d</string>
+    <string name="quizzes_results_category_summary">%1$d of %2$d passed · %3$d remaining</string>
     <string name="quizzes_last_attempt_today">Last attempt: today</string>
     <string name="quizzes_last_attempt_days">Last attempt: %1$d days ago</string>
     <string name="quizzes_last_attempt_date">Last attempt: %1$s</string>
@@ -138,10 +140,11 @@
     <string name="quizzes_level_advanced">Advanced</string>
     <string name="quizzes_saved_toggle_add">Save quiz</string>
     <string name="quizzes_saved_toggle_remove">Remove from saved</string>
-    <string name="quizzes_certificate_download">Download</string>
-    <string name="quizzes_certificate_share">Share</string>
     <string name="quizzes_attempt_best">%1$d/%2$d</string>
     <string name="quizzes_attempt_completed">Completed on %1$s</string>
+    <string name="quiz_track_progress">%1$d of %2$d quizzes completed</string>
+    <string name="quiz_track_quiz_meta">%1$d questions · approx. %2$d min</string>
+    <string name="quiz_track_empty">No quizzes available for this track yet.</string>
 
     <string name="project_location">Location: %1$s</string>
     <string name="project_category">Type: %1$s</string>
@@ -217,8 +220,6 @@
     <string name="common_invalid_email">Invalid email address</string>
     <string name="common_invalid_phone">Invalid phone number</string>
 
-    <string name="settings_language_title">Language</string>
-    <string name="settings_version">App version %1$s</string>
 
     <string name="progress_articles_title">Article progress</string>
     <string name="progress_articles_total">Total articles: %1$d</string>

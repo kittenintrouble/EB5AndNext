@@ -1,45 +1,78 @@
 package com.eb5.app.ui.quizzes
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.eb5.app.data.model.QuizCatalog
+import com.eb5.app.data.model.QuizProgress
+import com.eb5.app.data.model.QuizTopic
+import com.eb5.app.data.model.QuizTrack
+import com.eb5.app.data.model.QuizAttemptRecord
+import com.eb5.app.data.model.QuizInProgressState
+import com.eb5.app.ui.AppUiState
 import com.eb5.app.ui.quizzes.QuizzesTab.All
-import com.eb5.app.ui.quizzes.QuizzesTab.Results
 import com.eb5.app.ui.quizzes.QuizzesTab.Tracks
+import java.time.Instant
+import java.lang.String.CASE_INSENSITIVE_ORDER
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import java.time.Instant
-
-private const val KEY_TAB = "quizzes_tab"
+import kotlinx.coroutines.launch
 
 class QuizzesViewModel(
-    private val savedStateHandle: SavedStateHandle
+    private val appState: StateFlow<AppUiState>,
+    private val setQuizSaved: (String, Boolean) -> Unit
 ) : ViewModel() {
-
-    private val sampleQuizzes = buildSampleQuizzes()
-    private val sampleTracks = buildSampleTracks()
-    private val sampleResults = buildSampleResults()
-    private val sampleCertificates = buildSampleCertificates()
 
     private val _state = MutableStateFlow(
         QuizzesUiState(
-            tab = savedStateHandle.get<String>(KEY_TAB)?.let { runCatching { QuizzesTab.valueOf(it) }.getOrNull() }
-                ?: Tracks,
-            resumeQuizzes = sampleQuizzes.filter { it.inProgress },
-            tracks = sampleTracks,
-            allQuizzes = sampleQuizzes.groupBy { it.category },
+            tab = Tracks,
             filters = QuizFilters(),
-            filterChips = buildFilterChips(),
-            results = sampleResults,
-            certificates = sampleCertificates
+            filterChips = buildFilterChips()
         )
     )
     val state: StateFlow<QuizzesUiState> = _state.asStateFlow()
 
+    private val seedCatalog = QuizSeedData.defaultCatalog()
+    private var latestCatalog: QuizCatalog = seedCatalog
+    private var latestQuizzes: List<QuizUi> = emptyList()
+    private var quizProgress: Map<String, QuizProgress> = emptyMap()
+    private var savedQuizzes: Set<String> = emptySet()
+    private var questionCountByQuizId: Map<String, Int> = seedCatalog.quizzes.associate { it.id to it.questions.size }
+    private var quizAttempts: List<QuizAttemptRecord> = emptyList()
+    private var quizInProgressStates: Map<String, QuizInProgressState> = emptyMap()
+    private var usingSeed = true
+
+    init {
+        rebuildContent()
+        applySnapshot(appState.value)
+        viewModelScope.launch {
+            appState.collect { app -> applySnapshot(app) }
+        }
+    }
+
+    private fun applySnapshot(app: AppUiState) {
+        val incoming = app.quizCatalog
+        if (incoming.quizzes.isNotEmpty()) {
+            latestCatalog = incoming
+            usingSeed = false
+        } else if (usingSeed) {
+            latestCatalog = seedCatalog
+        }
+        quizProgress = app.quizProgress
+        savedQuizzes = app.savedQuizzes
+        questionCountByQuizId = latestCatalog.quizzes.associate { it.id to it.questions.size }
+        quizAttempts = app.quizAttempts
+        quizInProgressStates = app.quizInProgress
+        runCatching { rebuildContent() }
+            .onFailure { throwable ->
+                logEvent("quizzes_rebuild_error", mapOf("error" to throwable.message))
+                throwable.printStackTrace()
+            }
+    }
+
     fun onTabSelected(tab: QuizzesTab) {
         if (tab == _state.value.tab) return
-        savedStateHandle[KEY_TAB] = tab.name
         _state.update { it.copy(tab = tab) }
         logEvent("quizzes_tab_view", mapOf("tab" to tab.name))
     }
@@ -47,6 +80,7 @@ class QuizzesViewModel(
     fun onToggleFilterChip(group: FilterGroup, chipId: String) {
         when (group) {
             FilterGroup.Goal -> toggleSetChip(group, chipId)
+            FilterGroup.Level -> toggleSetChip(group, chipId)
             FilterGroup.Duration -> toggleChipExclusive(chipId) { id ->
                 when (id) {
                     "duration_short" -> 0..5
@@ -55,30 +89,33 @@ class QuizzesViewModel(
                     else -> null
                 }
             }
-            FilterGroup.Format -> toggleSetChip(group, chipId)
-            FilterGroup.Level -> toggleSetChip(group, chipId)
-            FilterGroup.Sort -> toggleSort(chipId)
         }
         logEvent("quizzes_filter_apply", mapOf("filters" to _state.value.filters))
     }
 
     fun onResetFilters() {
+        val chips = buildFilterChips()
         _state.update {
+            val filters = QuizFilters()
             it.copy(
-                filters = QuizFilters(),
-                filterChips = buildFilterChips()
+                filters = filters,
+                filterChips = chips,
+                allQuizzes = groupedWithFallback(filters),
+                quizList = latestQuizzes
             )
         }
     }
 
     fun onSavedToggle(quizId: String, isSaved: Boolean) {
-        val updated = sampleQuizzes.map {
+        setQuizSaved(quizId, isSaved)
+        latestQuizzes = latestQuizzes.map {
             if (it.id == quizId) it.copy(isSaved = isSaved) else it
         }
-        _state.update {
-            it.copy(
-                resumeQuizzes = updated.filter { quiz -> quiz.inProgress },
-                allQuizzes = updated.groupBy { quiz -> quiz.category }
+        _state.update { current ->
+            current.copy(
+                resumeQuizzes = latestQuizzes.filter { quiz -> quiz.inProgress },
+                allQuizzes = groupedWithFallback(current.filters),
+                quizList = latestQuizzes
             )
         }
     }
@@ -99,36 +136,152 @@ class QuizzesViewModel(
         _state.update { it.copy(isFilterSheetVisible = show) }
     }
 
-    fun onCertificateDownload(trackId: String) {
-        logEvent("results_certificate_download", mapOf("trackId" to trackId))
+    private fun rebuildContent() {
+        if (latestCatalog.quizzes.isEmpty()) {
+            latestCatalog = seedCatalog
+            questionCountByQuizId = latestCatalog.quizzes.associate { it.id to it.questions.size }
+        }
+        latestQuizzes = latestCatalog.quizzes.map { topic ->
+            topic.toQuizUi()
+        }
+        val currentFilters = _state.value.filters
+        val resume = latestQuizzes
+            .filter { it.inProgress }
+            .sortedByDescending { it.lastAttemptAt ?: Instant.MIN }
+        val tracks = buildTracks()
+        val results = buildResults()
+        val (overallProgress, categoryProgress) = buildProgressOverview()
+        _state.update {
+            it.copy(
+                resumeQuizzes = resume,
+                tracks = tracks,
+                allQuizzes = groupedWithFallback(currentFilters),
+                quizList = latestQuizzes,
+                results = results,
+                overallProgress = overallProgress,
+                categoryProgress = categoryProgress
+            )
+        }
     }
 
-    fun onCertificateShare(trackId: String) {
-        logEvent("results_certificate_share", mapOf("trackId" to trackId))
+    private fun buildTracks(): List<TrackUi> {
+        if (latestCatalog.tracks.isEmpty()) return emptyList()
+        val quizById = latestCatalog.quizzes.associateBy { it.id }
+        return latestCatalog.tracks.mapNotNull { track ->
+            val topics = track.quizIds.mapNotNull { id -> quizById[id] }
+            if (topics.isEmpty()) return@mapNotNull null
+            val completed = track.quizIds.count { id ->
+                val required = questionCountByQuizId[id] ?: return@count false
+                (quizProgress[id]?.bestScore ?: 0) >= required
+            }
+            val estimatedDuration = track.estimatedDurationMinutes.takeIf { it > 0 }
+                ?: topics.sumOf { it.durationMinutes }
+            TrackUi(
+                id = track.id,
+                title = track.title,
+                description = track.description,
+                quizIds = track.quizIds,
+                estimatedDurationMin = estimatedDuration,
+                completed = completed,
+                total = track.quizIds.size,
+                certificateAvailable = completed >= track.quizIds.size
+            )
+        }
+    }
+
+    private fun buildResults(): List<AttemptSummary> {
+        if (quizAttempts.isEmpty()) return emptyList()
+        val quizById = latestCatalog.quizzes.associateBy { it.id }
+        return quizAttempts.mapNotNull { record ->
+            val quiz = quizById[record.quizId] ?: return@mapNotNull null
+            AttemptSummary(
+                id = record.id,
+                title = quiz.title,
+                quizId = record.quizId,
+                trackId = record.trackId,
+                bestScore = record.score,
+                totalQuestions = record.totalQuestions,
+                level = record.level,
+                durationMin = record.durationMinutes,
+                completedAt = Instant.ofEpochMilli(record.completedAt)
+            )
+        }.sortedByDescending { it.completedAt }
+    }
+
+    private fun buildProgressOverview(): Pair<OverallQuizProgress, List<CategoryProgressUi>> {
+        if (latestQuizzes.isEmpty()) return OverallQuizProgress() to emptyList()
+        val grouped = latestQuizzes.groupBy { it.category }
+        val categoryProgress = grouped.keys
+            .sortedWith(CASE_INSENSITIVE_ORDER)
+            .map { category ->
+                val quizzes = grouped[category].orEmpty()
+                val completed = quizzes.count { quiz ->
+                    val required = questionCountByQuizId[quiz.id] ?: quiz.questionsCount
+                    val bestScore = quizProgress[quiz.id]?.bestScore ?: 0
+                    required > 0 && bestScore >= required
+                }
+                CategoryProgressUi(
+                    category = category,
+                    completed = completed,
+                    total = quizzes.size
+                )
+            }
+        val overallCompleted = categoryProgress.sumOf { it.completed }
+        val overall = OverallQuizProgress(
+            completed = overallCompleted,
+            total = latestQuizzes.size
+        )
+        return overall to categoryProgress
+    }
+
+    private fun applyFilters(
+        quizzes: List<QuizUi>,
+        filters: QuizFilters
+    ): Map<String, List<QuizUi>> {
+        var result = quizzes
+        val goalTags = filters.goals.mapNotNull(::goalTagForChip).toSet()
+        if (goalTags.isNotEmpty()) {
+            result = result.filter { quiz -> quiz.tags.any { it in goalTags } }
+        }
+        filters.duration?.let { range ->
+            result = result.filter { quiz -> quiz.durationMin in range }
+        }
+        val levels = filters.levels.mapNotNull(::levelForChip).toSet()
+        if (levels.isNotEmpty()) {
+            result = result.filter { quiz -> quiz.level.uppercase() in levels }
+        }
+        result = result.sortedWith(recommendedComparator())
+        return groupByCategory(result)
     }
 
     private fun toggleSetChip(group: FilterGroup, chipId: String) {
         _state.update { state ->
             val filters = state.filters
-            val updatedFilters = when (group) {
-                FilterGroup.Goal -> filters.copy(goals = filters.goals.toggle(chipId))
-                FilterGroup.Format -> filters.copy(formats = filters.formats.toggle(chipId))
-                FilterGroup.Level -> filters.copy(levels = filters.levels.toggle(chipId))
-                else -> filters
+            val (updatedFilters, updatedChips) = when (group) {
+                FilterGroup.Goal -> {
+                    val newSet = toggleExclusive(filters.goals, chipId)
+                    filters.copy(goals = newSet) to state.filterChips.copy(
+                        goals = state.filterChips.goals.map { chip ->
+                            chip.copy(selected = chip.id == chipId && newSet.isNotEmpty())
+                        }
+                    )
+                }
+                FilterGroup.Level -> {
+                    val newSet = toggleExclusive(filters.levels, chipId)
+                    filters.copy(levels = newSet) to state.filterChips.copy(
+                        levels = state.filterChips.levels.map { chip ->
+                            chip.copy(selected = chip.id == chipId && newSet.isNotEmpty())
+                        }
+                    )
+                }
+                else -> filters to state.filterChips
             }
-            val updatedChips = when (group) {
-                FilterGroup.Goal -> state.filterChips.copy(
-                    goals = state.filterChips.goals.updateSelection(chipId, updatedFilters.goals)
-                )
-                FilterGroup.Format -> state.filterChips.copy(
-                    formats = state.filterChips.formats.updateSelection(chipId, updatedFilters.formats)
-                )
-                FilterGroup.Level -> state.filterChips.copy(
-                    levels = state.filterChips.levels.updateSelection(chipId, updatedFilters.levels)
-                )
-                else -> state.filterChips
-            }
-            state.copy(filters = updatedFilters, filterChips = updatedChips)
+            state.copy(
+                filters = updatedFilters,
+                filterChips = updatedChips,
+                allQuizzes = groupedWithFallback(updatedFilters),
+                quizList = latestQuizzes
+            )
         }
     }
 
@@ -142,62 +295,103 @@ class QuizzesViewModel(
             val updatedChips = state.filterChips.durations.map {
                 if (it.id == chipId) it.copy(selected = newRange != null) else it.copy(selected = false)
             }
+            val updatedFilters = state.filters.copy(duration = newRange)
             state.copy(
-                filters = state.filters.copy(duration = newRange),
-                filterChips = state.filterChips.copy(durations = updatedChips)
+                filters = updatedFilters,
+                filterChips = state.filterChips.copy(durations = updatedChips),
+                allQuizzes = groupedWithFallback(updatedFilters),
+                quizList = latestQuizzes
             )
         }
     }
 
-    private fun toggleSort(chipId: String) {
-        val sort = when (chipId) {
-            "sort_recommended" -> QuizSortOption.Recommended
-            "sort_inprogress" -> QuizSortOption.InProgressFirst
-            "sort_newest" -> QuizSortOption.Newest
-            "sort_difficulty" -> QuizSortOption.Difficulty
-            else -> QuizSortOption.Recommended
-        }
-        _state.update { state ->
-            state.copy(
-                filters = state.filters.copy(sort = sort),
-                filterChips = state.filterChips.copy(
-                    sorts = state.filterChips.sorts.map { chip ->
-                        chip.copy(selected = chip.id == chipId)
-                    }
-                )
-            )
-        }
+    private fun <T> toggleExclusive(current: Set<T>, item: T): Set<T> =
+        if (current.contains(item)) emptySet() else setOf(item)
+
+    private fun QuizTopic.toQuizUi(): QuizUi {
+        val progress = quizProgress[id]
+        val progressState = quizInProgressStates[id]
+        val maxScore = questions.size
+        val bestScore = progress?.bestScore
+        val lastAttemptInstant = progress?.lastAttemptTimestamp
+            ?.takeIf { it > 0L }
+            ?.let { Instant.ofEpochMilli(it) }
+            ?: progressState?.let { Instant.ofEpochMilli(it.updatedAt) }
+        val lastScore = progress?.lastScore ?: 0
+        val inProgress = progressState != null
+        return QuizUi(
+            id = id,
+            title = title,
+            category = category,
+            format = format,
+            level = level,
+            durationMin = durationMinutes,
+            questionsCount = maxScore,
+            tags = (goalTags + tags).distinct(),
+            bestScore = bestScore,
+            passed = bestScore != null && bestScore >= maxScore,
+            lastAttemptAt = lastAttemptInstant,
+            inProgress = inProgress,
+            isSaved = savedQuizzes.contains(id)
+        )
     }
 
     private fun buildFilterChips(): QuizFilterUi = QuizFilterUi(
         goals = listOf(
             FilterChipState("goal_deal_ready", "Deal-ready"),
             FilterChipState("goal_source_funds", "Source of Funds"),
-            FilterChipState("goal_compliance", "Compliance")
+            FilterChipState("goal_compliance", "Compliance"),
+            FilterChipState("goal_risk", "Risk Management"),
+            FilterChipState("goal_legal", "Immigration Process")
         ),
         durations = listOf(
             FilterChipState("duration_short", "≤5 min"),
             FilterChipState("duration_medium", "6–10 min"),
             FilterChipState("duration_long", "10+ min")
         ),
-        formats = listOf(
-            FilterChipState("format_scenario", "Scenario"),
-            FilterChipState("format_calculator", "Calculator"),
-            FilterChipState("format_timeline", "Timeline"),
-            FilterChipState("format_multi", "Multi")
-        ),
         levels = listOf(
             FilterChipState("level_l", "Beginner"),
             FilterChipState("level_m", "Intermediate"),
             FilterChipState("level_h", "Advanced")
-        ),
-        sorts = listOf(
-            FilterChipState("sort_recommended", "Recommended", selected = true),
-            FilterChipState("sort_inprogress", "In-progress first"),
-            FilterChipState("sort_newest", "Newest"),
-            FilterChipState("sort_difficulty", "Difficulty")
         )
     )
+
+    private fun goalTagForChip(chipId: String): String? = when (chipId) {
+        "goal_deal_ready" -> "deal_ready"
+        "goal_source_funds" -> "source_funds"
+        "goal_compliance" -> "compliance"
+        "goal_risk" -> "risk"
+        "goal_legal" -> "immigration"
+        else -> null
+    }
+
+    private fun levelForChip(chipId: String): String? = when (chipId) {
+        "level_l" -> "L"
+        "level_m" -> "M"
+        "level_h" -> "H"
+        else -> null
+    }
+
+    private fun recommendedComparator(): Comparator<QuizUi> =
+        compareByDescending<QuizUi> { it.isSaved }
+            .thenByDescending { it.inProgress }
+            .thenBy { it.passed }
+            .thenByDescending { it.lastAttemptAt ?: Instant.MIN }
+
+    private fun groupByCategory(quizzes: List<QuizUi>): Map<String, List<QuizUi>> {
+        if (quizzes.isEmpty()) return emptyMap()
+        return quizzes.groupBy { it.category }
+            .toSortedMap(CASE_INSENSITIVE_ORDER)
+    }
+
+    private fun groupedWithFallback(filters: QuizFilters): Map<String, List<QuizUi>> {
+        val filtered = applyFilters(latestQuizzes, filters)
+        return if (filtered.isNotEmpty() || latestQuizzes.isEmpty()) {
+            filtered
+        } else {
+            groupByCategory(latestQuizzes)
+        }
+    }
 
     private fun logEvent(name: String, params: Map<String, Any?> = emptyMap()) {
         // TODO hook analytics
@@ -212,111 +406,6 @@ class QuizzesViewModel(
     ): List<FilterChipState> = map { chip ->
         chip.copy(selected = chip.id in selectedKeys)
     }
-
 }
 
-enum class FilterGroup { Goal, Duration, Format, Level, Sort }
-
-private fun buildSampleQuizzes(): List<QuizUi> = listOf(
-    QuizUi(
-        id = "quiz_eb5_basics_v1",
-        title = "EB-5 Basics and Program Timeline",
-        category = "EB-5 Basics",
-        format = "Multi",
-        level = "L",
-        durationMin = 5,
-        questionsCount = 5,
-        tags = listOf("basics", "timeline"),
-        bestScore = 4,
-        passed = true,
-        lastAttemptAt = Instant.now().minusSeconds(3600 * 24 * 3),
-        inProgress = false,
-        isSaved = true
-    ),
-    QuizUi(
-        id = "quiz_invest_models_v1",
-        title = "Investment Models: Debt vs Equity",
-        category = "Investment",
-        format = "Scenario",
-        level = "M",
-        durationMin = 6,
-        questionsCount = 5,
-        tags = listOf("deal-structure", "coupon"),
-        bestScore = 3,
-        passed = false,
-        lastAttemptAt = Instant.now().minusSeconds(3600 * 12),
-        inProgress = true,
-        isSaved = false
-    ),
-    QuizUi(
-        id = "quiz_risk_return_v1",
-        title = "Risk and Return Trade-offs",
-        category = "Risk & Compliance",
-        format = "Scenario",
-        level = "H",
-        durationMin = 8,
-        questionsCount = 6,
-        tags = listOf("risk", "portfolio"),
-        bestScore = null,
-        passed = false,
-        lastAttemptAt = null,
-        inProgress = false,
-        isSaved = false
-    )
-)
-
-private fun buildSampleTracks(): List<TrackUi> = listOf(
-    TrackUi(
-        id = "track_deal_ready_20m",
-        title = "Deal-Ready in 20 minutes",
-        description = "A focused set of quizzes to become deal-ready fast.",
-        quizIds = listOf("quiz_eb5_basics_v1", "quiz_invest_models_v1", "quiz_risk_return_v1"),
-        estimatedDurationMin = 20,
-        completed = 1,
-        total = 3,
-        certificateAvailable = false
-    ),
-    TrackUi(
-        id = "track_source_of_funds",
-        title = "Source of Funds Mastery",
-        description = "Master lawful source of funds documentation with targeted scenarios.",
-        quizIds = listOf("quiz_sof_intro", "quiz_sof_paths", "quiz_sof_review"),
-        estimatedDurationMin = 18,
-        completed = 3,
-        total = 3,
-        certificateAvailable = true
-    )
-)
-
-private fun buildSampleResults(): List<AttemptSummary> = listOf(
-    AttemptSummary(
-        id = "attempt_1",
-        title = "Investment Models: Debt vs Equity",
-        quizId = "quiz_invest_models_v1",
-        trackId = null,
-        bestScore = 3,
-        totalQuestions = 5,
-        level = "M",
-        durationMin = 6,
-        completedAt = Instant.now().minusSeconds(3600 * 24 * 2)
-    ),
-    AttemptSummary(
-        id = "attempt_2",
-        title = "Deal-Ready in 20 minutes",
-        quizId = null,
-        trackId = "track_deal_ready_20m",
-        bestScore = 12,
-        totalQuestions = 16,
-        level = "H",
-        durationMin = 20,
-        completedAt = Instant.now().minusSeconds(3600 * 24 * 10)
-    )
-)
-
-private fun buildSampleCertificates(): List<CertificateUi> = listOf(
-    CertificateUi(
-        trackId = "track_source_of_funds",
-        title = "Source of Funds Mastery",
-        completedAt = Instant.now().minusSeconds(3600 * 24 * 12)
-    )
-)
+enum class FilterGroup { Goal, Duration, Level }

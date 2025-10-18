@@ -3,14 +3,15 @@ package com.eb5.app.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import android.util.Log
-import com.eb5.app.BuildConfig
 import com.eb5.app.data.model.AppLanguage
 import com.eb5.app.data.model.Article
 import com.eb5.app.data.model.ArticleStatus
 import com.eb5.app.data.model.NewsArticle
 import com.eb5.app.data.model.Project
+import com.eb5.app.data.model.QuizCatalog
 import com.eb5.app.data.model.QuizProgress
-import com.eb5.app.data.model.QuizTopic
+import com.eb5.app.data.model.QuizAttemptRecord
+import com.eb5.app.data.model.QuizInProgressState
 import com.eb5.app.data.preferences.UserPreferencesRepository
 import com.eb5.app.data.repositories.ContentRepository
 import com.eb5.app.data.repositories.ProjectRepository
@@ -62,11 +63,11 @@ class AppViewModel(
                     previousState.articles
                 }
 
-                val quizzes = withContext(Dispatchers.IO) {
-                    runCatching { quizRepository.quizzes(language) }
+                val quizCatalog = withContext(Dispatchers.IO) {
+                    runCatching { quizRepository.catalog(language) }
                 }.getOrElse {
                     errors += "Quizzes could not be loaded."
-                    previousState.quizzes
+                    previousState.quizCatalog
                 }
 
                 val projects = withContext(Dispatchers.IO) {
@@ -88,18 +89,20 @@ class AppViewModel(
                         language = language,
                         onboardingCompleted = snapshot.onboardingCompleted,
                         articles = articles,
-                        quizzes = quizzes,
+                        quizCatalog = quizCatalog,
                         projects = projects,
                         favorites = snapshot.favorites,
                         articleStatuses = snapshot.articleStatuses,
                         quizProgress = snapshot.quizProgress,
+                        savedQuizzes = snapshot.savedQuizzes,
+                        quizAttempts = snapshot.quizAttempts,
+                        quizInProgress = snapshot.quizInProgressStates,
                         news = news,
                         isLoading = false,
                         error = errors.joinToString("\n").takeIf { message -> message.isNotBlank() },
                         pendingScrollArticleId = it.pendingScrollArticleId,
                         baseResetToken = it.baseResetToken,
                         currentRoute = it.currentRoute,
-                        pendingRestoreRoute = it.pendingRestoreRoute,
                         newsFavorites = snapshot.newsFavorites,
                         projectFavorites = snapshot.projectFavorites,
                         baseReturn = it.baseReturn,
@@ -119,11 +122,11 @@ class AppViewModel(
     }
 
     fun setLanguage(language: AppLanguage) {
-        val currentRoute = _uiState.value.currentRoute
-        if (currentRoute?.startsWith(AppDestination.Settings.route) == true) {
-            _uiState.update { it.copy(pendingRestoreRoute = currentRoute) }
-        }
         viewModelScope.launch {
+            if (_uiState.value.language == language) {
+                return@launch
+            }
+            _uiState.update { it.copy(isLoading = true) }
             preferencesRepository.setLanguage(language)
         }
     }
@@ -136,6 +139,13 @@ class AppViewModel(
     }
 
     fun toggleFavorite(articleId: Int) {
+        val currentFavorites = _uiState.value.favorites
+        val updatedFavorites = if (currentFavorites.contains(articleId)) {
+            currentFavorites - articleId
+        } else {
+            currentFavorites + articleId
+        }
+        _uiState.update { it.copy(favorites = updatedFavorites) }
         viewModelScope.launch {
             preferencesRepository.toggleFavorite(articleId)
         }
@@ -144,14 +154,32 @@ class AppViewModel(
     fun toggleArticleStatus(articleId: Int) {
         val current = _uiState.value.articleStatuses[articleId]
         val next = if (current == ArticleStatus.COMPLETED) ArticleStatus.IN_PROGRESS else ArticleStatus.COMPLETED
+        _uiState.update { state ->
+            state.copy(articleStatuses = state.articleStatuses + (articleId to next))
+        }
         viewModelScope.launch {
             preferencesRepository.setArticleStatus(articleId, next)
         }
     }
 
     fun setArticleInProgress(articleId: Int) {
+        _uiState.update { state ->
+            state.copy(articleStatuses = state.articleStatuses + (articleId to ArticleStatus.IN_PROGRESS))
+        }
         viewModelScope.launch {
             preferencesRepository.setArticleStatus(articleId, ArticleStatus.IN_PROGRESS)
+        }
+    }
+
+    fun toggleQuizSaved(quizId: String) {
+        viewModelScope.launch {
+            preferencesRepository.toggleQuizSaved(quizId)
+        }
+    }
+
+    fun setQuizSaved(quizId: String, saved: Boolean) {
+        viewModelScope.launch {
+            preferencesRepository.setQuizSaved(quizId, saved)
         }
     }
 
@@ -159,6 +187,33 @@ class AppViewModel(
         viewModelScope.launch {
             val timestamp = System.currentTimeMillis()
             preferencesRepository.updateQuizResult(quizId, score, timestamp)
+            val quiz = _uiState.value.quizCatalog.quizzes.firstOrNull { it.id == quizId }
+            if (quiz != null) {
+                val record = QuizAttemptRecord(
+                    id = java.util.UUID.randomUUID().toString(),
+                    quizId = quizId,
+                    trackId = quiz.trackIds.firstOrNull(),
+                    score = score,
+                    totalQuestions = quiz.questions.size,
+                    level = quiz.level,
+                    durationMinutes = quiz.durationMinutes,
+                    completedAt = timestamp
+                )
+                preferencesRepository.appendQuizAttempt(record)
+            }
+            preferencesRepository.updateQuizInProgress(quizId, null)
+        }
+    }
+
+    fun saveQuizProgress(state: QuizInProgressState) {
+        viewModelScope.launch {
+            preferencesRepository.updateQuizInProgress(state.quizId, state)
+        }
+    }
+
+    fun clearQuizProgress(quizId: String) {
+        viewModelScope.launch {
+            preferencesRepository.updateQuizInProgress(quizId, null)
         }
     }
 
@@ -332,10 +387,6 @@ class AppViewModel(
         _uiState.update { it.copy(currentRoute = route) }
     }
 
-    fun clearPendingRestoreRoute() {
-        _uiState.update { it.copy(pendingRestoreRoute = null) }
-    }
-
     fun openNewsArticle(articleId: String, languageCode: String?, returnRoute: String? = null) {
         val fallbackRoute = _uiState.value.currentRoute ?: returnRoute
         _uiState.update {
@@ -373,26 +424,31 @@ class AppViewModel(
     fun clearPendingProjectReturnRoute() {
         _uiState.update { it.copy(pendingProjectReturnRoute = null) }
     }
+
+    fun resetHomeScroll() {
+        _uiState.update { it.copy(homeResetToken = it.homeResetToken + 1) }
+    }
 }
 
 data class AppUiState(
     val language: AppLanguage = AppLanguage.EN,
     val onboardingCompleted: Boolean = false,
     val articles: List<Article> = emptyList(),
-    val quizzes: List<QuizTopic> = emptyList(),
+    val quizCatalog: QuizCatalog = QuizCatalog(emptyList()),
     val projects: List<Project> = emptyList(),
     val news: List<NewsArticle> = emptyList(),
     val favorites: Set<Int> = emptySet(),
     val articleStatuses: Map<Int, ArticleStatus> = emptyMap(),
     val quizProgress: Map<String, QuizProgress> = emptyMap(),
+    val savedQuizzes: Set<String> = emptySet(),
+    val quizAttempts: List<QuizAttemptRecord> = emptyList(),
+    val quizInProgress: Map<String, QuizInProgressState> = emptyMap(),
     val isLoading: Boolean = true,
     val error: String? = null,
-    val versionName: String = BuildConfig.VERSION_NAME,
     val availableLanguages: List<AppLanguage> = AppLanguage.supported,
     val pendingScrollArticleId: Int? = null,
     val baseResetToken: Int = 0,
     val currentRoute: String? = null,
-    val pendingRestoreRoute: String? = null,
     val newsFavorites: Set<String> = emptySet(),
     val projectFavorites: Set<String> = emptySet(),
     val baseReturn: AppViewModel.BaseReturnSnapshot? = null,
@@ -404,5 +460,6 @@ data class AppUiState(
     val pendingProjectReturnRoute: String? = null,
     val pendingArticleReturnRoute: String? = null,
     val baseSelectedCategory: String? = null,
-    val baseSelectedSubcategory: String? = null
+    val baseSelectedSubcategory: String? = null,
+    val homeResetToken: Int = 0
 )

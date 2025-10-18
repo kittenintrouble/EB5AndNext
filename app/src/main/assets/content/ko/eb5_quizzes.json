@@ -1,34 +1,855 @@
-[
-  {
-    "termId": 1,
-    "title": "프로그램 기초 퀴즈",
-    "questions": [
-      {
-        "question": "EB-5 투자자는 최소 몇 개의 정규직 일자리를 만들어야 합니까?",
-        "options": ["5개", "10개", "15개", "20개"],
-        "correctAnswerIndex": 1
+{
+  "tracks": [
+    {
+      "id": "track_foundations_ready",
+      "title": "EB-5 기초 준비 완료",
+      "description": "프로그램의 목적, 적격 자본, 일자리 창출 지표를 확실히 이해하여 투자 자료를 검토하기 전에 탄탄한 기초를 다집니다.",
+      "quizIds": [
+        "quiz_program_foundations",
+        "quiz_investment_thresholds",
+        "quiz_job_creation_models"
+      ],
+      "estimatedDurationMinutes": 18,
+      "goalTag": "deal_ready",
+      "category": "기초",
+      "unlock": {
+        "minimumArticlesCompleted": 1,
+        "categoryRequirements": [
+          {
+            "category": "기초",
+            "minCompleted": 1
+          }
+        ]
       },
-      {
-        "question": "EB-5 청원이 승인된 후 조건부 영주권을 부여하는 문서는 무엇입니까?",
-        "options": ["I-829 양식", "I-526E 양식", "영주권 카드", "취업허가서"],
-        "correctAnswerIndex": 2
+      "certificate": {
+        "accentColor": "#0B5FFF",
+        "secondaryColor": "#EEF4FF",
+        "backgroundGradient": [
+          "#F5FAFF",
+          "#E5F0FF"
+        ],
+        "signatureLabel": "프로그램 디렉터",
+        "signatureName": "Alex Morgan"
       }
-    ]
-  },
-  {
-    "termId": 2,
-    "title": "투자 모델 퀴즈",
-    "questions": [
-      {
-        "question": "지역센터 프로젝트의 핵심 특징은 무엇입니까?",
-        "options": ["투자자가 일상 운영을 직접 관리한다", "간접 고용을 계산할 수 있다", "최소 투자액은 50만 달러", "제조업만 허용된다"],
-        "correctAnswerIndex": 1
+    },
+    {
+      "id": "track_structures_capital",
+      "title": "자본 구조 심층 분석",
+      "description": "직접 투자와 지역센터 모델을 비교하고, 지분과 부채 구조를 분석하며, 자본 스택을 전문가처럼 해석합니다.",
+      "quizIds": [
+        "quiz_direct_vs_regional",
+        "quiz_equity_vs_debt",
+        "quiz_capital_stack_controls"
+      ],
+      "estimatedDurationMinutes": 21,
+      "goalTag": "deal_ready",
+      "category": "투자",
+      "unlock": {
+        "minimumArticlesCompleted": 3,
+        "categoryRequirements": [
+          {
+            "category": "투자",
+            "minCompleted": 2
+          }
+        ]
       },
-      {
-        "question": "다음 중 직접 EB-5 투자를 가장 잘 설명하는 것은?",
-        "options": ["투자자가 합동 펀드에 참여", "미국 국채를 매입", "투자자가 기업을 직접 운영", "지수 펀드에 투자"],
-        "correctAnswerIndex": 2
+      "certificate": {
+        "accentColor": "#8247FF",
+        "secondaryColor": "#F0E8FF",
+        "backgroundGradient": [
+          "#F9F5FF",
+          "#ECE3FF"
+        ],
+        "signatureLabel": "자본시장 책임자",
+        "signatureName": "Priya Desai"
       }
-    ]
-  }
-]
+    },
+    {
+      "id": "track_source_of_funds",
+      "title": "자금 출처 마스터",
+      "description": "자금의 합법적 출처를 입증하고, 깨끗한 자금 흐름을 유지하며, 복잡한 금융 이력을 자신 있게 정리합니다.",
+      "quizIds": [
+        "quiz_source_of_funds_basics",
+        "quiz_source_of_funds_documentation",
+        "quiz_source_of_funds_complex_paths"
+      ],
+      "estimatedDurationMinutes": 24,
+      "goalTag": "source_funds",
+      "category": "투자",
+      "unlock": {
+        "minimumArticlesCompleted": 4,
+        "categoryRequirements": [
+          {
+            "category": "투자",
+            "minCompleted": 3
+          }
+        ]
+      },
+      "certificate": {
+        "accentColor": "#0C8576",
+        "secondaryColor": "#E3F4F1",
+        "backgroundGradient": [
+          "#F3FFFC",
+          "#DEF2EC"
+        ],
+        "signatureLabel": "컴플라이언스 책임자",
+        "signatureName": "Mia Chen"
+      }
+    },
+    {
+      "id": "track_immigration_compliance",
+      "title": "이민 & 컴플라이언스 흐름",
+      "description": "위험 유지 요건, 거버넌스 의무, 각 청원 단계의 핵심 포인트를 관리하여 원활한 I-829 승인을 이끕니다.",
+      "quizIds": [
+        "quiz_at_risk_rules",
+        "quiz_governance_fund_admin",
+        "quiz_petition_process_mastery"
+      ],
+      "estimatedDurationMinutes": 22,
+      "goalTag": "immigration",
+      "category": "이민 및 법적 절차",
+      "unlock": {
+        "minimumArticlesCompleted": 5,
+        "categoryRequirements": [
+          {
+            "category": "이민 및 법적 절차",
+            "minCompleted": 2
+          },
+          {
+            "category": "리스크 관리",
+            "minCompleted": 2
+          }
+        ]
+      },
+      "certificate": {
+        "accentColor": "#FF6B4A",
+        "secondaryColor": "#FFE8E1",
+        "backgroundGradient": [
+          "#FFF5F2",
+          "#FFE2D9"
+        ],
+        "signatureLabel": "법무 디렉터",
+        "signatureName": "Jordan Reyes"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "quiz_program_foundations",
+      "termId": 1,
+      "title": "프로그램 목적 및 일정",
+      "summary": "EB-5 투자가 일자리 창출과 조건부 영주권, 조건 해제 시점을 어떻게 달성하는지 확인합니다.",
+      "category": "기초",
+      "subcategory": "프로그램 기본",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Multi",
+      "level": "L",
+      "durationMinutes": 6,
+      "recommendedArticles": [
+        1,
+        3,
+        4
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "overview",
+        "timeline"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 투자이민 프로그램의 핵심 정책 목적은 무엇인가요?",
+          "options": [
+            "일자리를 창출하는 투자로 미국 경제 성장을 촉진한다",
+            "주와 지방 정부에 보조금을 제공한다",
+            "외국 자본으로 미 재무부 국채를 매입한다",
+            "이민 투자자에게 확정 수익을 보장한다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "I-526E 승인을 받은 후 조건부 영주권은 보통 얼마 동안 부여되나요?",
+          "options": [
+            "2년",
+            "6개월",
+            "5년",
+            "10년"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 투자자는 조건부 영주권을 해제하기 위해 언제 I-829를 제출해야 하나요?",
+          "options": [
+            "조건부 영주권 만료 직전 90일 기간 동안",
+            "미국 입국 후 30일 이내",
+            "프로젝트가 모든 수익을 배분한 후에만",
+            "I-526E와 동시에"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_investment_thresholds",
+      "termId": 8,
+      "title": "투자 기준액 & 유지 의무",
+      "summary": "최소 투자금, 자본 유지 규칙, 그리고 EB-5 자본의 ‘위험 유지’ 의미를 점검합니다.",
+      "category": "기초",
+      "subcategory": "자격 요건",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Quick Check",
+      "level": "L",
+      "durationMinutes": 5,
+      "recommendedArticles": [
+        5,
+        6,
+        7
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "thresholds",
+        "sustainment"
+      ],
+      "questions": [
+        {
+          "question": "목표 고용지역(TEA) 프로젝트의 현재 최소 투자금은 얼마인가요?",
+          "options": [
+            "$800,000",
+            "$500,000",
+            "$900,000",
+            "$1,050,000"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "개혁 및 무결성 법에 따라 비-TEA 프로젝트의 표준 최소 투자금은 얼마인가요?",
+          "options": [
+            "$1,050,000",
+            "$800,000",
+            "$750,000",
+            "$650,000"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "다음 중 EB-5 ‘위험 유지(at risk)’ 자본 요건을 정확히 설명한 것은 무엇인가요?",
+          "options": [
+            "자본은 계약상 보증 없이 유지 기간 내내 손익에 노출되어야 한다",
+            "공사가 끝나면 자본을 인출할 수 있다",
+            "미국 은행 계좌에 보관하면 위험 유지로 간주된다",
+            "이자를 지급하면 개발자가 자본을 보증할 수 있다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_job_creation_models",
+      "termId": 3,
+      "title": "일자리 창출 플레이북",
+      "summary": "직접·간접·파생 일자리를 구분하고 USCIS 증빙 요구 사항과 연계합니다.",
+      "category": "기초",
+      "subcategory": "자격 요건",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "compliance"
+      ],
+      "format": "Scenario",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        3,
+        9,
+        10
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "job_creation",
+        "economics"
+      ],
+      "questions": [
+        {
+          "question": "직접 EB-5 프로젝트에서 일자리로 인정되는 고용 형태는 무엇인가요?",
+          "options": [
+            "신규 상업 기업이 고용한 정규직 W-2 직원",
+            "계절 업무를 위한 독립 계약자",
+            "해외 계열사가 미국 외에서 창출한 일자리",
+            "경제 모델이 예측한 모든 일자리"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "지역센터 EB-5 프로젝트는 간접 일자리를 어떻게 계산하나요?",
+          "options": [
+            "프로젝트 지출을 일자리로 환산하는 공인 경제 모델을 활용한다",
+            "더 많은 파트타임 직원을 직접 고용한다",
+            "해외 하도급 업체가 만든 일자리를 포함한다",
+            "대출 계약서에 확정 일자리 수를 보장한다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "USCIS가 기대하는 EB-5 일자리 창출 기간은 무엇인가요?",
+          "options": [
+            "투자자가 조건부 영주권자가 된 후 약 2년 안에 일자리가 창출되어야 하며, 정당한 사유가 있을 때만 제한적으로 연장된다",
+            "I-526E 제출 후 6개월 이내에 일자리가 만들어져야 한다",
+            "프로젝트가 EB-5 대출을 상환하기 전에는 언제든 일자리를 만들면 된다",
+            "일자리는 예측만 하면 되고 검증할 필요가 없다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_direct_vs_regional",
+      "termId": 2,
+      "title": "직접 투자 vs. 지역센터 모델",
+      "summary": "직접 투자와 지역센터 프로젝트의 투자자 책임, 일자리 계산 방식, 운영 통제를 비교합니다.",
+      "category": "투자",
+      "subcategory": "투자 모델",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Scenario",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        2,
+        15,
+        18
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "direct",
+        "regional_center"
+      ],
+      "questions": [
+        {
+          "question": "직접 EB-5 투자 모델의 핵심 특징은 무엇인가요?",
+          "options": [
+            "투자자가 신규 상업 기업의 운영에 적극 참여한다",
+            "투자자들이 연방 승인 지역센터를 통해 자금을 모은다",
+            "간접 일자리가 증빙 없이 자동으로 인정된다",
+            "제3자 관리자가 모든 운영을 담당한다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "지역센터 EB-5 구조의 고유한 장점은 무엇인가요?",
+          "options": [
+            "자본을 모으고 간접·파생 일자리까지 인정받을 수 있다",
+            "TEA 프로젝트보다 낮은 최소 투자금",
+            "USCIS 연례 보고 의무 면제",
+            "센터가 보장하는 확정 상환 조건"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "다음 중 직접 EB-5 프로젝트에 가장 가까운 사례는 무엇인가요?",
+          "options": [
+            "투자자가 프랜차이즈 식당을 직접 열고 새 직원을 고용한다",
+            "호텔 개발사가 지역센터 대출 펀드로 자금을 조달한다",
+            "펀드가 공공 인프라를 위해 지방채를 매입한다",
+            "벤처캐피털 펀드가 여러 스타트업에 EB-5 자금을 배분한다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_equity_vs_debt",
+      "termId": 24,
+      "title": "지분형 vs. 대출형 구조",
+      "summary": "EB-5 지분형과 대출형 상품의 수익 구조, 담보, 상환 순위를 비교합니다.",
+      "category": "투자",
+      "subcategory": "위험 투자",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "risk"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        22,
+        23,
+        26
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "capital_stack",
+        "returns"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 지분형 투자자는 보통 어떻게 수익을 얻나요?",
+          "options": [
+            "선순위 부채 상환 후 남은 이익 배당을 통해",
+            "개발자가 보장하는 고정 이자 지급을 통해",
+            "정부가 발급한 세금 공제를 통해",
+            "USCIS가 지급하는 연례 지원금을 통해"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 대출형 상품과 가장 밀접한 특징은 무엇인가요?",
+          "options": [
+            "담보가 설정되고 상환 일정이 고정되어 있다",
+            "모든 프로젝트 결정에 대한 의결권",
+            "프로젝트 수익에 연동된 무제한 상승 잠재력",
+            "제3자의 감독이 전혀 없다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "선순위 대출, EB-5 대출, 개발자 지분이 함께 구성된 자본 스택의 장점은 무엇인가요?",
+          "options": [
+            "이해관계자의 인센티브를 분산시켜 여러 층으로 리스크를 나눌 수 있다",
+            "EB-5 자금이 자동으로 최우선 상환된다",
+            "경제 영향 분석이 필요 없다",
+            "USCIS의 서류 심사가 사라진다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_capital_stack_controls",
+      "termId": 41,
+      "title": "자본 스택 통제",
+      "summary": "선순위 대출 약정을 해석하고, 공사 집행을 모니터링하며, 건전한 브리지 파이낸싱 활용 여부를 점검합니다.",
+      "category": "투자",
+      "subcategory": "자금 출처",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "risk"
+      ],
+      "format": "Case Study",
+      "level": "H",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        32,
+        35,
+        37
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "bridge",
+        "monitoring"
+      ],
+      "questions": [
+        {
+          "question": "일반적인 EB-5 자본 구조에서 선순위 건설 대출자는 어떤 권리를 가지나요?",
+          "options": [
+            "프로젝트 현금 흐름과 담보에 대한 최우선 권리",
+            "개발자 지분과 동일한 우선순위",
+            "EB-5 투자자보다 낮은 후순위",
+            "담보 없이 보증인 역할만 수행"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "고급 대출기관이 독립적인 공사 모니터를 요구하는 이유는 무엇인가요?",
+          "options": [
+            "예산, 일정, 인출 요청을 실제 진행 상황과 대조해 검증하기 위해",
+            "공사를 예정일보다 일찍 끝내기 위해",
+            "개발사 현장 소장을 대체하기 위해",
+            "프로젝트를 개인 투자자에게 마케팅하기 위해"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 프로젝트에서 브리지 파이낸싱은 주로 어떻게 활용되나요?",
+          "options": [
+            "EB-5 자금 모집 중에도 공사를 시작하기 위해",
+            "투자자의 이민 변호사 수임료를 지불하기 위해",
+            "관련 없는 기업 부채를 갚기 위해",
+            "EB-5 투자자에게 확정 수익을 보장하기 위해"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_basics",
+      "termId": 52,
+      "title": "자금 출처 기본",
+      "summary": "증여, 급여 저축, 유보이익 등 합법적 자금 출처 스토리 구축의 기초를 다집니다.",
+      "category": "투자",
+      "subcategory": "자금 출처",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "compliance"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        52,
+        53,
+        55
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "source_of_funds",
+        "documentation"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 자본의 합법적 출처를 입증하기 위한 핵심 요건은 무엇인가요?",
+          "options": [
+            "자금을 합법적 활동과 연결하는 신뢰도 높은 서류 증빙",
+            "임의의 은행 공증 서한 확보",
+            "지역센터가 자금을 인증하도록 하는 것",
+            "투자자의 여권 도장을 제출하는 것"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 자금이 증여로 제공되면 보통 어떤 서류가 요구되나요?",
+          "options": [
+            "증여 계약서와 증여자의 합법적 자금 출처를 입증하는 재무 기록",
+            "증여자의 구두 확인만 제출",
+            "지역센터 확인서",
+            "증여가 암호화폐로 전송되었다는 증빙"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "장기간 급여 저축은 EB-5에서 어떻게 입증해야 하나요?",
+          "options": [
+            "고용계약서, 급여 명세, 저축 누적을 보여주는 은행 명세서를 제출한다",
+            "증빙 없이 개인 진술서만 제출한다",
+            "여러 페이퍼컴퍼니를 통해 자금을 이동한다",
+            "설명 없이 현금을 입금한다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_documentation",
+      "termId": 60,
+      "title": "자금 흐름 증빙",
+      "summary": "RIA 심사에 견딜 수 있도록 은행 거래 내역, 환전 기록, 세금 신고로 모든 자금 이동을 추적합니다.",
+      "category": "투자",
+      "subcategory": "자금 출처",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "compliance"
+      ],
+      "format": "Timeline",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        60,
+        61,
+        63
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "path_of_funds",
+        "currency"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 에스크로 계좌로의 자금 흐름을 가장 잘 보여주는 증빙은 무엇인가요?",
+          "options": [
+            "출처부터 에스크로까지 모든 이체가 나타난 연속 은행 명세서",
+            "은행 확인 없이 작성한 스프레드시트",
+            "첨부 없는 변호사 확인서",
+            "현금 인출 영수증만 제출"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 투자를 위한 외화 환전 시 권장되는 모범 사례는 무엇인가요?",
+          "options": [
+            "공식 은행 영수증으로 환전을 입증하고 적용 환율을 기재한다",
+            "환전상과 구두 합의만 의존한다",
+            "환전 증빙 없이 현금을 바로 입금한다",
+            "I-829 단계까지 환전 증빙을 미룬다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 자금과 관련된 세금 준수를 투자자는 어떻게 입증해야 하나요?",
+          "options": [
+            "자금 출처에 해당하는 세금 신고서나 납세 증명서를 제출한다",
+            "감사되지 않은 개인 스프레드시트만 제출한다",
+            "지역센터에 세무 상태 인증을 요청한다",
+            "USCIS에 세금 기록 공개를 피한다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_complex_paths",
+      "termId": 68,
+      "title": "복합 자금 전략",
+      "summary": "부동산 매각, 담보 대출, 가족 자금 등 복합 구조를 증빙 체계를 유지하며 정리합니다.",
+      "category": "투자",
+      "subcategory": "자금 출처",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "risk"
+      ],
+      "format": "Case Study",
+      "level": "H",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        68,
+        69,
+        70
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "loans",
+        "property_sale"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 자금으로 활용할 부동산 매각 시 어떤 서류를 제출해야 하나요?",
+          "options": [
+            "매매 계약서, 등기 증서, 클로징 명세서, 세금 납부 증빙",
+            "구매자의 확인서만",
+            "매각 증빙 없는 일반 감정평가서",
+            "개발사의 구두 진술"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "개인 대출이 EB-5 자본으로 인정받기 위해 충족해야 할 조건은 무엇인가요?",
+          "options": [
+            "투자자 자산을 담보로 설정하고 정식 대출 계약이 체결되어야 한다",
+            "담보 없이 프로젝트가 보증해야 한다",
+            "외국 정부가 대출해야 한다",
+            "미국 달러로만 대출되어야 한다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "여러 단계로 구성된 자금 출처는 어떻게 제시해야 하나요?",
+          "options": [
+            "각 자금 레이어마다 증빙을 갖춘 연대기 형태의 설명서를 작성한다",
+            "모든 출처를 첨부 없이 진술서 하나로 요약한다",
+            "증빙 전에 모든 자금을 현금으로 합친다",
+            "지역센터의 컴플라이언스 보고서에만 의존한다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_at_risk_rules",
+      "termId": 85,
+      "title": "위험 유지 자본 가이드",
+      "summary": "재투자, 보증, 적립금 정책이 RIA 무결성 기준을 준수하도록 점검합니다.",
+      "category": "리스크 관리",
+      "subcategory": "EB-5 투자 리스크",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "compliance",
+        "risk"
+      ],
+      "format": "Scenario",
+      "level": "H",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        85,
+        86,
+        88
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "at_risk",
+        "redeployment"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 자본의 보장된 환매는 왜 위험 유지 요건을 위반하나요?",
+          "options": [
+            "프로젝트 성과에 따른 손익 가능성을 없애기 때문이다",
+            "USCIS가 모든 출구 전략을 금지하기 때문이다",
+            "보증은 I-829 승인 후에만 허용되기 때문이다",
+            "투자자가 이자를 받지 못하게 하기 때문이다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "유지 기간이 끝나기 전에 EB-5 자본이 상환되면 무엇을 해야 하나요?",
+          "options": [
+            "다른 적격 위험 유지 활동으로 재투자해야 한다",
+            "I-829 승인까지 에스크로에 계속 보관해야 한다",
+            "30일 이내에 투자자에게 환급해야 한다",
+            "개발자 개인 계좌로 이전할 수 있다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "USCIS 정책 지침에 가장 부합하는 재투자 옵션은 무엇인가요?",
+          "options": [
+            "비슷한 위험과 일자리 창출 가능성을 지닌 다른 상업 기업에 재투자한다",
+            "확정 수익이 보장된 수동적 시장 증권을 매입한다",
+            "이자가 없는 계좌에 현금을 보관한다",
+            "개발자의 무관한 사업에 대출한다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_governance_fund_admin",
+      "termId": 93,
+      "title": "거버넌스 & 자금 관리",
+      "summary": "독립 관리자, 감사 보고서, 투자자 공시 등 감독 체계를 평가합니다.",
+      "category": "리스크 관리",
+      "subcategory": "법적 및 재무 안전장치",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "compliance",
+        "risk"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        90,
+        93,
+        95
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "governance",
+        "fund_admin"
+      ],
+      "questions": [
+        {
+          "question": "독립적인 펀드 관리자를 고용하는 주된 이점은 무엇인가요?",
+          "options": [
+            "지급과 기록을 제3자가 감독한다",
+            "해외 에이전트에게 프로젝트를 마케팅한다",
+            "투자자 수익을 보장한다",
+            "재무 보고 필요성을 없앤다"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 투자 계약서에 포함되어야 할 공시는 무엇인가요?",
+          "options": [
+            "자금 사용 계획, 수수료 구조, 출구 전략을 상세히 기재",
+            "시장 동향에 대한 개인 의견",
+            "검증되지 않은 기존 투자자 후기",
+            "프로젝트 설계도만 기재"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "모범 사례 기준으로 투자자는 프로젝트 보고를 얼마나 자주 기대해야 하나요?",
+          "options": [
+            "정기적으로(예: 분기별) 공사 진행, 집행 내역, 일자리 창출을 요약 보고한다",
+            "I-829 제출 시 한 번만 보고한다",
+            "개발사가 홍보 자료가 있을 때마다",
+            "I-526E 승인 후에는 보고가 선택 사항이다"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_petition_process_mastery",
+      "termId": 110,
+      "title": "이민 청원 마스터",
+      "summary": "I-526E부터 I-829까지 모든 절차를 순서대로 이해하고 가정별 최적의 진행 경로를 선택합니다.",
+      "category": "이민 및 법적 절차",
+      "subcategory": "EB-5 청원 절차",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "immigration",
+        "deal_ready"
+      ],
+      "format": "Timeline",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        101,
+        105,
+        109
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "petition",
+        "family"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 이민 절차를 정확히 나타낸 순서는 무엇인가요?",
+          "options": [
+            "I-526E 승인 → 비자 발급 또는 신분 조정 → 조건부 영주권 → I-829 심사",
+            "영사 인터뷰 → I-829 → I-526E → 조건부 영주권",
+            "I-829 → 조건 해제 영주권 → I-526E → 비자 발급",
+            "조건부 영주권 → I-526E → 비자 발급 → I-829"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "영사 절차 대신 신분 조정이 가능한 경우는 언제인가요?",
+          "options": [
+            "투자자가 미국에 합법적으로 체류 중이며 이민 비자 번호가 사용 가능할 때",
+            "투자자가 여행을 피하고 싶을 때마다",
+            "I-829 제출 이후에만",
+            "투자자가 방문 비자를 보유하고 I-526E를 제출하지 않았을 때"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "주 신청인 EB-5 투자자를 통해 파생 신분을 받을 수 있는 가족은 누구인가요?",
+          "options": [
+            "배우자와 21세 미만 미혼 자녀",
+            "주 신청인의 부모",
+            "나이에 상관없는 기혼 자녀",
+            "사업계획서에 나열된 모든 친척"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    }
+  ]
+}

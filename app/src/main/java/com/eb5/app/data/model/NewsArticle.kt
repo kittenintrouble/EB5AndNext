@@ -30,6 +30,7 @@ data class ArticleBlock(
     // Heading
     @SerializedName("level") val level: Int? = null,
     @SerializedName("text") val text: String? = null,
+    @SerializedName("title") val title: String? = null,
     // Image
     @SerializedName("url") val url: String? = null,
     @SerializedName("alt") val alt: String? = null,
@@ -43,7 +44,9 @@ data class ArticleBlock(
     // List
     @SerializedName("items") val items: List<String>? = null,
     // Link
-    @SerializedName("href") val href: String? = null
+    @SerializedName("href") val href: String? = null,
+    // Callout
+    @SerializedName("variant") val variant: String? = null
 )
 
 data class ArticleMeta(

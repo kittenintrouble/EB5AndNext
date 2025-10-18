@@ -43,7 +43,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.res.stringResource
+import com.eb5.app.ui.localization.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -126,8 +126,7 @@ fun BaseScreen(
     val categorySummaries = remember(articles, articleStatuses) {
         fun orderArticles(list: List<Article>): List<Article> =
             list.sortedWith(
-                compareBy<Article> { articleStatuses[it.id] == ArticleStatus.COMPLETED }
-                    .thenBy { it.dayNumber ?: Int.MAX_VALUE }
+                compareBy<Article> { it.dayNumber ?: Int.MAX_VALUE }
                     .thenBy { it.id }
             )
         categoryOrder.mapNotNull { categoryName ->
@@ -154,8 +153,7 @@ fun BaseScreen(
     val groupedBySubcategory = remember(selectedCategory, groupedByCategory, articleStatuses) {
         fun orderArticles(list: List<Article>): List<Article> =
             list.sortedWith(
-                compareBy<Article> { articleStatuses[it.id] == ArticleStatus.COMPLETED }
-                    .thenBy { it.dayNumber ?: Int.MAX_VALUE }
+                compareBy<Article> { it.dayNumber ?: Int.MAX_VALUE }
                     .thenBy { it.id }
             )
         selectedCategory?.let { category ->
@@ -254,6 +252,7 @@ fun BaseScreen(
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold
                 )
+                Spacer(modifier = Modifier.height(16.dp))
                 // Selected Category Row
                 if (selectedCategory != null) {
                     Surface(
@@ -354,6 +353,11 @@ fun BaseScreen(
             selectedCategory == null -> {
                 items(categorySummaries, key = { it.name }) { summary ->
                     Card(
+                        onClick = {
+                            onSelectCategory(summary.name)
+                            onSelectSubcategory(null)
+                            scope.launch { listState.scrollToItem(0) }
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp)
                     ) {
@@ -369,12 +373,7 @@ fun BaseScreen(
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.SemiBold,
                                 maxLines = 2,
-                                overflow = TextOverflow.Clip,
-                                modifier = Modifier.clickable {
-                                    onSelectCategory(summary.name)
-                                    onSelectSubcategory(null)
-                                    scope.launch { listState.scrollToItem(0) }
-                                }
+                                overflow = TextOverflow.Clip
                             )
 
                             // Progress text + horizontal progress bar
@@ -416,27 +415,33 @@ fun BaseScreen(
                             val readMinutes = timeArticle?.let { articleReadTimes[it.id] ?: 1 }
                             val timeSuffix = readMinutes?.let { " • " + stringResource(R.string.base_read_time_format, it) } ?: ""
 
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(2.dp))
                             HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f), thickness = 1.dp)
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = statusText + timeSuffix,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.primary,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier.clickable {
-                                    summary.targetArticle?.let { article ->
-                                        onRecordBaseReturn(
-                                            null,
-                                            null,
-                                            listState.firstVisibleItemIndex,
-                                            listState.firstVisibleItemScrollOffset
-                                        )
-                                        onArticleSelected(article.id)
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        summary.targetArticle?.let { article ->
+                                            onRecordBaseReturn(
+                                                null,
+                                                null,
+                                                listState.firstVisibleItemIndex,
+                                                listState.firstVisibleItemScrollOffset
+                                            )
+                                            onArticleSelected(article.id)
+                                        }
                                     }
-                                }
-                            )
+                                    .padding(vertical = 4.dp)
+                            ) {
+                                Text(
+                                    text = statusText + timeSuffix,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
                             // Removed AssistChip for view category, now handled by title tap
                         }
                     }
@@ -445,6 +450,10 @@ fun BaseScreen(
             selectedSubcategory == null -> {
                 items(subSummaries, key = { it.name }) { summary ->
                     Card(
+                        onClick = {
+                            onSelectSubcategory(summary.name)
+                            scope.launch { listState.scrollToItem(0) }
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp)
                     ) {
@@ -460,11 +469,7 @@ fun BaseScreen(
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.SemiBold,
                                 maxLines = 2,
-                                overflow = TextOverflow.Clip,
-                                modifier = Modifier.clickable {
-                                    onSelectSubcategory(summary.name)
-                                    scope.launch { listState.scrollToItem(0) }
-                                }
+                                overflow = TextOverflow.Clip
                             )
 
                             // Progress line
@@ -505,28 +510,34 @@ fun BaseScreen(
                             val readMinutes = timeArticle?.let { articleReadTimes[it.id] ?: 1 }
                             val timeSuffix = readMinutes?.let { " • " + stringResource(R.string.base_read_time_format, it) } ?: ""
 
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(2.dp))
                             HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f), thickness = 1.dp)
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(2.dp))
 
-                           Text(
-                               text = statusText + timeSuffix,
-                               style = MaterialTheme.typography.bodyMedium,
-                               color = MaterialTheme.colorScheme.primary,
-                               maxLines = 2,
-                               overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier.clickable {
-                                    summary.targetArticle?.let { article ->
-                                        onRecordBaseReturn(
-                                            selectedCategory,
-                                            selectedSubcategory,
-                                            listState.firstVisibleItemIndex,
-                                            listState.firstVisibleItemScrollOffset
-                                        )
-                                        onArticleSelected(article.id)
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        summary.targetArticle?.let { article ->
+                                            onRecordBaseReturn(
+                                                selectedCategory,
+                                                selectedSubcategory,
+                                                listState.firstVisibleItemIndex,
+                                                listState.firstVisibleItemScrollOffset
+                                            )
+                                            onArticleSelected(article.id)
+                                        }
                                     }
-                                }
-                            )
+                                    .padding(vertical = 4.dp)
+                            ) {
+                                Text(
+                                    text = statusText + timeSuffix,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
                         }
                     }
                 }
@@ -571,6 +582,7 @@ private fun ArticleRow(
     onToggleStatus: () -> Unit
 ) {
     Card(
+        onClick = onOpen,
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp)
     ) {
@@ -583,8 +595,7 @@ private fun ArticleRow(
                     Text(
                         text = article.title,
                         style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.clickable { onOpen() }
+                        fontWeight = FontWeight.SemiBold
                     )
                     Text(
                         text = article.shortDescription ?: article.description,

@@ -1,34 +1,855 @@
-[
-  {
-    "termId": 1,
-    "title": "项目基础测验",
-    "questions": [
-      {
-        "question": "EB-5 投资者至少需要创造多少个全职工作岗位？",
-        "options": ["5 个", "10 个", "15 个", "20 个"],
-        "correctAnswerIndex": 1
+{
+  "tracks": [
+    {
+      "id": "track_foundations_ready",
+      "title": "EB-5 基础就绪",
+      "description": "在审阅项目资料前，夯实对项目目标、合格资金与就业指标的理解。",
+      "quizIds": [
+        "quiz_program_foundations",
+        "quiz_investment_thresholds",
+        "quiz_job_creation_models"
+      ],
+      "estimatedDurationMinutes": 18,
+      "goalTag": "deal_ready",
+      "category": "基础",
+      "unlock": {
+        "minimumArticlesCompleted": 1,
+        "categoryRequirements": [
+          {
+            "category": "基础",
+            "minCompleted": 1
+          }
+        ]
       },
-      {
-        "question": "EB-5 申请获批后授予有条件居留的文件是？",
-        "options": ["I-829 表", "I-526E 表", "绿卡", "工作许可"],
-        "correctAnswerIndex": 2
+      "certificate": {
+        "accentColor": "#0B5FFF",
+        "secondaryColor": "#EEF4FF",
+        "backgroundGradient": [
+          "#F5FAFF",
+          "#E5F0FF"
+        ],
+        "signatureLabel": "项目总监",
+        "signatureName": "Alex Morgan"
       }
-    ]
-  },
-  {
-    "termId": 2,
-    "title": "投资模式测验",
-    "questions": [
-      {
-        "question": "区域中心项目的一个关键特征是什么？",
-        "options": ["投资者直接管理日常运营", "可以计算间接就业", "最低投资额为 50 万美元", "仅限制造业项目"],
-        "correctAnswerIndex": 1
+    },
+    {
+      "id": "track_structures_capital",
+      "title": "资本结构深度解析",
+      "description": "比较直接与区域中心模式，分析股权与债权定位，并像专业人士一样读懂资本堆栈。",
+      "quizIds": [
+        "quiz_direct_vs_regional",
+        "quiz_equity_vs_debt",
+        "quiz_capital_stack_controls"
+      ],
+      "estimatedDurationMinutes": 21,
+      "goalTag": "deal_ready",
+      "category": "投资",
+      "unlock": {
+        "minimumArticlesCompleted": 3,
+        "categoryRequirements": [
+          {
+            "category": "投资",
+            "minCompleted": 2
+          }
+        ]
       },
-      {
-        "question": "以下哪项描述了直接 EB-5 投资？",
-        "options": ["投资者加入集合基金", "投资者购买美国国债", "投资者积极管理企业", "投资者选择指数基金"],
-        "correctAnswerIndex": 2
+      "certificate": {
+        "accentColor": "#8247FF",
+        "secondaryColor": "#F0E8FF",
+        "backgroundGradient": [
+          "#F9F5FF",
+          "#ECE3FF"
+        ],
+        "signatureLabel": "资本市场负责人",
+        "signatureName": "Priya Desai"
       }
-    ]
-  }
-]
+    },
+    {
+      "id": "track_source_of_funds",
+      "title": "资金来源精通",
+      "description": "记录资金合法来源，保持清晰的资金路径，并从容应对层叠的财务历史。",
+      "quizIds": [
+        "quiz_source_of_funds_basics",
+        "quiz_source_of_funds_documentation",
+        "quiz_source_of_funds_complex_paths"
+      ],
+      "estimatedDurationMinutes": 24,
+      "goalTag": "source_funds",
+      "category": "投资",
+      "unlock": {
+        "minimumArticlesCompleted": 4,
+        "categoryRequirements": [
+          {
+            "category": "投资",
+            "minCompleted": 3
+          }
+        ]
+      },
+      "certificate": {
+        "accentColor": "#0C8576",
+        "secondaryColor": "#E3F4F1",
+        "backgroundGradient": [
+          "#F3FFFC",
+          "#DEF2EC"
+        ],
+        "signatureLabel": "合规负责人",
+        "signatureName": "Mia Chen"
+      }
+    },
+    {
+      "id": "track_immigration_compliance",
+      "title": "移民与合规流程",
+      "description": "掌握风险维持要求、治理义务及每个申请节点，助力顺利获批 I-829。",
+      "quizIds": [
+        "quiz_at_risk_rules",
+        "quiz_governance_fund_admin",
+        "quiz_petition_process_mastery"
+      ],
+      "estimatedDurationMinutes": 22,
+      "goalTag": "immigration",
+      "category": "移民与法律流程",
+      "unlock": {
+        "minimumArticlesCompleted": 5,
+        "categoryRequirements": [
+          {
+            "category": "移民与法律流程",
+            "minCompleted": 2
+          },
+          {
+            "category": "风险管理",
+            "minCompleted": 2
+          }
+        ]
+      },
+      "certificate": {
+        "accentColor": "#FF6B4A",
+        "secondaryColor": "#FFE8E1",
+        "backgroundGradient": [
+          "#FFF5F2",
+          "#FFE2D9"
+        ],
+        "signatureLabel": "法务总监",
+        "signatureName": "Jordan Reyes"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "quiz_program_foundations",
+      "termId": 1,
+      "title": "项目目标与时间轴",
+      "summary": "确认 EB-5 投资如何带来就业、条件式绿卡以及解除条件的时间窗口。",
+      "category": "基础",
+      "subcategory": "项目入门",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Multi",
+      "level": "L",
+      "durationMinutes": 6,
+      "recommendedArticles": [
+        1,
+        3,
+        4
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "overview",
+        "timeline"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 投资移民计划的核心政策目标是什么？",
+          "options": [
+            "通过创造就业的投资促进美国经济增长",
+            "向州和地方政府提供补助",
+            "用海外资本资助美国国债",
+            "向移民投资者提供保证收益"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "I-526E 获批后，条件式绿卡通常授予多长时间？",
+          "options": [
+            "2 年",
+            "6 个月",
+            "5 年",
+            "10 年"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 投资者何时必须提交 I-829 以解除绿卡条件？",
+          "options": [
+            "在条件式绿卡到期前的 90 天内",
+            "入境美国后的 30 天内",
+            "仅在项目分配完全部收益之后",
+            "与 I-526E 同时"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_investment_thresholds",
+      "termId": 8,
+      "title": "投资门槛与资金维持",
+      "summary": "回顾最低投资额、资金维持规则，以及 EB-5 资金“风险承担”的真实含义。",
+      "category": "基础",
+      "subcategory": "USCIS 标准",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Quick Check",
+      "level": "L",
+      "durationMinutes": 5,
+      "recommendedArticles": [
+        5,
+        6,
+        7
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "thresholds",
+        "sustainment"
+      ],
+      "questions": [
+        {
+          "question": "位于目标就业区 (TEA) 的项目当前最低投资额是多少？",
+          "options": [
+            "$800,000",
+            "$500,000",
+            "$900,000",
+            "$1,050,000"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "按《改革与诚信法》，非 TEA 项目的标准最低投资额是多少？",
+          "options": [
+            "$1,050,000",
+            "$800,000",
+            "$750,000",
+            "$650,000"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "哪一项准确反映 EB-5 “风险承担” 资金要求？",
+          "options": [
+            "在维持期内，资金必须处于可能获利或亏损的状态，且无合同保证",
+            "建设完成即可撤回资金",
+            "只要存放在美国银行账户就视为 at risk",
+            "只要支付利息，开发商即可为资金提供担保"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_job_creation_models",
+      "termId": 3,
+      "title": "就业创造指南",
+      "summary": "区分直接、间接与诱发就业，并满足 USCIS 的证据要求。",
+      "category": "基础",
+      "subcategory": "USCIS 标准",
+      "trackIds": [
+        "track_foundations_ready"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "compliance"
+      ],
+      "format": "Scenario",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        3,
+        9,
+        10
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "job_creation",
+        "economics"
+      ],
+      "questions": [
+        {
+          "question": "在直接 EB-5 项目中，哪些职位可计入就业数量？",
+          "options": [
+            "由新商业企业雇用的全职 W-2 员工",
+            "承担季节性工作的独立承包商",
+            "海外关联公司在美国境外创造的岗位",
+            "经济模型预测的任何岗位"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "区域中心项目如何计算间接就业？",
+          "options": [
+            "使用被认可的经济模型，将项目支出换算为就业数量",
+            "直接雇用更多兼职员工",
+            "统计海外分包商创造的岗位",
+            "在贷款协议中保证固定就业数量"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "USCIS 对 EB-5 就业创造的时间要求是什么？",
+          "options": [
+            "在投资者成为条件式居民后的约两年内完成，必要时可适度延长",
+            "必须在提交 I-526E 后六个月内创造岗位",
+            "在项目偿还 EB-5 贷款前的任意时间创造岗位即可",
+            "只需预测岗位数量，无需核实"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_direct_vs_regional",
+      "termId": 2,
+      "title": "直接投资与区域中心比较",
+      "summary": "对比两种模式下的投资者责任、就业计算方式与运营控制。",
+      "category": "投资",
+      "subcategory": "投资模式",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready"
+      ],
+      "format": "Scenario",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        2,
+        15,
+        18
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "direct",
+        "regional_center"
+      ],
+      "questions": [
+        {
+          "question": "直接 EB-5 投资的显著特征是什么？",
+          "options": [
+            "投资者主动参与管理新商业企业",
+            "投资者通过联邦批准的区域中心筹集资金",
+            "间接就业无需证据即可计入",
+            "第三方管理人承担全部运营职责"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "区域中心结构特有的优势是什么？",
+          "options": [
+            "能够汇集资金，并计入间接及诱发就业",
+            "相比 TEA 项目拥有更低的最低投资额",
+            "免除向 USCIS 提交年度报告",
+            "由中心担保的固定回款条款"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "以下哪种情况最符合直接 EB-5 项目？",
+          "options": [
+            "投资者自营并管理一家加盟餐厅，雇用新员工",
+            "酒店开发商通过区域中心贷款基金筹资",
+            "基金购买市政债券以融资公共基础设施",
+            "风投基金将 EB-5 资金投入多家初创企业"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_equity_vs_debt",
+      "termId": 24,
+      "title": "股权与债权结构",
+      "summary": "判读股权与债权 EB-5 产品在收益、抵押与回收顺序上的差异。",
+      "category": "投资",
+      "subcategory": "风险投资",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "risk"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        22,
+        23,
+        26
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "capital_stack",
+        "returns"
+      ],
+      "questions": [
+        {
+          "question": "EB-5 股权投资者通常如何获取收益？",
+          "options": [
+            "在偿付高级债务后通过利润分配获得",
+            "通过开发商保证的固定利息",
+            "依靠政府发放的税收抵免",
+            "依靠 USCIS 发放的年度津贴"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "下列哪个特征最符合 EB-5 债权产品？",
+          "options": [
+            "具有抵押品并约定固定的还款计划",
+            "对所有项目决策拥有投票权",
+            "与项目收益挂钩的无限上行潜力",
+            "不存在任何第三方监管"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "包含高级债务、EB-5 债务以及开发商股权的多元资本堆栈有何优势？",
+          "options": [
+            "让不同利益方的激励保持一致，并将风险分散到多个层级",
+            "自动确保 EB-5 部分优先偿还",
+            "无需进行经济影响分析",
+            "使 USCIS 不再审查发售文件"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_capital_stack_controls",
+      "termId": 41,
+      "title": "资本堆栈控制",
+      "summary": "理解高级贷款条款，监控施工提款，并识别稳健的过渡融资运用。",
+      "category": "投资",
+      "subcategory": "资金来源",
+      "trackIds": [
+        "track_structures_capital"
+      ],
+      "goalTags": [
+        "deal_ready",
+        "risk"
+      ],
+      "format": "Case Study",
+      "level": "H",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        32,
+        35,
+        37
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "bridge",
+        "monitoring"
+      ],
+      "questions": [
+        {
+          "question": "在典型的 EB-5 资本结构中，高级建设贷款方拥有何种权利？",
+          "options": [
+            "对项目现金流和抵押物享有第一优先权",
+            "与开发商股权享有同等优先权",
+            "位于 EB-5 投资者之后的次级权利",
+            "只担任担保人，没有抵押品"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "为何专业贷款机构要求独立施工监理？",
+          "options": [
+            "核对预算、进度与提款请求是否与实际施工一致",
+            "确保项目提前完工",
+            "取代开发商的现场负责人",
+            "向散户投资者推介项目"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "桥梁融资在 EB-5 项目中通常如何使用？",
+          "options": [
+            "在 EB-5 资金尚在募集时启动施工",
+            "支付投资者的移民律师费",
+            "偿还无关的公司债务",
+            "向 EB-5 投资者保证固定收益"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_basics",
+      "termId": 52,
+      "title": "资金来源基础",
+      "summary": "为赠与、薪资累积与留存收益等合法来源叙述打下基础。",
+      "category": "投资",
+      "subcategory": "资金来源",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "compliance"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        52,
+        53,
+        55
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "source_of_funds",
+        "documentation"
+      ],
+      "questions": [
+        {
+          "question": "证明 EB-5 资金合法来源的关键要求是什么？",
+          "options": [
+            "提供可信的文件链，连接资金与合法活动",
+            "获得任意银行的公证函",
+            "由区域中心出具资金证明",
+            "展示投资者护照上的出入境章"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "当 EB-5 资金来自赠与时通常需要哪些文件？",
+          "options": [
+            "赠与协议及赠与人证明其合法资金来源的财务记录",
+            "仅需赠与人口头确认",
+            "区域中心出具的说明",
+            "证明赠与以加密货币形式转移"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "长期薪资储蓄应如何用于 EB-5 佐证？",
+          "options": [
+            "提供劳动合同、工资记录及体现累积的银行流水",
+            "提交没有佐证的个人陈述",
+            "通过多个空壳公司转移资金",
+            "不做说明地直接存入现金"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_documentation",
+      "termId": 60,
+      "title": "资金路径佐证",
+      "summary": "以银行流水、换汇凭证与税务申报追踪每笔交易，应对 RIA 审查。",
+      "category": "投资",
+      "subcategory": "资金来源",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "compliance"
+      ],
+      "format": "Timeline",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        60,
+        61,
+        63
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "path_of_funds",
+        "currency"
+      ],
+      "questions": [
+        {
+          "question": "哪项证据最能说明资金进入 EB-5 托管账户的路径？",
+          "options": [
+            "按顺序列出每笔从源头到托管的银行流水",
+            "没有银行佐证的电子表格",
+            "律师出具的无附件说明",
+            "仅有一张现金取款凭证"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "为 EB-5 投资换汇时最佳做法是什么？",
+          "options": [
+            "使用银行正式凭证记录换汇，并注明所用汇率",
+            "依靠换汇商的口头承诺",
+            "无换汇凭证直接存入现金",
+            "等到 I-829 阶段再补充换汇文件"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "投资者应如何证明与 EB-5 资金相关的纳税合规？",
+          "options": [
+            "提交已申报的税表或涵盖资金来源的完税证明",
+            "仅提交未经审计的个人表格",
+            "请区域中心证明纳税状况",
+            "避免向 USCIS 提供税务记录"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_source_of_funds_complex_paths",
+      "termId": 68,
+      "title": "复杂资金策略",
+      "summary": "在不破坏证据链的前提下处理房产出售、抵押贷款与多方家庭出资。",
+      "category": "投资",
+      "subcategory": "资金来源",
+      "trackIds": [
+        "track_source_of_funds"
+      ],
+      "goalTags": [
+        "source_funds",
+        "risk"
+      ],
+      "format": "Case Study",
+      "level": "H",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        68,
+        69,
+        70
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "loans",
+        "property_sale"
+      ],
+      "questions": [
+        {
+          "question": "利用房产出售资金投资 EB-5 时应提供哪些文件？",
+          "options": [
+            "买卖合同、产权证、交割单及已缴税款证明",
+            "仅有买方的一封信",
+            "没有成交证据的估价报告",
+            "开发商的口头说明"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "个人贷款要被认定为 EB-5 资金需满足什么条件？",
+          "options": [
+            "须以投资者自有资产作抵押并签署正式贷款协议",
+            "必须为无担保且由项目方保证",
+            "必须由外国政府发放",
+            "必须仅以美元计价"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "投资者应如何呈现多层次资金来源？",
+          "options": [
+            "按时间顺序撰写说明，并为每一层资金附上证据",
+            "仅提供一份无附件的概述声明",
+            "在记录之前将所有资金转为现金",
+            "完全依赖区域中心的合规报告"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_at_risk_rules",
+      "termId": 85,
+      "title": "风险维持资金护栏",
+      "summary": "确保再投资、担保与准备金政策符合理性法案的完整性标准。",
+      "category": "风险管理",
+      "subcategory": "EB-5 投资风险",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "compliance",
+        "risk"
+      ],
+      "format": "Scenario",
+      "level": "H",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        85,
+        86,
+        88
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "at_risk",
+        "redeployment"
+      ],
+      "questions": [
+        {
+          "question": "为何对 EB-5 资金提供保证回购会违反风险要求？",
+          "options": [
+            "因为这会消除与项目表现相关的盈亏可能",
+            "因为 USCIS 禁止任何退出策略",
+            "因为担保仅在 I-829 批准后才允许",
+            "因为这会阻止投资者赚取利息"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "若 EB-5 资金在维持期结束前被偿还，应如何处理？",
+          "options": [
+            "必须再投资于另一项符合条件的风险项目",
+            "资金须留在托管账户直至 I-829 批准",
+            "须在 30 天内退还给投资者",
+            "可转入开发商个人账户"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "以下哪种再投资方式最符合 USCIS 政策指引？",
+          "options": [
+            "再投资于另一家具有类似风险与就业潜力的商业企业",
+            "购买带有保证收益的被动型证券",
+            "将资金存入不计息账户",
+            "借给开发商无关的副业"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_governance_fund_admin",
+      "termId": 93,
+      "title": "治理与资金管理",
+      "summary": "评估独立管理人、审计报告与投资者披露构成的监管生态。",
+      "category": "风险管理",
+      "subcategory": "法律及财务保障",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "compliance",
+        "risk"
+      ],
+      "format": "Multi",
+      "level": "M",
+      "durationMinutes": 7,
+      "recommendedArticles": [
+        90,
+        93,
+        95
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "governance",
+        "fund_admin"
+      ],
+      "questions": [
+        {
+          "question": "聘请独立资金管理人的主要好处是什么？",
+          "options": [
+            "由第三方监督拨款与账务记录",
+            "向海外代理推广项目",
+            "保证投资者收益",
+            "无需再进行财务报告"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "EB-5 认购协议中应包含哪些披露信息？",
+          "options": [
+            "资金用途、费用结构与退出机制的详细说明",
+            "对市场趋势的个人观点",
+            "未经核实的旧投资者推荐",
+            "仅有项目建筑图纸"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "按最佳实践，投资者应多久收到一次项目报告？",
+          "options": [
+            "按固定频率（如每季度）汇总施工、支出与就业情况",
+            "仅在提交 I-829 时报告一次",
+            "开发商有宣传内容时",
+            "I-526E 获批后报告为可选项"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "quiz_petition_process_mastery",
+      "termId": 110,
+      "title": "移民申请全掌握",
+      "summary": "梳理 I-526E 至 I-829 的全部流程，并为每个家庭选择合适的办理路径。",
+      "category": "移民与法律流程",
+      "subcategory": "EB-5 申请流程",
+      "trackIds": [
+        "track_immigration_compliance"
+      ],
+      "goalTags": [
+        "immigration",
+        "deal_ready"
+      ],
+      "format": "Timeline",
+      "level": "M",
+      "durationMinutes": 8,
+      "recommendedArticles": [
+        101,
+        105,
+        109
+      ],
+      "requiredArticles": [],
+      "tags": [
+        "petition",
+        "family"
+      ],
+      "questions": [
+        {
+          "question": "哪一顺序准确反映 EB-5 移民流程？",
+          "options": [
+            "I-526E 批准 → 发放签证或身份调整 → 条件式居留 → I-829 审理",
+            "领事面谈 → I-829 → I-526E → 条件式居留",
+            "I-829 → 永久绿卡 → I-526E → 发放签证",
+            "条件式居留 → I-526E → 发放签证 → I-829"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "在何种情况下可以选择身份调整而非领事程序？",
+          "options": [
+            "当投资者合法居留美国且有可用移民签证号码时",
+            "只要投资者想避免旅行即可",
+            "仅在提交 I-829 之后",
+            "当投资者持有旅游签证且尚未提交 I-526E 时"
+          ],
+          "correctAnswerIndex": 0
+        },
+        {
+          "question": "哪些家庭成员可通过 EB-5 主申请人获得衍生身份？",
+          "options": [
+            "配偶及 21 岁以下未婚子女",
+            "主申请人的父母",
+            "不论年龄的已婚子女",
+            "商业计划中列出的任何亲属"
+          ],
+          "correctAnswerIndex": 0
+        }
+      ]
+    }
+  ]
+}
